@@ -265,7 +265,7 @@ function TourModal({ tour, onClose }: { tour: Tour; onClose: () => void }) {
 
         {/* Gallery */}
         <div className="relative overflow-hidden rounded-t-3xl">
-          <div className="relative h-[32vh] min-h-[240px] max-h-[360px] sm:h-[38vh] sm:min-h-[320px] sm:max-h-[420px] overflow-hidden">
+          <div className="relative h-[42vh] min-h-[280px] max-h-[420px] sm:h-[40vh] sm:min-h-[320px] sm:max-h-[460px] overflow-hidden">
             <AnimatePresence mode="wait">
               <motion.img
                 key={activeImg}

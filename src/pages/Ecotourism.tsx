@@ -60,7 +60,7 @@ const tours: Tour[] = [
       "🌿 Apresentação de plantas medicinais",
       "📸 Stops para fotografia em pontos privilegiados",
     ],
-    gallery: [tourSafari, tourSafari2, ecotourismImg],
+    gallery: [tourSafari, tourSafari2, ecotourismImg, "/fotos_reais_amazon/eco-safari-river.png", "/fotos_reais_amazon/eco-safari-monkey.png", "/fotos_reais_amazon/eco-safari-snake.png", "/fotos_reais_amazon/eco-safari-sloth.png"],
   },
   {
     icon: Footprints,

@@ -467,6 +467,31 @@ function TourModal({ tour, onClose }: { tour: Tour; onClose: () => void }) {
 // ─── Tour Card ────────────────────────────────────────────────────────────────
 function TourCard({ tour, index, onClick }: { tour: Tour; index: number; onClick: () => void }) {
   const [hovered, setHovered] = useState(false);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const touchStartX = useMotionValue(0);
+  const images = tour.gallery.length > 0 ? tour.gallery : [tour.preview];
+
+  const goNext = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+    setActiveSlide(i => (i + 1) % images.length);
+  }, [images.length]);
+
+  const goPrev = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+    setActiveSlide(i => (i - 1 + images.length) % images.length);
+  }, [images.length]);
+
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    touchStartX.set(e.touches[0].clientX);
+  }, [touchStartX]);
+
+  const handleTouchEnd = useCallback((e: React.TouchEvent) => {
+    const diff = touchStartX.get() - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) setActiveSlide(i => (i + 1) % images.length);
+      else setActiveSlide(i => (i - 1 + images.length) % images.length);
+    }
+  }, [images.length, touchStartX]);
 
   return (
     <SectionFadeIn>
@@ -492,17 +517,75 @@ function TourCard({ tour, index, onClick }: { tour: Tour; index: number; onClick
         onHoverEnd={() => setHovered(false)}
         onClick={onClick}
       >
-        {/* Preview Image */}
-        <div className="relative overflow-hidden" style={{ height: 180 }}>
-          <motion.img
-            src={tour.preview}
-            alt={tour.title}
-            className="w-full h-full object-cover"
-            animate={{ scale: hovered ? 1.08 : 1 }}
-            transition={{ duration: 0.55, ease: [0.25, 0.46, 0.45, 0.94] }}
-          />
-          {/* Image gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent" />
+        {/* Carousel */}
+        <div
+          className="relative overflow-hidden aspect-[4/3]"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={activeSlide}
+              src={images[activeSlide]}
+              alt={`${tour.title} - ${activeSlide + 1}`}
+              className="absolute inset-0 w-full h-full object-cover"
+              initial={{ opacity: 0, scale: 1.04 }}
+              animate={{ opacity: 1, scale: hovered ? 1.06 : 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+            />
+          </AnimatePresence>
+
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+
+          {/* Nav arrows — visible on hover (desktop) or always on mobile */}
+          {images.length > 1 && (
+            <>
+              <motion.button
+                className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full flex items-center justify-center opacity-70 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-200"
+                style={{
+                  background: "rgba(0,0,0,0.4)",
+                  backdropFilter: "blur(8px)",
+                  border: "1px solid rgba(255,255,255,0.2)",
+                }}
+                whileTap={{ scale: 0.85 }}
+                onClick={goPrev}
+              >
+                <ChevronLeft size={16} className="text-white" />
+              </motion.button>
+              <motion.button
+                className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full flex items-center justify-center opacity-70 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-200"
+                style={{
+                  background: "rgba(0,0,0,0.4)",
+                  backdropFilter: "blur(8px)",
+                  border: "1px solid rgba(255,255,255,0.2)",
+                }}
+                whileTap={{ scale: 0.85 }}
+                onClick={goNext}
+              >
+                <ChevronRight size={16} className="text-white" />
+              </motion.button>
+            </>
+          )}
+
+          {/* Dots */}
+          {images.length > 1 && (
+            <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex gap-1.5">
+              {images.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={(e) => { e.stopPropagation(); setActiveSlide(i); }}
+                  className="rounded-full transition-all duration-300"
+                  style={{
+                    width: i === activeSlide ? 18 : 6,
+                    height: 6,
+                    background: i === activeSlide ? "white" : "rgba(255,255,255,0.5)",
+                  }}
+                />
+              ))}
+            </div>
+          )}
 
           {/* Tag */}
           <div
@@ -513,33 +596,40 @@ function TourCard({ tour, index, onClick }: { tour: Tour; index: number; onClick
 
           {/* Icon overlay */}
           <div
-            className="absolute bottom-3 left-3 w-9 h-9 rounded-xl flex items-center justify-center"
+            className="absolute bottom-2.5 left-3 w-8 h-8 rounded-xl flex items-center justify-center"
             style={{
               background: "rgba(255,255,255,0.18)",
               backdropFilter: "blur(12px)",
               border: "1px solid rgba(255,255,255,0.3)",
             }}
           >
-            <tour.icon size={18} className="text-white" />
+            <tour.icon size={16} className="text-white" />
           </div>
 
           {/* Rating */}
-          <div className="absolute bottom-3 right-3 flex items-center gap-1">
+          <div className="absolute top-3 left-3 flex items-center gap-1 px-2 py-0.5 rounded-full" style={{ background: "rgba(0,0,0,0.35)", backdropFilter: "blur(8px)" }}>
             <Star size={11} className="fill-amber-400 text-amber-400" />
             <span className="text-white text-xs font-semibold">{tour.rating}</span>
           </div>
+
+          {/* Slide counter */}
+          {images.length > 1 && (
+            <div className="absolute top-3 right-20 px-2 py-0.5 rounded-full text-[10px] text-white/80 font-semibold" style={{ background: "rgba(0,0,0,0.35)", backdropFilter: "blur(8px)" }}>
+              {activeSlide + 1}/{images.length}
+            </div>
+          )}
         </div>
 
         {/* Card body */}
-        <div className="p-5">
-          <h3 className="font-heading text-lg font-semibold text-white mb-0.5 group-hover:text-amber-200 transition-colors duration-300">
+        <div className="p-4 sm:p-5">
+          <h3 className="font-heading text-base sm:text-lg font-semibold text-white mb-0.5 group-hover:text-amber-200 transition-colors duration-300">
             {tour.title}
           </h3>
-          <p className="text-xs text-white/55 font-body italic mb-3">{tour.subtitle}</p>
-          <p className="text-sm text-white/75 font-body leading-relaxed line-clamp-3">{tour.desc}</p>
+          <p className="text-xs text-white/55 font-body italic mb-2">{tour.subtitle}</p>
+          <p className="text-sm text-white/75 font-body leading-relaxed line-clamp-2 sm:line-clamp-3">{tour.desc}</p>
 
           {/* Meta */}
-          <div className="flex items-center gap-3 mt-4 pt-4 border-t border-white/10">
+          <div className="flex items-center gap-3 mt-3 pt-3 border-t border-white/10">
             <div className="flex items-center gap-1.5 text-xs text-white/55 font-body">
               <Clock size={11} />
               {tour.duration}
@@ -551,14 +641,14 @@ function TourCard({ tour, index, onClick }: { tour: Tour; index: number; onClick
             </div>
           </div>
 
-          {/* Tap to open hint */}
+          {/* Tap hint */}
           <motion.div
-            className="mt-3 flex items-center gap-2 text-xs text-white/40 font-body"
+            className="mt-2 flex items-center gap-2 text-xs text-white/40 font-body"
             animate={{ opacity: hovered ? 1 : 0.4 }}
             transition={{ duration: 0.2 }}
           >
             <span className="inline-block w-1 h-1 rounded-full bg-amber-400" />
-            Toque para ver detalhes e galeria
+            Toque para ver detalhes
           </motion.div>
         </div>
       </motion.div>
@@ -667,7 +757,7 @@ const Ecotourism = () => {
             </p>
           </SectionFadeIn>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
             {tours.map((tour, i) => (
               <TourCard
                 key={tour.title}

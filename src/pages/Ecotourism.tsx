@@ -607,11 +607,18 @@ function TourCard({ tour, index, onClick }: { tour: Tour; index: number; onClick
             </div>
           )}
 
-          {/* Tag */}
-          <div
-            className={`absolute top-3 right-3 px-2.5 py-1 rounded-full bg-gradient-to-r ${tour.tagColor} text-white text-[10px] font-bold uppercase tracking-wider shadow-sm`}
-          >
-            {tour.tag}
+          {/* Top-right: counter + tag */}
+          <div className="absolute top-3 right-3 flex items-center gap-1.5">
+            {images.length > 1 && (
+              <div className="px-2 py-0.5 rounded-full text-[10px] text-white/90 font-semibold" style={{ background: "rgba(0,0,0,0.4)", backdropFilter: "blur(8px)" }}>
+                {activeSlide + 1}/{images.length}
+              </div>
+            )}
+            <div
+              className={`px-2.5 py-1 rounded-full bg-gradient-to-r ${tour.tagColor} text-white text-[10px] font-bold uppercase tracking-wider shadow-sm`}
+            >
+              {tour.tag}
+            </div>
           </div>
 
           {/* Icon overlay */}
@@ -631,13 +638,6 @@ function TourCard({ tour, index, onClick }: { tour: Tour; index: number; onClick
             <Star size={11} className="fill-amber-400 text-amber-400" />
             <span className="text-white text-xs font-semibold">{tour.rating}</span>
           </div>
-
-          {/* Slide counter */}
-          {images.length > 1 && (
-            <div className="absolute top-3 right-20 px-2 py-0.5 rounded-full text-[10px] text-white/80 font-semibold" style={{ background: "rgba(0,0,0,0.35)", backdropFilter: "blur(8px)" }}>
-              {activeSlide + 1}/{images.length}
-            </div>
-          )}
         </div>
 
         {/* Card body */}

@@ -374,7 +374,7 @@ function TourModal({ tour, onClose }: { tour: Tour; onClose: () => void }) {
                     transition={springConfig}
                     whileTap={{ scale: 0.96 }}
                   >
-                    <img src={img} alt="" className="w-full h-full object-cover" />
+                    <img src={img} alt="" className="w-full h-full object-cover" loading="lazy" />
                   </motion.button>
                 ))}
               </div>
@@ -690,6 +690,7 @@ const Ecotourism = () => {
           className="absolute inset-0 w-full h-full object-cover"
           width={1200}
           height={800}
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-primary/60 to-primary/80" />
         <div className="relative z-10 text-center px-4">

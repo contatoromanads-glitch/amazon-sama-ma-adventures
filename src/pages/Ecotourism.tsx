@@ -264,119 +264,139 @@ function TourModal({ tour, onClose }: { tour: Tour; onClose: () => void }) {
         </div>
 
         {/* Gallery */}
-        <div className="relative overflow-hidden rounded-t-3xl sm:rounded-t-3xl" style={{ height: 240 }}>
-          <AnimatePresence mode="wait">
-            <motion.img
-              key={activeImg}
-              src={tour.gallery[activeImg]}
-              alt={tour.title}
-              className="absolute inset-0 w-full h-full object-cover"
-              initial={{ opacity: 0, scale: 1.06 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.38, ease: [0.25, 0.46, 0.45, 0.94] }}
-            />
-          </AnimatePresence>
-
-          {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-
-          {/* Nav arrows */}
-          {tour.gallery.length > 1 && (
-            <>
-              <motion.button
-                className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center"
-                style={{
-                  background: "rgba(255,255,255,0.18)",
-                  backdropFilter: "blur(12px)",
-                  border: "1px solid rgba(255,255,255,0.3)",
-                }}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                transition={springConfig}
-                onClick={prev}
-              >
-                <ChevronLeft size={18} className="text-white" />
-              </motion.button>
-              <motion.button
-                className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center"
-                style={{
-                  background: "rgba(255,255,255,0.18)",
-                  backdropFilter: "blur(12px)",
-                  border: "1px solid rgba(255,255,255,0.3)",
-                }}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                transition={springConfig}
-                onClick={next}
-              >
-                <ChevronRight size={18} className="text-white" />
-              </motion.button>
-            </>
-          )}
-
-          {/* Dots */}
-          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
-            {tour.gallery.map((_, i) => (
-              <motion.button
-                key={i}
-                className="rounded-full"
-                style={{
-                  width: i === activeImg ? 20 : 6,
-                  height: 6,
-                  background: i === activeImg ? "white" : "rgba(255,255,255,0.5)",
-                }}
-                animate={{ width: i === activeImg ? 20 : 6 }}
-                transition={springConfig}
-                onClick={() => setActiveImg(i)}
+        <div className="relative overflow-hidden rounded-t-3xl">
+          <div className="relative h-[32vh] min-h-[240px] max-h-[360px] sm:h-[38vh] sm:min-h-[320px] sm:max-h-[420px] overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={activeImg}
+                src={tour.gallery[activeImg]}
+                alt={tour.title}
+                className="absolute inset-0 w-full h-full object-cover"
+                initial={{ opacity: 0, scale: 1.06 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.96 }}
+                transition={{ duration: 0.38, ease: [0.25, 0.46, 0.45, 0.94] }}
               />
-            ))}
-          </div>
+            </AnimatePresence>
 
-          {/* Thumbnail strip */}
-          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-2">
-            {tour.gallery.map((img, i) => (
-              <motion.button
-                key={i}
-                onClick={() => setActiveImg(i)}
-                className="rounded-lg overflow-hidden"
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+
+            {/* Nav arrows */}
+            {tour.gallery.length > 1 && (
+              <>
+                <motion.button
+                  className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center"
+                  style={{
+                    background: "rgba(255,255,255,0.18)",
+                    backdropFilter: "blur(12px)",
+                    border: "1px solid rgba(255,255,255,0.3)",
+                  }}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  transition={springConfig}
+                  onClick={prev}
+                >
+                  <ChevronLeft size={18} className="text-white" />
+                </motion.button>
+                <motion.button
+                  className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full flex items-center justify-center"
+                  style={{
+                    background: "rgba(255,255,255,0.18)",
+                    backdropFilter: "blur(12px)",
+                    border: "1px solid rgba(255,255,255,0.3)",
+                  }}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  transition={springConfig}
+                  onClick={next}
+                >
+                  <ChevronRight size={18} className="text-white" />
+                </motion.button>
+              </>
+            )}
+
+            {/* Close */}
+            <motion.button
+              className="absolute top-3 right-3 w-9 h-9 rounded-full flex items-center justify-center"
+              style={{
+                background: "rgba(0,0,0,0.35)",
+                backdropFilter: "blur(12px)",
+                border: "1px solid rgba(255,255,255,0.2)",
+              }}
+              whileHover={{ scale: 1.12, background: "rgba(0,0,0,0.55)" }}
+              whileTap={{ scale: 0.88 }}
+              transition={springConfig}
+              onClick={onClose}
+            >
+              <X size={16} className="text-white" />
+            </motion.button>
+
+            {/* Tag on gallery */}
+            <div
+              className={`absolute top-3 left-3 px-3 py-1 rounded-full bg-gradient-to-r ${tour.tagColor} text-white text-xs font-bold uppercase tracking-wider`}
+              style={{ backdropFilter: "blur(8px)" }}
+            >
+              {tour.tag}
+            </div>
+
+            {/* Counter */}
+            {tour.gallery.length > 1 && (
+              <div
+                className="absolute bottom-3 right-3 px-2.5 py-1 rounded-full text-[11px] text-white font-semibold"
                 style={{
-                  width: i === activeImg ? 52 : 40,
-                  height: 34,
-                  border: i === activeImg ? "2px solid rgba(255,255,255,0.9)" : "2px solid rgba(255,255,255,0.3)",
-                  opacity: i === activeImg ? 1 : 0.65,
+                  background: "rgba(0,0,0,0.35)",
+                  backdropFilter: "blur(8px)",
+                  border: "1px solid rgba(255,255,255,0.15)",
                 }}
-                animate={{ width: i === activeImg ? 52 : 40, opacity: i === activeImg ? 1 : 0.65 }}
-                transition={springConfig}
-                whileHover={{ opacity: 1 }}
               >
-                <img src={img} alt="" className="w-full h-full object-cover" />
-              </motion.button>
-            ))}
+                {activeImg + 1}/{tour.gallery.length}
+              </div>
+            )}
           </div>
 
-          {/* Close */}
-          <motion.button
-            className="absolute top-3 right-3 w-9 h-9 rounded-full flex items-center justify-center"
-            style={{
-              background: "rgba(0,0,0,0.35)",
-              backdropFilter: "blur(12px)",
-              border: "1px solid rgba(255,255,255,0.2)",
-            }}
-            whileHover={{ scale: 1.12, background: "rgba(0,0,0,0.55)" }}
-            whileTap={{ scale: 0.88 }}
-            transition={springConfig}
-            onClick={onClose}
-          >
-            <X size={16} className="text-white" />
-          </motion.button>
+          {/* Thumbnails + dots below image for mobile-first layout */}
+          {tour.gallery.length > 1 && (
+            <div className="px-4 sm:px-5 pt-3 pb-1 bg-black/10">
+              <div className="flex gap-2 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                {tour.gallery.map((img, i) => (
+                  <motion.button
+                    key={i}
+                    onClick={() => setActiveImg(i)}
+                    className="rounded-lg overflow-hidden shrink-0"
+                    style={{
+                      width: i === activeImg ? 68 : 56,
+                      height: i === activeImg ? 46 : 40,
+                      border: i === activeImg ? "2px solid rgba(255,255,255,0.95)" : "1px solid rgba(255,255,255,0.28)",
+                      opacity: i === activeImg ? 1 : 0.7,
+                    }}
+                    animate={{ opacity: i === activeImg ? 1 : 0.7 }}
+                    transition={springConfig}
+                    whileTap={{ scale: 0.96 }}
+                  >
+                    <img src={img} alt="" className="w-full h-full object-cover" />
+                  </motion.button>
+                ))}
+              </div>
 
-          {/* Tag on gallery */}
-          <div className={`absolute top-3 left-3 px-3 py-1 rounded-full bg-gradient-to-r ${tour.tagColor} text-white text-xs font-bold uppercase tracking-wider`}
-            style={{ backdropFilter: "blur(8px)" }}
-          >
-            {tour.tag}
-          </div>
+              <div className="flex justify-center gap-1.5 pb-2">
+                {tour.gallery.map((_, i) => (
+                  <motion.button
+                    key={i}
+                    className="rounded-full"
+                    style={{
+                      width: i === activeImg ? 18 : 6,
+                      height: 6,
+                      background: i === activeImg ? "white" : "rgba(255,255,255,0.4)",
+                    }}
+                    animate={{ width: i === activeImg ? 18 : 6 }}
+                    transition={springConfig}
+                    onClick={() => setActiveImg(i)}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Content */}

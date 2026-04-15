@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import BookingModal from "./BookingModal";
 
 const navLinks = [
   { label: "Início", path: "/" },
@@ -9,7 +10,7 @@ const navLinks = [
   { label: "Ecoturismo", path: "/ecoturismo" },
   { label: "Pesca Esportiva", path: "/pesca" },
   { label: "Sobre Nós", path: "/sobre" },
-  { label: "Contato", path: "/contato" },
+  { label: "Dúvidas / Ajuda", path: "/contato" },
 ];
 
 const Header = () => {
@@ -53,12 +54,11 @@ const Header = () => {
               {l.label}
             </Link>
           ))}
-          <Link
-            to="/contato"
-            className="ml-2 px-5 py-2 text-sm font-semibold rounded bg-accent text-accent-foreground hover:bg-gold-light transition-colors duration-300"
-          >
-            Reserve Agora
-          </Link>
+          <BookingModal className="ml-2">
+            <button className="px-5 py-2 text-sm font-semibold rounded bg-accent text-accent-foreground hover:bg-gold-light transition-colors duration-300">
+              Reserve Agora
+            </button>
+          </BookingModal>
         </nav>
 
         {/* Mobile toggle */}
@@ -94,12 +94,11 @@ const Header = () => {
                   {l.label}
                 </Link>
               ))}
-              <Link
-                to="/contato"
-                className="mt-2 px-5 py-3 text-center text-sm font-semibold rounded bg-accent text-accent-foreground"
-              >
-                Reserve Agora
-              </Link>
+              <BookingModal className="mt-2 w-full">
+                <button className="w-full px-5 py-3 text-center text-sm font-semibold rounded bg-accent text-accent-foreground">
+                  Reserve Agora
+                </button>
+              </BookingModal>
             </div>
           </motion.nav>
         )}

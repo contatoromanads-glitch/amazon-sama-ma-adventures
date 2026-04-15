@@ -264,8 +264,8 @@ function TourModal({ tour, onClose }: { tour: Tour; onClose: () => void }) {
         </div>
 
         {/* Gallery */}
-        <div className="relative overflow-hidden">
-          <div className="relative w-full overflow-hidden" style={{ height: "clamp(280px, 42vh, 420px)" }}>
+        <div className="relative overflow-hidden shrink-0">
+          <div className="relative w-full" style={{ height: 300 }}>
             <AnimatePresence mode="wait">
               <motion.img
                 key={activeImg}

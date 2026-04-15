@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { MapPin, Plane, Ship, MessageCircle, Instagram, Clock, Send } from "lucide-react";
 import SectionFadeIn from "@/components/SectionFadeIn";
-import heroImg from "@/assets/hero-lodge.jpg";
+import heroImg from "@/assets/hero-lodge.webp";
 
 const emptyForm = {
   name: "",

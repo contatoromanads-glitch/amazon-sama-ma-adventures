@@ -7,18 +7,18 @@ import BookingModal from "@/components/BookingModal";
 
 // ─── Images ──────────────────────────────────────────────────────────────────
 import { photos } from "@/lib/photos";
-const ecotourismImg = "/fotos_reais_amazon/eco-new-11.jpeg";
-const fishingImg    = "/fotos_reais_amazon/eco-new-28.jpeg";
-const heroImg       = "/fotos_reais_amazon/eco-new-38.jpeg";
-const tourSafari    = "/fotos_reais_amazon/eco-new-16.jpeg";
-const tourSafari2   = "/fotos_reais_amazon/eco-new-18.jpeg";
-const tourTrilhas   = "/fotos_reais_amazon/eco-new-10.jpeg";
-const tourTrilhas2  = "/fotos_reais_amazon/eco-new-41.jpeg";
-const tourPorDoSol  = "/fotos_reais_amazon/eco-new-30.jpeg";
-const tourNoturna   = "/fotos_reais_amazon/eco-new-17.jpeg";
-const tourNoturna2  = "/fotos_reais_amazon/eco-new-6.jpeg";
-const tourCultura   = "/fotos_reais_amazon/eco-new-14.jpeg";
-const tourRoteiro   = "/fotos_reais_amazon/eco-new-2.jpeg";
+const ecotourismImg = "/fotos_reais_amazon/eco-new-11.webp";
+const fishingImg    = "/fotos_reais_amazon/eco-new-28.webp";
+const heroImg       = "/fotos_reais_amazon/eco-new-38.webp";
+const tourSafari    = "/fotos_reais_amazon/eco-new-16.webp";
+const tourSafari2   = "/fotos_reais_amazon/eco-new-18.webp";
+const tourTrilhas   = "/fotos_reais_amazon/eco-new-10.webp";
+const tourTrilhas2  = "/fotos_reais_amazon/eco-new-41.webp";
+const tourPorDoSol  = "/fotos_reais_amazon/eco-new-30.webp";
+const tourNoturna   = "/fotos_reais_amazon/eco-new-17.webp";
+const tourNoturna2  = "/fotos_reais_amazon/eco-new-6.webp";
+const tourCultura   = "/fotos_reais_amazon/eco-new-14.webp";
+const tourRoteiro   = "/fotos_reais_amazon/eco-new-2.webp";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface Tour {
@@ -60,7 +60,7 @@ const tours: Tour[] = [
       "🌿 Apresentação de plantas medicinais",
       "📸 Stops para fotografia em pontos privilegiados",
     ],
-    gallery: [tourSafari, tourSafari2, ecotourismImg, "/fotos_reais_amazon/eco-victoria-regia.jpg", "/fotos_reais_amazon/eco-orquidea.jpg", "/fotos_reais_amazon/eco-orquidario.jpg"],
+    gallery: [tourSafari, tourSafari2, ecotourismImg, "/fotos_reais_amazon/eco-victoria-regia.webp", "/fotos_reais_amazon/eco-orquidea.webp", "/fotos_reais_amazon/eco-orquidario.webp"],
   },
   {
     icon: Footprints,
@@ -83,7 +83,7 @@ const tours: Tour[] = [
       "🍃 Técnicas de sobrevivência na selva",
       "📍 Múltiplos níveis: fácil, médio e desafiador",
     ],
-    gallery: [tourTrilhas, tourTrilhas2, heroImg, "/fotos_reais_amazon/eco-larvas-tronco.jpg", "/fotos_reais_amazon/eco-peixe-floresta.jpg"],
+    gallery: [tourTrilhas, tourTrilhas2, heroImg, "/fotos_reais_amazon/eco-larvas-tronco.webp", "/fotos_reais_amazon/eco-peixe-floresta.webp"],
   },
   {
     icon: Sunrise,
@@ -129,7 +129,7 @@ const tours: Tour[] = [
       "🦟 Kit repelente fornecido",
       "🔦 Equipamentos de segurança completos",
     ],
-    gallery: [tourNoturna, tourNoturna2, fishingImg, "/fotos_reais_amazon/eco-banquete-noturno.jpg"],
+    gallery: [tourNoturna, tourNoturna2, fishingImg, "/fotos_reais_amazon/eco-banquete-noturno.webp"],
   },
   {
     icon: Users,
@@ -152,7 +152,7 @@ const tours: Tour[] = [
       "🪵 Artesanato local",
       "🤝 Encontro cultural genuíno",
     ],
-    gallery: [tourCultura, "/fotos_reais_amazon/eco-artesanato-loja.jpg", "/fotos_reais_amazon/eco-artesanato-madeira.jpg", ecotourismImg],
+    gallery: [tourCultura, "/fotos_reais_amazon/eco-artesanato-loja.webp", "/fotos_reais_amazon/eco-artesanato-madeira.webp", ecotourismImg],
   },
   {
     icon: Map,
@@ -181,26 +181,26 @@ const tours: Tour[] = [
 
 // ─── Animal Gallery Data ──────────────────────────────────────────────────────
 const animalPhotos = [
-  { src: "/fotos_reais_amazon/eco-new-12.jpeg", alt: "Aranha" },
-  { src: "/fotos_reais_amazon/eco-new-13.jpeg", alt: "Caranguejeira" },
-  { src: "/fotos_reais_amazon/eco-new-15.jpeg", alt: "Ave Amazônica" },
-  { src: "/fotos_reais_amazon/eco-new-19.jpeg", alt: "Papagaio" },
-  { src: "/fotos_reais_amazon/eco-new-20.jpeg", alt: "Garça" },
-  { src: "/fotos_reais_amazon/eco-new-21.jpeg", alt: "Gavião em Voo" },
-  { src: "/fotos_reais_amazon/eco-new-22.jpeg", alt: "Macaco Prego" },
-  { src: "/fotos_reais_amazon/eco-new-23.jpeg", alt: "Águia Pescadora" },
-  { src: "/fotos_reais_amazon/eco-new-24.jpeg", alt: "Macaco de Cheiro" },
-  { src: "/fotos_reais_amazon/eco-new-25.jpeg", alt: "Ave Colorida" },
-  { src: "/fotos_reais_amazon/eco-new-26.jpeg", alt: "Andorinha" },
-  { src: "/fotos_reais_amazon/eco-new-29.jpeg", alt: "Ave Silvestre" },
-  { src: "/fotos_reais_amazon/eco-new-31.jpeg", alt: "Pássaro no Galho" },
-  { src: "/fotos_reais_amazon/eco-new-32.jpeg", alt: "Bicho-Preguiça" },
-  { src: "/fotos_reais_amazon/eco-new-33.jpeg", alt: "Garça Branca" },
-  { src: "/fotos_reais_amazon/eco-new-34.jpeg", alt: "Garça Moura" },
-  { src: "/fotos_reais_amazon/eco-new-35.jpeg", alt: "Macaco" },
-  { src: "/fotos_reais_amazon/eco-new-36.jpeg", alt: "Pica-Pau" },
-  { src: "/fotos_reais_amazon/eco-new-39.jpeg", alt: "Tarântulas" },
-  { src: "/fotos_reais_amazon/eco-new-40.jpeg", alt: "Iguana" },
+  { src: "/fotos_reais_amazon/eco-new-12.webp", alt: "Aranha" },
+  { src: "/fotos_reais_amazon/eco-new-13.webp", alt: "Caranguejeira" },
+  { src: "/fotos_reais_amazon/eco-new-15.webp", alt: "Ave Amazônica" },
+  { src: "/fotos_reais_amazon/eco-new-19.webp", alt: "Papagaio" },
+  { src: "/fotos_reais_amazon/eco-new-20.webp", alt: "Garça" },
+  { src: "/fotos_reais_amazon/eco-new-21.webp", alt: "Gavião em Voo" },
+  { src: "/fotos_reais_amazon/eco-new-22.webp", alt: "Macaco Prego" },
+  { src: "/fotos_reais_amazon/eco-new-23.webp", alt: "Águia Pescadora" },
+  { src: "/fotos_reais_amazon/eco-new-24.webp", alt: "Macaco de Cheiro" },
+  { src: "/fotos_reais_amazon/eco-new-25.webp", alt: "Ave Colorida" },
+  { src: "/fotos_reais_amazon/eco-new-26.webp", alt: "Andorinha" },
+  { src: "/fotos_reais_amazon/eco-new-29.webp", alt: "Ave Silvestre" },
+  { src: "/fotos_reais_amazon/eco-new-31.webp", alt: "Pássaro no Galho" },
+  { src: "/fotos_reais_amazon/eco-new-32.webp", alt: "Bicho-Preguiça" },
+  { src: "/fotos_reais_amazon/eco-new-33.webp", alt: "Garça Branca" },
+  { src: "/fotos_reais_amazon/eco-new-34.webp", alt: "Garça Moura" },
+  { src: "/fotos_reais_amazon/eco-new-35.webp", alt: "Macaco" },
+  { src: "/fotos_reais_amazon/eco-new-36.webp", alt: "Pica-Pau" },
+  { src: "/fotos_reais_amazon/eco-new-39.webp", alt: "Tarântulas" },
+  { src: "/fotos_reais_amazon/eco-new-40.webp", alt: "Iguana" },
 ];
 
 // ─── iOS Spring config ────────────────────────────────────────────────────────
@@ -374,7 +374,7 @@ function TourModal({ tour, onClose }: { tour: Tour; onClose: () => void }) {
                     transition={springConfig}
                     whileTap={{ scale: 0.96 }}
                   >
-                    <img src={img} alt="" className="w-full h-full object-cover" />
+                    <img src={img} alt="" className="w-full h-full object-cover" loading="lazy" />
                   </motion.button>
                 ))}
               </div>
@@ -690,6 +690,7 @@ const Ecotourism = () => {
           className="absolute inset-0 w-full h-full object-cover"
           width={1200}
           height={800}
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-primary/60 to-primary/80" />
         <div className="relative z-10 text-center px-4">

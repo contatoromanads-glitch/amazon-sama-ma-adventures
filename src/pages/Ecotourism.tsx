@@ -60,7 +60,7 @@ const tours: Tour[] = [
       "🌿 Apresentação de plantas medicinais",
       "📸 Stops para fotografia em pontos privilegiados",
     ],
-    gallery: [tourSafari, tourSafari2, ecotourismImg, "/fotos_reais_amazon/eco-safari-river.png", "/fotos_reais_amazon/eco-safari-monkey.png", "/fotos_reais_amazon/eco-safari-snake.png", "/fotos_reais_amazon/eco-safari-sloth.png"],
+    gallery: [tourSafari, tourSafari2, ecotourismImg, "/fotos_reais_amazon/eco-victoria-regia.jpg", "/fotos_reais_amazon/eco-orquidea.jpg", "/fotos_reais_amazon/eco-orquidario.jpg"],
   },
   {
     icon: Footprints,
@@ -83,7 +83,7 @@ const tours: Tour[] = [
       "🍃 Técnicas de sobrevivência na selva",
       "📍 Múltiplos níveis: fácil, médio e desafiador",
     ],
-    gallery: [tourTrilhas, tourTrilhas2, heroImg],
+    gallery: [tourTrilhas, tourTrilhas2, heroImg, "/fotos_reais_amazon/eco-larvas-tronco.jpg", "/fotos_reais_amazon/eco-peixe-floresta.jpg"],
   },
   {
     icon: Sunrise,
@@ -129,7 +129,7 @@ const tours: Tour[] = [
       "🦟 Kit repelente fornecido",
       "🔦 Equipamentos de segurança completos",
     ],
-    gallery: [tourNoturna, tourNoturna2, fishingImg],
+    gallery: [tourNoturna, tourNoturna2, fishingImg, "/fotos_reais_amazon/eco-banquete-noturno.jpg"],
   },
   {
     icon: Users,
@@ -152,7 +152,7 @@ const tours: Tour[] = [
       "🪵 Artesanato local",
       "🤝 Encontro cultural genuíno",
     ],
-    gallery: [tourCultura, ecotourismImg, fishingImg],
+    gallery: [tourCultura, "/fotos_reais_amazon/eco-artesanato-loja.jpg", "/fotos_reais_amazon/eco-artesanato-madeira.jpg", ecotourismImg],
   },
   {
     icon: Map,

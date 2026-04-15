@@ -125,6 +125,32 @@
   }
 }
 
+/* Content-visibility for off-screen sections */
+.section-padding {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
+
+/* CSS fade-in animation (replaces framer-motion SectionFadeIn) */
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-section {
+  opacity: 0;
+}
+
+.fade-in-section.is-visible {
+  animation: fadeSlideIn 0.7s ease-out forwards;
+}
+
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;

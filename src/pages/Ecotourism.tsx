@@ -866,7 +866,7 @@ const Ecotourism = () => {
                   transition={springConfig}
                 >
                   <img
-                    src={photo.src}
+                    src={thumb(photo.src)}
                     alt={photo.alt}
                     className="w-full h-full object-cover"
                     loading="lazy"

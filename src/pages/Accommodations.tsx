@@ -1,7 +1,7 @@
 import { AirVent, Droplets, Wifi, Sparkles, BedDouble, BedSingle, Utensils, MapPin, MessageCircle } from "lucide-react";
 import SectionFadeIn from "@/components/SectionFadeIn";
 import { photos } from "@/lib/photos";
-const accommodationImg = photos.quartoStandard;
+const accommodationImg = "/4567450e-33c2-4ebd-9811-397b90d43bb7.png";
 const restaurantImg    = photos.restaurante;
 const heroImg          = photos.lodge;
 import { motion } from "framer-motion";

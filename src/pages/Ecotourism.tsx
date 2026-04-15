@@ -757,7 +757,7 @@ const Ecotourism = () => {
             </p>
           </SectionFadeIn>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
             {tours.map((tour, i) => (
               <TourCard
                 key={tour.title}

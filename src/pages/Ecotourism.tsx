@@ -485,6 +485,14 @@ function TourModal({ tour, onClose }: { tour: Tour; onClose: () => void }) {
 }
 
 // ─── Tour Card ────────────────────────────────────────────────────────────────
+/** Returns the thumbnail path for a given full-size image */
+function thumb(src: string): string {
+  if (src.startsWith("/fotos_reais_amazon/")) {
+    return src.replace("/fotos_reais_amazon/", "/fotos_reais_amazon/thumbs/");
+  }
+  return src;
+}
+
 function TourCard({ tour, index, onClick }: { tour: Tour; index: number; onClick: () => void }) {
   const [hovered, setHovered] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
@@ -546,9 +554,10 @@ function TourCard({ tour, index, onClick }: { tour: Tour; index: number; onClick
           <AnimatePresence mode="wait">
             <motion.img
               key={activeSlide}
-              src={images[activeSlide]}
+              src={thumb(images[activeSlide])}
               alt={`${tour.title} - ${activeSlide + 1}`}
               className="absolute inset-0 w-full h-full object-cover"
+              loading="lazy"
               initial={{ opacity: 0, scale: 1.04 }}
               animate={{ opacity: 1, scale: hovered ? 1.06 : 1 }}
               exit={{ opacity: 0 }}

@@ -134,6 +134,8 @@ const Index = () => {
           loop
           muted
           playsInline
+          poster="/hero-poster.webp"
+          preload="none"
           className="absolute inset-0 w-full h-full object-cover"
           aria-hidden="true"
         >
@@ -257,13 +259,15 @@ const Index = () => {
           </SectionFadeIn>
           <SectionFadeIn>
             <div className="hover-zoom rounded-lg overflow-hidden">
-              <img
-                src={accommodationImg}
+               <img
+                src={accommodationImg.replace("/fotos_reais_amazon/", "/fotos_reais_amazon/thumbs/")}
                 alt="Estrutura flutuante do Amazon Samaúma Lodge no Paraná do Mamori"
                 className="w-full h-[420px] object-cover"
                 loading="lazy"
-                width={1200}
-                height={800}
+                decoding="async"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                width={400}
+                height={267}
               />
             </div>
           </SectionFadeIn>
@@ -313,12 +317,14 @@ const Index = () => {
                 <Link to={e.link} className="group block">
                   <div className="relative hover-zoom rounded-lg overflow-hidden mb-5">
                     <img
-                      src={e.img}
+                      src={e.img.replace("/fotos_reais_amazon/", "/fotos_reais_amazon/thumbs/")}
                       alt={e.title}
                       className="w-full h-64 object-cover"
                       loading="lazy"
-                      width={1200}
-                      height={800}
+                      decoding="async"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      width={400}
+                      height={267}
                     />
                     <span className="absolute top-4 right-4 bg-accent text-accent-foreground text-xs font-body font-bold uppercase tracking-widest px-3 py-1 rounded-full">
                       {e.tag}
@@ -370,12 +376,14 @@ const Index = () => {
           <SectionFadeIn>
             <div className="hover-zoom rounded-lg overflow-hidden">
               <img
-                src={ecotourismImg}
+                src={ecotourismImg.replace("/fotos_reais_amazon/", "/fotos_reais_amazon/thumbs/")}
                 alt="Acesso de barco ao Amazon Samaúma Lodge"
                 className="w-full h-[400px] object-cover"
                 loading="lazy"
-                width={1200}
-                height={800}
+                decoding="async"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                width={400}
+                height={267}
               />
             </div>
           </SectionFadeIn>

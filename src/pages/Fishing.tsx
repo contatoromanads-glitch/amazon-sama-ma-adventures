@@ -277,7 +277,7 @@ function Lightbox({ items, startIndex, onClose }: { items: GalleryItem[]; startI
                 whileHover={{ opacity: 1, scale: 1.08 }}
                 transition={springCfg}
               >
-                <img src={g.src} alt="" className="w-full h-full object-cover" />
+                <img src={g.src} alt="" className="w-full h-full object-cover" loading="lazy" />
               </motion.button>
             ))}
           </div>

@@ -665,7 +665,7 @@ const About = () => {
                   ))}
                 </div>
                 <motion.a
-                  href="https://wa.me/559291163391"
+                  href="https://wa.me/5592991163391?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20Amazon%20Sama%C3%BAma%20Lodge%20e%20gostaria%20de%20falar%20diretamente%20com%20o%20guia%20sobre%20uma%20experi%C3%AAncia%20personalizada."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 py-3.5 rounded-2xl text-sm font-bold uppercase tracking-wide font-body text-white w-full h-auto min-h-[52px] text-center leading-snug"

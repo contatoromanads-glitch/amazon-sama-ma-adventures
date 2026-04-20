@@ -16,8 +16,10 @@ const Contact = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     /* <!-- Booking system removed and replaced with WhatsApp link --> */
-    const text = encodeURIComponent(`Olá! Meu nome é ${form.name}. ${form.message ? `\n\nMensagem: ${form.message}` : ''}`);
-    window.open(`https://wa.me/559299999000?text=${text}`, '_blank');
+    const text = encodeURIComponent(
+      `Olá! Meu nome é ${form.name || "(não informado)"}.${form.email ? `\nE-mail: ${form.email}` : ""}${form.phone ? `\nTelefone: ${form.phone}` : ""}\n\nVim pelo site do Amazon Samaúma Lodge e gostaria de tirar dúvidas.${form.message ? `\n\nMensagem: ${form.message}` : ""}`
+    );
+    window.open(`https://wa.me/5592991163391?text=${text}`, '_blank');
     setForm(emptyForm);
   };
 
@@ -118,7 +120,7 @@ const Contact = () => {
                 <p className="text-center text-sm text-muted-foreground">
                   Prefere contato imediato?{" "}
                   <a
-                    href={`https://wa.me/559299999000?text=${encodeURIComponent(`Olá! Meu nome é ${form.name || "..."} e gostaria de tirar algumas dúvidas.`)}`}
+                    href={`https://wa.me/5592991163391?text=${encodeURIComponent(`Olá! Meu nome é ${form.name || "..."} e gostaria de tirar algumas dúvidas sobre o Amazon Samaúma Lodge.`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gold hover:underline inline-flex items-center gap-1"
@@ -151,12 +153,12 @@ const Contact = () => {
                       <div>
                         <p className="font-body font-semibold text-sm mb-1">WhatsApp (Reservas)</p>
                         <a
-                          href="https://wa.me/559299999000"
+                          href="https://wa.me/5592991163391?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20Amazon%20Sama%C3%BAma%20Lodge%20e%20gostaria%20de%20fazer%20uma%20reserva."
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-sm text-gold hover:underline"
                         >
-                          +55 (92) 99999-0000
+                          +55 (92) 99116-3391
                         </a>
                       </div>
                     </li>

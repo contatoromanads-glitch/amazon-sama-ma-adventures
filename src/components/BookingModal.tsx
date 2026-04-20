@@ -1,12 +1,31 @@
 import React from 'react';
 import { Calendar as CalendarIcon } from 'lucide-react';
 
-/* <!-- Booking system removed and replaced with WhatsApp link --> */
+/* <!-- Booking system: WhatsApp link with service-specific pre-filled messages --> */
+const WHATSAPP_NUMBER = '5592991163391';
+
+function buildMessage(defaultInterest?: string, defaultRoom?: string): string {
+  // Room-specific message takes priority
+  if (defaultRoom) {
+    return `Olá! Tenho interesse em reservar o "${defaultRoom}" no Amazon Samaúma Lodge. Poderia me enviar valores, datas disponíveis e o que está incluso?`;
+  }
+
+  // Service-specific messages
+  switch (defaultInterest) {
+    case 'Pesca Esportiva':
+      return `Olá! Tenho interesse no pacote de Pesca Esportiva do Amazon Samaúma Lodge. Gostaria de saber valores, datas disponíveis, espécies da temporada e o que está incluso (guia, equipamentos, refeições).`;
+    case 'Ecoturismo':
+      return `Olá! Tenho interesse nos passeios de Ecoturismo do Amazon Samaúma Lodge (trilhas, observação de fauna, passeios de barco). Poderia me enviar valores, datas disponíveis e roteiros?`;
+    case 'Relaxar/Descansar':
+      return `Olá! Quero reservar uma estadia de descanso no Amazon Samaúma Lodge. Poderia me enviar valores das diárias, datas disponíveis e o que está incluso (refeições, traslado)?`;
+    default:
+      return `Olá! Gostaria de fazer uma reserva no Amazon Samaúma Lodge. Poderia me enviar mais informações sobre valores, datas disponíveis e pacotes?`;
+  }
+}
+
 export default function BookingModal({ children, className, defaultInterest, defaultRoom }: { children?: React.ReactNode, className?: string, defaultInterest?: string, defaultRoom?: string }) {
-  // Construct a personalized WhatsApp message based on the props passed from different pages
-  const textMessage = `Olá! Gostaria de saber mais sobre reservas no lodge.${defaultInterest ? ` Tenho interesse especial em: ${defaultInterest}.` : ''}${defaultRoom ? ` Gostaria de ver o: ${defaultRoom}.` : ''}`;
-  const encodedText = encodeURIComponent(textMessage);
-  const whatsappUrl = `https://wa.me/559299999000?text=${encodedText}`;
+  const textMessage = buildMessage(defaultInterest, defaultRoom);
+  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(textMessage)}`;
 
   return (
     <a 

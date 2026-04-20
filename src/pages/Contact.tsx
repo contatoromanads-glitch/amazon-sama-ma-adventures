@@ -16,8 +16,10 @@ const Contact = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     /* <!-- Booking system removed and replaced with WhatsApp link --> */
-    const text = encodeURIComponent(`Olá! Meu nome é ${form.name}. ${form.message ? `\n\nMensagem: ${form.message}` : ''}`);
-    window.open(`https://wa.me/559299999000?text=${text}`, '_blank');
+    const text = encodeURIComponent(
+      `Olá! Meu nome é ${form.name || "(não informado)"}.${form.email ? `\nE-mail: ${form.email}` : ""}${form.phone ? `\nTelefone: ${form.phone}` : ""}\n\nVim pelo site do Amazon Samaúma Lodge e gostaria de tirar dúvidas.${form.message ? `\n\nMensagem: ${form.message}` : ""}`
+    );
+    window.open(`https://wa.me/5592991163391?text=${text}`, '_blank');
     setForm(emptyForm);
   };
 

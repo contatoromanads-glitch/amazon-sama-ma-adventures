@@ -8,7 +8,7 @@ import { photos } from "@/lib/photos";
 const accommodationImg = photos.quartoStandard;
 const ecotourismImg    = "/00d47a7f-6c10-4e3a-b79d-625befed8282.jpg";
 const fishingImg       = "/fotos_reais_amazon/home-pesca.jpg";
-const restaurantImg    = photos.restaurante;
+const restaurantImg    = "/3db69c3c-08ab-40d3-aac2-5f1d435fbcf8.jpg";
 
 const HERO_VIDEO_URL = "/hero-drone.mp4";
 

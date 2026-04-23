@@ -11,7 +11,7 @@ import SectionFadeIn from "@/components/SectionFadeIn";
 import BookingModal from "@/components/BookingModal";
 import { Link } from "react-router-dom";
 import { photos } from "@/lib/photos";
-const heroImg          = photos.lodge;
+const heroImg          = "/fotos_reais_amazon/about-hero-artesanato.webp";
 const accommodationImg = photos.quartoStandard;
 const restaurantImg    = photos.restaurante;
 const ownerImg         = photos.proprietario;

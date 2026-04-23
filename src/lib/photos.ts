@@ -44,7 +44,7 @@ export const photos = {
   /** Safari amazônico — wildlife on the river */
   tourSafari:    `${BASE}/ecoturismo.webp`,
   /** Safari amazônico — second shot */
-  tourSafari2:   `${BASE}/pesca-no-rio.webp`,
+  tourSafari2:   `${BASE}/expedicao-noturna.jpg`,
   /** Trilhas na floresta — trail walk */
   tourTrilhas:   `${BASE}/pesca-barco.webp`,
   /** Trilhas na floresta — second shot */

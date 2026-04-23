@@ -776,8 +776,11 @@ const Fishing = () => {
       <section className="section-padding bg-primary">
         <div className="container-lodge grid lg:grid-cols-2 gap-12 items-center">
           <SectionFadeIn>
-            <div className="hover-zoom rounded-lg overflow-hidden">
+            <div className="relative hover-zoom rounded-lg overflow-hidden">
               <img src={ecotourismImg} alt="Expedição noturna" className="w-full h-[380px] object-cover" loading="lazy" width={1200} height={800} />
+              <span className="absolute bottom-2 right-2 px-2 py-1 text-[10px] sm:text-xs font-body bg-background/70 text-foreground rounded backdrop-blur-sm">
+                Imagens meramente ilustrativas
+              </span>
             </div>
           </SectionFadeIn>
           <SectionFadeIn>

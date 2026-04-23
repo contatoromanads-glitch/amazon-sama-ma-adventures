@@ -171,7 +171,7 @@ const values = [
     short: "Baixo impacto ambiental",
     color: "hsl(147,55%,38%)", glow: "rgba(50,160,80,0.3)",
     long: "Cada decisão no Amazon Samaúma Lodge é guiada pelo respeito à floresta. Utilizamos energia de forma consciente, reduzimos o plástico e trabalhamos em harmonia com a natureza que nos abriga. Preservar a Amazônia é nosso compromisso com as próximas gerações.",
-    image: ecotourismImg,
+    image: "/sustentabilidade-canoa.jpeg",
   },
   {
     icon: Heart, emoji: "🤝", title: "Hospitalidade",

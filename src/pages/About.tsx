@@ -534,7 +534,7 @@ const About = () => {
         <div className="container-lodge grid lg:grid-cols-2 gap-12 items-center">
           <SectionFadeIn>
             <div className="relative rounded-2xl overflow-hidden">
-              <motion.img src={restaurantImg} alt="Restaurante amazônico"
+              <motion.img src="/restaurante-buffet.jpeg" alt="Buffet de gastronomia amazônica no lodge"
                 className="w-full h-[380px] object-cover" loading="lazy"
                 whileHover={{ scale: 1.04 }} transition={{ duration: 0.6 }} />
               <motion.div className="absolute inset-0 flex items-end p-6"

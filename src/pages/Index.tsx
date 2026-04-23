@@ -6,8 +6,8 @@ import SectionFadeIn from "@/components/SectionFadeIn";
 import BookingModal from "@/components/BookingModal";
 import { photos } from "@/lib/photos";
 const accommodationImg = photos.quartoStandard;
-const ecotourismImg    = "user-uploads://8b252218-6098-46f4-bbfd-09d2a349de04.jpg";
-const fishingImg       = "user-uploads://dfdeafcf-9794-455d-8b88-8296a15ebbf4.jpg";
+const ecotourismImg    = "/fotos_reais_amazon/home-ecoturismo.jpg";
+const fishingImg       = "/fotos_reais_amazon/home-pesca.jpg";
 const restaurantImg    = photos.restaurante;
 
 const HERO_VIDEO_URL = "/hero-drone.mp4";

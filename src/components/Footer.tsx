@@ -22,7 +22,7 @@ const Footer = () => (
             <Instagram size={22} />
           </a>
           <a
-            href="https://wa.me/5592991163391?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20Amazon%20Sama%C3%BAma%20Lodge%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es."
+            href="https://wa.me/559293839110?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20Amazon%20Sama%C3%BAma%20Lodge%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es."
             target="_blank"
             rel="noopener noreferrer"
             className="text-primary-foreground/60 hover:text-gold transition-colors"

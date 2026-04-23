@@ -153,12 +153,12 @@ const Contact = () => {
                       <div>
                         <p className="font-body font-semibold text-sm mb-1">WhatsApp (Reservas)</p>
                         <a
-                          href="https://wa.me/5592991163391?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20Amazon%20Sama%C3%BAma%20Lodge%20e%20gostaria%20de%20fazer%20uma%20reserva."
+                          href="https://wa.me/559293839110?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20Amazon%20Sama%C3%BAma%20Lodge%20e%20gostaria%20de%20fazer%20uma%20reserva."
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-sm text-gold hover:underline"
                         >
-                          +55 (92) 99116-3391
+                          +55 (92) 9383-9110
                         </a>
                       </div>
                     </li>

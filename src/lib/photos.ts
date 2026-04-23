@@ -16,7 +16,7 @@ export const photos = {
 
   // ── Rooms & Facilities ───────────────────────────────────────────────────
   /** Interior of the Standard room (upload quarto-standard.webp to replace) */
-  quartoStandard: `${BASE}/lodge.webp`,
+  quartoStandard: `${BASE}/quarto-standard.png`,
   /** Interior of the Family room (upload quarto-familia.webp to replace) */
   quartoFamilia:  `${BASE}/lodge.webp`,
   /** Restaurant / dining area */

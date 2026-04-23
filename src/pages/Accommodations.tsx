@@ -2,7 +2,7 @@ import { AirVent, Droplets, Wifi, Sparkles, BedDouble, BedSingle, Utensils, MapP
 import SectionFadeIn from "@/components/SectionFadeIn";
 import { photos } from "@/lib/photos";
 const accommodationImg = "/4567450e-33c2-4ebd-9811-397b90d43bb7.png";
-const restaurantImg    = photos.restaurante;
+const restaurantImg    = "/c025ccc9-c4d1-458f-a73d-3891e2a48101.png";
 const heroImg          = photos.lodge;
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -84,7 +84,7 @@ const Accommodations = () => (
         <SectionFadeIn>
           <div className="hover-zoom rounded-lg overflow-hidden">
             <img
-              src={photos.restaurante}
+              src={restaurantImg}
               alt="Área de convivência e restaurante do lodge"
               className="w-full h-[420px] object-cover"
               loading="lazy"

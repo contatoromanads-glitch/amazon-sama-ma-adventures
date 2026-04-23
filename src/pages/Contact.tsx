@@ -19,7 +19,7 @@ const Contact = () => {
     const text = encodeURIComponent(
       `Olá! Meu nome é ${form.name || "(não informado)"}.${form.email ? `\nE-mail: ${form.email}` : ""}${form.phone ? `\nTelefone: ${form.phone}` : ""}\n\nVim pelo site do Amazon Samaúma Lodge e gostaria de tirar dúvidas.${form.message ? `\n\nMensagem: ${form.message}` : ""}`
     );
-    window.open(`https://wa.me/5592991163391?text=${text}`, '_blank');
+    window.open(`https://wa.me/559293839110?text=${text}`, '_blank');
     setForm(emptyForm);
   };
 

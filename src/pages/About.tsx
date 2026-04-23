@@ -199,7 +199,7 @@ const values = [
     short: "Pesque & Solte sempre",
     color: "hsl(195,70%,52%)", glow: "rgba(30,180,200,0.3)",
     long: "Praticamos o Pesque & Solte em todas as saídas de pesca. Cada tucunaré capturado é devolvido ao rio com cuidado, garantindo que as espécies se reproduzam e que o Mamori continue sendo um dos melhores destinos de pesca esportiva do mundo.",
-    image: fishingImg,
+    image: "/pesca-responsavel-sunset.jpeg",
   },
   {
     icon: Compass, emoji: "🧭", title: "Autenticidade",

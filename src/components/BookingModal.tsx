@@ -2,7 +2,7 @@ import React from 'react';
 import { Calendar as CalendarIcon } from 'lucide-react';
 
 /* <!-- Booking system: WhatsApp link with service-specific pre-filled messages --> */
-const WHATSAPP_NUMBER = '5592991163391';
+const WHATSAPP_NUMBER = '559293839110';
 
 function buildMessage(defaultInterest?: string, defaultRoom?: string): string {
   // Room-specific message takes priority

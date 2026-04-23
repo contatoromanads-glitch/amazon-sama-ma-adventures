@@ -178,7 +178,7 @@ const values = [
     short: "Recebemos como família",
     color: "hsl(0,70%,62%)", glow: "rgba(220,60,60,0.28)",
     long: "Cada hóspede é recebido com um sorriso genuíno, um café fresco e toda a atenção da equipe. Nossa hospitalidade nasce da cultura ribeirinha — calorosa, espontânea e verdadeira. Queremos que você se sinta em casa no coração da Amazônia.",
-    image: restaurantImg,
+    image: "/hospitalidade-grupo-lodge.jpeg",
   },
   {
     icon: Shield, emoji: "🛡️", title: "Segurança",

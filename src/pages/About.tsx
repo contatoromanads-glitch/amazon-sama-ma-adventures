@@ -192,7 +192,7 @@ const values = [
     short: "Valorizamos o povo ribeirinho",
     color: "hsl(280,60%,62%)", glow: "rgba(180,80,220,0.28)",
     long: "Trabalhamos com moradores locais, compramos de produtores ribeirinhos e contribuímos para que a comunidade do Paraná do Mamori prospere. O turismo que praticamos respeita as pessoas que guardam a floresta há séculos.",
-    image: heroImg,
+    image: "/fotos_reais_amazon/about-card-comunidade.webp",
   },
   {
     icon: Fish, emoji: "🎣", title: "Pesca Responsável",

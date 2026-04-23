@@ -200,7 +200,7 @@ const Accommodations = () => (
         <SectionFadeIn>
           <div className="hover-zoom rounded-lg overflow-hidden">
             <img
-              src={restaurantImg}
+              src="/restaurante-buffet-novo.jpeg"
               alt="Restaurante do Amazon Samaúma Lodge"
               className="w-full h-[380px] object-cover"
               loading="lazy"

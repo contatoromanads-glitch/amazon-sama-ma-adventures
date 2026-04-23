@@ -376,7 +376,7 @@ const Index = () => {
           <SectionFadeIn>
             <div className="hover-zoom rounded-lg overflow-hidden">
               <img
-                src={ecotourismImg.replace("/fotos_reais_amazon/", "/fotos_reais_amazon/thumbs/")}
+                src="user-uploads://8b252218-6098-46f4-bbfd-09d2a349de04.jpg"
                 alt="Acesso de barco ao Amazon Samaúma Lodge"
                 className="w-full h-[400px] object-cover"
                 loading="lazy"

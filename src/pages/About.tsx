@@ -206,7 +206,7 @@ const values = [
     short: "Amazônia real, sem filtros",
     color: "hsl(38,80%,57%)", glow: "rgba(220,160,30,0.3)",
     long: "O Amazon Samaúma Lodge não é um resort. É um mergulho real na Amazônia — com seus sons, cheiros, sabores e ritmos únicos. O pôr do sol sobre o Mamori, o boto que aparece do nada, o silêncio da floresta à noite — tudo real. Essa autenticidade é o nosso maior patrimônio.",
-    image: ecotourismImg,
+    image: "/autenticidade-fogueira.jpeg",
   },
 ];
 

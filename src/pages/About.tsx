@@ -185,7 +185,7 @@ const values = [
     short: "Guias experientes & equipamentos top",
     color: "hsl(210,70%,58%)", glow: "rgba(50,120,220,0.28)",
     long: "Todos os passeios são conduzidos por guias locais com vasto conhecimento do rio e da floresta. Mantemos equipamentos de segurança de qualidade, coletes salva-vidas e primeiros socorros em todas as saídas. Sua família pode relaxar com total tranquilidade.",
-    image: accommodationImg,
+    image: "/seguranca-barco-equipe.jpeg",
   },
   {
     icon: Users, emoji: "👨‍👩‍👧", title: "Comunidade",

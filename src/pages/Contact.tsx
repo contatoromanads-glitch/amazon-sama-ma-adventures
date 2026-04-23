@@ -120,7 +120,7 @@ const Contact = () => {
                 <p className="text-center text-sm text-muted-foreground">
                   Prefere contato imediato?{" "}
                   <a
-                    href={`https://wa.me/5592991163391?text=${encodeURIComponent(`Olá! Meu nome é ${form.name || "..."} e gostaria de tirar algumas dúvidas sobre o Amazon Samaúma Lodge.`)}`}
+                    href={`https://wa.me/559293839110?text=${encodeURIComponent(`Olá! Meu nome é ${form.name || "..."} e gostaria de tirar algumas dúvidas sobre o Amazon Samaúma Lodge.`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gold hover:underline inline-flex items-center gap-1"

@@ -6,7 +6,7 @@ import SectionFadeIn from "@/components/SectionFadeIn";
 import BookingModal from "@/components/BookingModal";
 import { photos } from "@/lib/photos";
 const accommodationImg = photos.quartoStandard;
-const ecotourismImg    = photos.ecoturismo;
+const ecotourismImg    = "user-uploads://8b252218-6098-46f4-bbfd-09d2a349de04.jpg";
 const fishingImg       = photos.pesca;
 const restaurantImg    = photos.restaurante;
 

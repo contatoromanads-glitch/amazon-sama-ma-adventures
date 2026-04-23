@@ -12,7 +12,7 @@ import BookingModal from "@/components/BookingModal";
 import { Link } from "react-router-dom";
 import { photos } from "@/lib/photos";
 const heroImg          = "/fotos_reais_amazon/about-hero-artesanato.webp";
-const accommodationImg = "/63df7bc7-9095-464c-b580-6e538ea563ad.jpg";
+const accommodationImg = "/fotos_reais_amazon/about-card-floresta.webp";
 const restaurantImg    = photos.restaurante;
 const ownerImg         = photos.proprietario;
 const fishingImg       = photos.pesca;

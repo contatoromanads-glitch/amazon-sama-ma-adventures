@@ -557,7 +557,7 @@ const About = () => {
               Refeições caseiras, saborosas e com ingredientes locais — uma viagem pelos sabores autênticos da Amazônia.
             </p>
             <div className="grid grid-cols-2 gap-3">
-              {["🐟 Tucunaré grelhado", "🍚 Farofa regional", "🍴 Caldeirada amazônica", "🌿 Sucos da floresta"].map(item => (
+              {["🐟 Peixe grelhado", "🍚 Farofa regional", "🍴 Caldeirada amazônica", "🌿 Sucos da floresta"].map(item => (
                 <motion.div key={item}
                   className="flex items-center gap-2 text-sm font-body text-muted-foreground p-3 bg-background rounded-xl border border-border"
                   whileHover={{ x: 4, borderColor: "hsl(var(--gold)/0.4)" }} transition={sp}>

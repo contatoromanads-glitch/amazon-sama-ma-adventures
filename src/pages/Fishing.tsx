@@ -5,6 +5,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
 import SectionFadeIn from "@/components/SectionFadeIn";
+import SEOHead from "@/components/SEOHead";
 import { Link } from "react-router-dom";
 import BookingModal from "@/components/BookingModal";
 
@@ -498,6 +499,12 @@ const Fishing = () => {
 
   return (
     <div className="bg-background pt-20">
+      <SEOHead
+        title="Pesca Esportiva na Amazônia | Amazon Samaúma Lodge"
+        description="Pesca esportiva no Paraná do Mamori — Tucunaré, Tambaqui e mais. Guias experientes, barco equipado, modalidade Pesque & Solte. Temporada Set–Jan. Careiro Castanho – AM."
+        canonicalPath="/pesca"
+        ogImage="https://amazon-samauma-lodge.com.br/fotos_reais_amazon/home-pesca.jpg"
+      />
 
       {/* ── Hero ───────────────────────────────────────────────────────────── */}
       <section className="relative h-[55vh] min-h-[400px] flex items-center justify-center overflow-hidden">

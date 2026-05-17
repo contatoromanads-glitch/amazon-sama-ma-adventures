@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { TreePine, Bird, Moon, Users, Map, Footprints, MessageCircle, Sunrise, X, ChevronLeft, ChevronRight, Clock, Star } from "lucide-react";
 import { motion, AnimatePresence, useSpring, useMotionValue } from "framer-motion";
 import SectionFadeIn from "@/components/SectionFadeIn";
+import SEOHead from "@/components/SEOHead";
 import { Link } from "react-router-dom";
 import BookingModal from "@/components/BookingModal";
 
@@ -691,6 +692,12 @@ const Ecotourism = () => {
 
   return (
     <div className="bg-background pt-20">
+      <SEOHead
+        title="Ecoturismo na Amazônia | Amazon Samaúma Lodge"
+        description="Explore a Floresta Amazônica com trilhas guiadas, safáris noturnos, observação de botos e jacarés, passeios de canoa e muito mais no Paraná do Mamori, Careiro Castanho – AM."
+        canonicalPath="/ecoturismo"
+        ogImage="https://amazon-samauma-lodge.com.br/fotos_reais_amazon/eco-new-38.webp"
+      />
       {/* Hero */}
       <section className="relative h-[55vh] min-h-[400px] flex items-center justify-center overflow-hidden">
         <img

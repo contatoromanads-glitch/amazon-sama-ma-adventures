@@ -156,6 +156,38 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Accessibility: respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .fade-in-section {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+
+  .hover-zoom img {
+    transition: none !important;
+  }
+}
+
+/* Focus visible — keyboard navigation */
+:focus-visible {
+  outline: 2px solid hsl(var(--gold));
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

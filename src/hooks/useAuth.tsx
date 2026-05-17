@@ -1,6 +1,8 @@
-import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import { createContext, useContext, useEffect, useState, useRef, ReactNode } from "react";
 import type { Session, User } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
+
+const SESSION_TIMEOUT_MS = 30 * 60 * 1000; // 30 minutos de inatividade
 
 interface AuthContextValue {
   user: User | null;
@@ -17,22 +19,48 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const resetTimeout = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(async () => {
+      await supabase.auth.signOut();
+    }, SESSION_TIMEOUT_MS);
+  };
+
+  const clearTimeout_ = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+  };
 
   useEffect(() => {
-    // 1. Listener primeiro (regra Lovable)
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, newSession) => {
       setSession(newSession);
       setUser(newSession?.user ?? null);
+      if (newSession) {
+        resetTimeout();
+      } else {
+        clearTimeout_();
+      }
     });
 
-    // 2. Depois recupera a sessão atual
     supabase.auth.getSession().then(({ data: { session: current } }) => {
       setSession(current);
       setUser(current?.user ?? null);
       setLoading(false);
+      if (current) resetTimeout();
     });
 
-    return () => subscription.unsubscribe();
+    // Reset timeout on user activity
+    const activityEvents = ["mousedown", "keydown", "touchstart", "scroll"];
+    const onActivity = () => { if (user) resetTimeout(); };
+    activityEvents.forEach((e) => window.addEventListener(e, onActivity, { passive: true }));
+
+    return () => {
+      subscription.unsubscribe();
+      clearTimeout_();
+      activityEvents.forEach((e) => window.removeEventListener(e, onActivity));
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const signIn = async (email: string, password: string) => {
@@ -41,6 +69,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const signOut = async () => {
+    clearTimeout_();
     await supabase.auth.signOut();
   };
 

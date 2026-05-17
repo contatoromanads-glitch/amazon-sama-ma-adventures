@@ -8,6 +8,7 @@ import {
   useTransform, useInView, animate,
 } from "framer-motion";
 import SectionFadeIn from "@/components/SectionFadeIn";
+import SEOHead from "@/components/SEOHead";
 import BookingModal from "@/components/BookingModal";
 import { Link } from "react-router-dom";
 import { photos } from "@/lib/photos";
@@ -359,6 +360,12 @@ const About = () => {
 
   return (
     <div className="bg-background pt-20 overflow-x-hidden">
+      <SEOHead
+        title="Sobre Nós | Amazon Samaúma Lodge"
+        description="Conheça a história do Amazon Samaúma Lodge — pousada flutuante no Paraná do Mamori, Careiro Castanho – AM. Arlos, o proprietário, e a equipe que torna cada estadia inesquecível."
+        canonicalPath="/sobre"
+        ogImage="https://amazon-samauma-lodge.com.br/fotos_reais_amazon/about-hero-artesanato.webp"
+      />
 
       {/* ── Hero ─────────────────────────────────────────────────────────────── */}
       <section className="relative h-[65vh] min-h-[480px] flex items-center justify-center overflow-hidden">

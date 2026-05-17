@@ -1,5 +1,6 @@
 import { AirVent, Droplets, Wifi, Sparkles, BedDouble, BedSingle, Utensils, MapPin, MessageCircle } from "lucide-react";
 import SectionFadeIn from "@/components/SectionFadeIn";
+import SEOHead from "@/components/SEOHead";
 import { photos } from "@/lib/photos";
 const accommodationImg = "/4567450e-33c2-4ebd-9811-397b90d43bb7.png";
 const restaurantImg    = "/c025ccc9-c4d1-458f-a73d-3891e2a48101.png";
@@ -34,6 +35,11 @@ const rooms = [
 
 const Accommodations = () => (
   <div className="bg-background pt-20">
+    <SEOHead
+      title="Acomodações | Amazon Samaúma Lodge"
+      description="5 quartos privativos sobre o rio no Paraná do Mamori. Ar-condicionado, Wi-Fi Starlink, água quente, banheiro privativo e restaurante incluso. Careiro Castanho – AM."
+      canonicalPath="/acomodacoes"
+    />
     {/* Hero */}
     <section className="relative h-[55vh] min-h-[400px] flex items-center justify-center overflow-hidden">
       <img

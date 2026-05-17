@@ -3,6 +3,7 @@ import { Utensils, Wifi, Leaf, TreePine, Fish, Binoculars, ChevronDown, Star, Ma
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import SectionFadeIn from "@/components/SectionFadeIn";
+import SEOHead from "@/components/SEOHead";
 import BookingModal from "@/components/BookingModal";
 import { photos } from "@/lib/photos";
 const accommodationImg = photos.quartoStandard;
@@ -127,6 +128,11 @@ const Index = () => {
 
   return (
     <div className="bg-background">
+      <SEOHead
+        title="Amazon Samaúma Lodge | Pousada Flutuante na Amazônia"
+        description="Pousada flutuante no Paraná do Mamori, Careiro Castanho – AM. Ecoturismo, pesca esportiva do Tucunaré, culinária amazônica e imersão total na Floresta Amazônica."
+        canonicalPath="/"
+      />
       {/* Hero */}
       <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
         <video

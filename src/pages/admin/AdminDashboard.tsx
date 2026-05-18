@@ -29,7 +29,7 @@ export default function AdminDashboard() {
     faqs: counts.faqs,
   };
 
-  const supabaseOk = !!import.meta.env.VITE_SUPABASE_ANON_KEY;
+  const supabaseOk = !!(import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || import.meta.env.VITE_SUPABASE_ANON_KEY);
 
   return (
     <div className="space-y-6">

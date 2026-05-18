@@ -29,7 +29,7 @@ export default function FAQsManager() {
   const { data: faqs = [], isLoading } = useQuery({
     queryKey: ["faqs-admin"],
     queryFn: async () => {
-      const { data, error } = await supabase.from("faqs" as any).select("*").order("sort_order");
+      const { data, error } = await (supabase as any).from("faqs").select("*").order("sort_order");
       if (error) throw error;
       return data as FAQ[];
     },
@@ -38,10 +38,10 @@ export default function FAQsManager() {
   const save = useMutation({
     mutationFn: async () => {
       if (editId) {
-        const { error } = await supabase.from("faqs" as any).update(form).eq("id", editId);
+        const { error } = await (supabase as any).from("faqs").update(form).eq("id", editId);
         if (error) throw error;
       } else {
-        const { error } = await supabase.from("faqs" as any).insert({ ...form, sort_order: faqs.length });
+        const { error } = await (supabase as any).from("faqs").insert({ ...form, sort_order: faqs.length });
         if (error) throw error;
       }
     },
@@ -50,14 +50,14 @@ export default function FAQsManager() {
   });
 
   const remove = useMutation({
-    mutationFn: async (id: string) => { const { error } = await supabase.from("faqs" as any).delete().eq("id", id); if (error) throw error; },
+    mutationFn: async (id: string) => { const { error } = await (supabase as any).from("faqs").delete().eq("id", id); if (error) throw error; },
     onSuccess: () => { qc.invalidateQueries({ queryKey: ["faqs-admin"] }); toast({ title: "FAQ excluída." }); },
     onError: (e: Error) => toast({ title: "Erro", description: e.message, variant: "destructive" }),
   });
 
   const toggleActive = useMutation({
     mutationFn: async ({ id, is_active }: { id: string; is_active: boolean }) => {
-      const { error } = await supabase.from("faqs" as any).update({ is_active }).eq("id", id);
+      const { error } = await (supabase as any).from("faqs").update({ is_active }).eq("id", id);
       if (error) throw error;
     },
     onSuccess: () => qc.invalidateQueries({ queryKey: ["faqs-admin"] }),

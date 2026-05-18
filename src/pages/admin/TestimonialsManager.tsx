@@ -29,7 +29,7 @@ export default function TestimonialsManager() {
   const { data: testimonials = [], isLoading } = useQuery({
     queryKey: ["testimonials"],
     queryFn: async () => {
-      const { data, error } = await supabase.from("testimonials" as any).select("*").order("sort_order");
+      const { data, error } = await (supabase as any).from("testimonials").select("*").order("sort_order");
       if (error) throw error;
       return data as Testimonial[];
     },
@@ -38,10 +38,10 @@ export default function TestimonialsManager() {
   const save = useMutation({
     mutationFn: async () => {
       if (editId) {
-        const { error } = await supabase.from("testimonials" as any).update(form).eq("id", editId);
+        const { error } = await (supabase as any).from("testimonials").update(form).eq("id", editId);
         if (error) throw error;
       } else {
-        const { error } = await supabase.from("testimonials" as any).insert({ ...form, sort_order: testimonials.length });
+        const { error } = await (supabase as any).from("testimonials").insert({ ...form, sort_order: testimonials.length });
         if (error) throw error;
       }
     },
@@ -50,7 +50,7 @@ export default function TestimonialsManager() {
   });
 
   const remove = useMutation({
-    mutationFn: async (id: string) => { const { error } = await supabase.from("testimonials" as any).delete().eq("id", id); if (error) throw error; },
+    mutationFn: async (id: string) => { const { error } = await (supabase as any).from("testimonials").delete().eq("id", id); if (error) throw error; },
     onSuccess: () => { qc.invalidateQueries({ queryKey: ["testimonials"] }); toast({ title: "Depoimento excluído." }); },
     onError: (e: Error) => toast({ title: "Erro", description: e.message, variant: "destructive" }),
   });

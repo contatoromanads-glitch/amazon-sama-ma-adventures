@@ -57,7 +57,7 @@ export default function TestimonialsManager() {
 
   const toggleActive = useMutation({
     mutationFn: async ({ id, is_active }: { id: string; is_active: boolean }) => {
-      const { error } = await supabase.from("testimonials").update({ is_active }).eq("id", id);
+      const { error } = await (supabase as any).from("testimonials").update({ is_active }).eq("id", id);
       if (error) throw error;
     },
     onSuccess: () => qc.invalidateQueries({ queryKey: ["testimonials"] }),

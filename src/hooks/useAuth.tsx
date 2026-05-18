@@ -35,8 +35,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const checkAdmin = async (uid: string | undefined) => {
     if (!uid) { setIsAdmin(false); return; }
-    const { data } = await supabase
-      .from("user_roles" as never)
+    // user_roles is not in the generated types; cast through unknown
+    const { data } = await (supabase as unknown as {
+      from: (t: string) => {
+        select: (c: string) => {
+          eq: (k: string, v: string) => {
+            eq: (k: string, v: string) => {
+              maybeSingle: () => Promise<{ data: unknown }>;
+            };
+          };
+        };
+      };
+    })
+      .from("user_roles")
       .select("role")
       .eq("user_id", uid)
       .eq("role", "admin")

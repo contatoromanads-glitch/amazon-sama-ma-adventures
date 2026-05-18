@@ -18,6 +18,7 @@ const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -32,25 +33,42 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
   };
 
+  const checkAdmin = async (uid: string | undefined) => {
+    if (!uid) { setIsAdmin(false); return; }
+    const { data } = await supabase
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", uid)
+      .eq("role", "admin")
+      .maybeSingle();
+    setIsAdmin(!!data);
+  };
+
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, newSession) => {
       setSession(newSession);
       setUser(newSession?.user ?? null);
       if (newSession) {
         resetTimeout();
+        // Defer Supabase call to avoid deadlock inside the auth callback
+        setTimeout(() => { checkAdmin(newSession.user.id); }, 0);
       } else {
         clearTimeout_();
+        setIsAdmin(false);
       }
     });
 
     supabase.auth.getSession().then(({ data: { session: current } }) => {
       setSession(current);
       setUser(current?.user ?? null);
-      setLoading(false);
-      if (current) resetTimeout();
+      if (current) {
+        resetTimeout();
+        checkAdmin(current.user.id).finally(() => setLoading(false));
+      } else {
+        setLoading(false);
+      }
     });
 
-    // Reset timeout on user activity
     const activityEvents = ["mousedown", "keydown", "touchstart", "scroll"];
     const onActivity = () => { if (user) resetTimeout(); };
     activityEvents.forEach((e) => window.addEventListener(e, onActivity, { passive: true }));
@@ -72,8 +90,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     clearTimeout_();
     await supabase.auth.signOut();
   };
-
-  const isAdmin = (user?.user_metadata?.role === "admin") || (user?.app_metadata?.role === "admin");
 
   return (
     <AuthContext.Provider value={{ user, session, isAdmin, loading, signIn, signOut }}>

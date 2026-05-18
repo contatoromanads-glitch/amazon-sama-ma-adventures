@@ -2,13 +2,14 @@
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from './types';
 
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+// Anon key is a public key — safe to commit (visible in every browser request)
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL ?? "https://pwfawrrvdvuufamrltzc.supabase.co";
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY ?? "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB3ZmF3cnJ2ZHZ1dWZhbXJsdHpjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0MjcyOTksImV4cCI6MjA5MzAwMzI5OX0.ZAJ3YPxqCuBDwGU2yXZEBeHO0mT39DpZ9mRZS3euff0";
 
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";
 
-export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_ANON_KEY, {
   auth: {
     storage: localStorage,
     persistSession: true,

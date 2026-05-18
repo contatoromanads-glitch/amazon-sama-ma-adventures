@@ -36,7 +36,7 @@ export default function SiteConfigManager() {
   const { data: rows = [], isLoading } = useQuery({
     queryKey: ["site-config"],
     queryFn: async () => {
-      const { data, error } = await supabase.from("site_config").select("*");
+      const { data, error } = await (supabase as any).from("site_config").select("*");
       if (error) throw error;
       return data as { key: string; value: string }[];
     },
@@ -57,7 +57,7 @@ export default function SiteConfigManager() {
         value: config[key],
         updated_at: new Date().toISOString(),
       }));
-      const { error } = await supabase.from("site_config").upsert(upserts, { onConflict: "key" });
+      const { error } = await (supabase as any).from("site_config").upsert(upserts, { onConflict: "key" });
       if (error) throw error;
     },
     onSuccess: () => { qc.invalidateQueries({ queryKey: ["site-config"] }); toast({ title: "Configurações salvas!" }); },

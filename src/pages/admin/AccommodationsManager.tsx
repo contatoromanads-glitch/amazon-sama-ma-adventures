@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Plus, Pencil, Trash2, Eye, EyeOff, GripVertical, ImagePlus, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import type { Accommodation } from "@/integrations/supabase/types";
+import type { Accommodation } from "@/types/admin";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -39,7 +39,7 @@ export default function AccommodationsManager() {
   const { data: accommodations = [], isLoading } = useQuery({
     queryKey: ["accommodations"],
     queryFn: async () => {
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from("accommodations")
         .select("*")
         .order("sort_order");
@@ -51,10 +51,10 @@ export default function AccommodationsManager() {
   const save = useMutation({
     mutationFn: async () => {
       if (editId) {
-        const { error } = await supabase.from("accommodations").update({ ...form, updated_at: new Date().toISOString() }).eq("id", editId);
+        const { error } = await (supabase as any).from("accommodations").update({ ...form, updated_at: new Date().toISOString() }).eq("id", editId);
         if (error) throw error;
       } else {
-        const { error } = await supabase.from("accommodations").insert({ ...form, sort_order: accommodations.length });
+        const { error } = await (supabase as any).from("accommodations").insert({ ...form, sort_order: accommodations.length });
         if (error) throw error;
       }
     },
@@ -68,7 +68,7 @@ export default function AccommodationsManager() {
 
   const remove = useMutation({
     mutationFn: async (id: string) => {
-      const { error } = await supabase.from("accommodations").delete().eq("id", id);
+      const { error } = await (supabase as any).from("accommodations").delete().eq("id", id);
       if (error) throw error;
     },
     onSuccess: () => {
@@ -80,7 +80,7 @@ export default function AccommodationsManager() {
 
   const toggleActive = useMutation({
     mutationFn: async ({ id, is_active }: { id: string; is_active: boolean }) => {
-      const { error } = await supabase.from("accommodations").update({ is_active, updated_at: new Date().toISOString() }).eq("id", id);
+      const { error } = await (supabase as any).from("accommodations").update({ is_active, updated_at: new Date().toISOString() }).eq("id", id);
       if (error) throw error;
     },
     onSuccess: () => qc.invalidateQueries({ queryKey: ["accommodations"] }),

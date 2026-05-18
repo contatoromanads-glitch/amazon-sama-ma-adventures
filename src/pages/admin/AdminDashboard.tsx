@@ -13,10 +13,10 @@ const sections = [
 ];
 
 function useCounts() {
-  const acc = useQuery({ queryKey: ["accommodations-count"], queryFn: async () => { const { count } = await supabase.from("accommodations").select("*", { count: "exact", head: true }).eq("is_active", true); return count ?? 0; } });
-  const ban = useQuery({ queryKey: ["banners-count"], queryFn: async () => { const { count } = await supabase.from("banners").select("*", { count: "exact", head: true }).eq("is_active", true); return count ?? 0; } });
-  const tes = useQuery({ queryKey: ["testimonials-count"], queryFn: async () => { const { count } = await supabase.from("testimonials").select("*", { count: "exact", head: true }).eq("is_active", true); return count ?? 0; } });
-  const faq = useQuery({ queryKey: ["faqs-count"], queryFn: async () => { const { count } = await supabase.from("faqs").select("*", { count: "exact", head: true }).eq("is_active", true); return count ?? 0; } });
+  const acc = useQuery({ queryKey: ["accommodations-count"], queryFn: async () => { const { count } = await (supabase as any).from("accommodations").select("*", { count: "exact", head: true }).eq("is_active", true); return count ?? 0; } });
+  const ban = useQuery({ queryKey: ["banners-count"], queryFn: async () => { const { count } = await (supabase as any).from("banners").select("*", { count: "exact", head: true }).eq("is_active", true); return count ?? 0; } });
+  const tes = useQuery({ queryKey: ["testimonials-count"], queryFn: async () => { const { count } = await (supabase as any).from("testimonials").select("*", { count: "exact", head: true }).eq("is_active", true); return count ?? 0; } });
+  const faq = useQuery({ queryKey: ["faqs-count"], queryFn: async () => { const { count } = await (supabase as any).from("faqs").select("*", { count: "exact", head: true }).eq("is_active", true); return count ?? 0; } });
   return { accommodations: acc.data, banners: ban.data, testimonials: tes.data, faqs: faq.data };
 }
 
@@ -29,7 +29,7 @@ export default function AdminDashboard() {
     faqs: counts.faqs,
   };
 
-  const supabaseOk = !!import.meta.env.VITE_SUPABASE_ANON_KEY;
+  const supabaseOk = !!(import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || import.meta.env.VITE_SUPABASE_ANON_KEY);
 
   return (
     <div className="space-y-6">

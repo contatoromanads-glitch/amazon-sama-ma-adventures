@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Plus, Pencil, Trash2, Eye, EyeOff, ImagePlus } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import type { Banner } from "@/integrations/supabase/types";
+import type { Banner } from "@/types/admin";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -31,7 +31,7 @@ export default function BannersManager() {
   const { data: banners = [], isLoading } = useQuery({
     queryKey: ["banners"],
     queryFn: async () => {
-      const { data, error } = await supabase.from("banners").select("*").order("sort_order");
+      const { data, error } = await (supabase as any).from("banners").select("*").order("sort_order");
       if (error) throw error;
       return data as Banner[];
     },
@@ -41,10 +41,10 @@ export default function BannersManager() {
     mutationFn: async () => {
       if (!form.image_url) throw new Error("Adicione uma imagem para o banner.");
       if (editId) {
-        const { error } = await supabase.from("banners").update({ ...form, updated_at: new Date().toISOString() }).eq("id", editId);
+        const { error } = await (supabase as any).from("banners").update({ ...form, updated_at: new Date().toISOString() }).eq("id", editId);
         if (error) throw error;
       } else {
-        const { error } = await supabase.from("banners").insert({ ...form, sort_order: banners.length });
+        const { error } = await (supabase as any).from("banners").insert({ ...form, sort_order: banners.length });
         if (error) throw error;
       }
     },
@@ -53,14 +53,14 @@ export default function BannersManager() {
   });
 
   const remove = useMutation({
-    mutationFn: async (id: string) => { const { error } = await supabase.from("banners").delete().eq("id", id); if (error) throw error; },
+    mutationFn: async (id: string) => { const { error } = await (supabase as any).from("banners").delete().eq("id", id); if (error) throw error; },
     onSuccess: () => { qc.invalidateQueries({ queryKey: ["banners"] }); toast({ title: "Banner excluído." }); },
     onError: (e: Error) => toast({ title: "Erro", description: e.message, variant: "destructive" }),
   });
 
   const toggleActive = useMutation({
     mutationFn: async ({ id, is_active }: { id: string; is_active: boolean }) => {
-      const { error } = await supabase.from("banners").update({ is_active, updated_at: new Date().toISOString() }).eq("id", id);
+      const { error } = await (supabase as any).from("banners").update({ is_active, updated_at: new Date().toISOString() }).eq("id", id);
       if (error) throw error;
     },
     onSuccess: () => qc.invalidateQueries({ queryKey: ["banners"] }),

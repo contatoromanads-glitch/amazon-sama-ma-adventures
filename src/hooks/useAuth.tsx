@@ -15,8 +15,17 @@ interface AuthContextValue {
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
+/** Verifica se o usuário tem role admin no Supabase (busca dados frescos do servidor) */
+const checkIsAdmin = (u: User | null): boolean => {
+  if (!u) return false;
+  return (
+    u.user_metadata?.role === "admin" ||
+    u.app_metadata?.role === "admin"
+  );
+};
+
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser]       = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -29,53 +38,53 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }, SESSION_TIMEOUT_MS);
   };
 
-  const clearTimeout_ = () => {
+  const clearTimer = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
   };
 
-  const checkAdmin = async (uid: string | undefined) => {
-    if (!uid) { setIsAdmin(false); return; }
-    const { data } = await (supabase as any)
-      .from("user_roles")
-      .select("role")
-      .eq("user_id", uid)
-      .eq("role", "admin")
-      .maybeSingle();
-    setIsAdmin(!!data);
+  /** Busca dados frescos do usuário no servidor (não do JWT cacheado) */
+  const refreshUser = async () => {
+    const { data } = await supabase.auth.getUser();
+    const freshUser = data?.user ?? null;
+    setUser(freshUser);
+    setIsAdmin(checkIsAdmin(freshUser));
+    return freshUser;
   };
 
   useEffect(() => {
+    // Ouve mudanças de sessão (login / logout / refresh de token)
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, newSession) => {
       setSession(newSession);
-      setUser(newSession?.user ?? null);
       if (newSession) {
         resetTimeout();
-        // Defer Supabase call to avoid deadlock inside the auth callback
-        setTimeout(() => { checkAdmin(newSession.user.id); }, 0);
+        // Após login, busca dados frescos para garantir que user_metadata está atualizado
+        setTimeout(() => { refreshUser(); }, 0);
       } else {
-        clearTimeout_();
+        setUser(null);
         setIsAdmin(false);
+        clearTimer();
       }
     });
 
-    supabase.auth.getSession().then(({ data: { session: current } }) => {
+    // Carrega sessão existente ao inicializar
+    supabase.auth.getSession().then(async ({ data: { session: current } }) => {
       setSession(current);
-      setUser(current?.user ?? null);
       if (current) {
         resetTimeout();
-        checkAdmin(current.user.id).finally(() => setLoading(false));
-      } else {
-        setLoading(false);
+        await refreshUser();
       }
+      setLoading(false);
     });
 
+    // Reset timeout em atividade do usuário
     const activityEvents = ["mousedown", "keydown", "touchstart", "scroll"];
-    const onActivity = () => { if (user) resetTimeout(); };
+    const userRef = { current: user };
+    const onActivity = () => { if (userRef.current) resetTimeout(); };
     activityEvents.forEach((e) => window.addEventListener(e, onActivity, { passive: true }));
 
     return () => {
       subscription.unsubscribe();
-      clearTimeout_();
+      clearTimer();
       activityEvents.forEach((e) => window.removeEventListener(e, onActivity));
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -87,7 +96,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const signOut = async () => {
-    clearTimeout_();
+    clearTimer();
     await supabase.auth.signOut();
   };
 

@@ -1,13 +1,15 @@
-import { AirVent, Droplets, Wifi, Sparkles, BedDouble, BedSingle, Utensils, MapPin, MessageCircle } from "lucide-react";
+import { AirVent, Droplets, Wifi, Sparkles, BedDouble, Utensils, MapPin, MessageCircle } from "lucide-react";
+import { motion } from "framer-motion";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+import type { Accommodation } from "@/integrations/supabase/types";
 import SectionFadeIn from "@/components/SectionFadeIn";
 import SEOHead from "@/components/SEOHead";
+import BookingModal from "@/components/BookingModal";
 import { photos } from "@/lib/photos";
+
 const accommodationImg = "/4567450e-33c2-4ebd-9811-397b90d43bb7.png";
 const restaurantImg    = "/c025ccc9-c4d1-458f-a73d-3891e2a48101.png";
-const heroImg          = photos.lodge;
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import BookingModal from "@/components/BookingModal";
 
 const amenities = [
   { icon: BedDouble, label: "Camas Confortáveis" },
@@ -18,22 +20,55 @@ const amenities = [
   { icon: Utensils, label: "Restaurante Incluso" },
 ];
 
-const rooms = [
+// Fallback estático caso o banco esteja vazio
+const STATIC_ROOMS = [
   {
     name: "Quarto Standard",
     desc: "Acomodação confortável com vista para o rio, cama de casal, ar-condicionado e banheiro privativo. Perfeito para casais em busca de uma experiência amazônica autêntica.",
     capacity: "2 pessoas",
+    price_info: null as string | null,
+    amenities: [] as string[],
     img: accommodationImg,
   },
   {
     name: "Quarto Família",
     desc: "Espaço amplo para famílias, com camas adicionais, ar-condicionado e banheiro privativo. Uma experiência inesquecível para toda a família na Amazônia.",
     capacity: "Até 4 pessoas",
+    price_info: null as string | null,
+    amenities: [] as string[],
     img: photos.quartoFamilia,
   },
 ];
 
-const Accommodations = () => (
+function Accommodations() {
+  // Busca quartos ativos do Supabase, ordenados por sort_order
+  const { data: dbRooms = [] } = useQuery<Accommodation[]>({
+    queryKey: ["accommodations-public"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("accommodations")
+        .select("*")
+        .eq("is_active", true)
+        .order("sort_order");
+      if (error) return [];
+      return data ?? [];
+    },
+    staleTime: 5 * 60 * 1000, // revalida a cada 5 min
+  });
+
+  // Se o banco tiver quartos, usa o banco; caso contrário, usa o fallback estático
+  const rooms = dbRooms.length > 0
+    ? dbRooms.map((r) => ({
+        name: r.name,
+        desc: r.description,
+        capacity: r.capacity,
+        price_info: r.price_info,
+        amenities: r.amenities ?? [],
+        img: r.images?.[0] ?? accommodationImg,
+      }))
+    : STATIC_ROOMS;
+
+  return (
   <div className="bg-background pt-20">
     <SEOHead
       title="Acomodações | Amazon Samaúma Lodge"
@@ -135,7 +170,20 @@ const Accommodations = () => (
                       {room.capacity}
                     </span>
                   </div>
+                  {room.price_info && (
+                    <p className="text-gold font-body font-semibold text-sm mb-3">{room.price_info}</p>
+                  )}
                   <p className="text-body text-muted-foreground mb-4">{room.desc}</p>
+                  {room.amenities.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {room.amenities.slice(0, 4).map((a) => (
+                        <span key={a} className="text-xs bg-muted text-muted-foreground px-2 py-1 rounded-full">{a}</span>
+                      ))}
+                      {room.amenities.length > 4 && (
+                        <span className="text-xs bg-muted text-muted-foreground px-2 py-1 rounded-full">+{room.amenities.length - 4}</span>
+                      )}
+                    </div>
+                  )}
                   <div className="flex items-center gap-2 text-sm text-muted-foreground mb-5">
                     <MapPin size={14} className="text-gold" />
                     <span>Vista para o Paraná do Mamori</span>
@@ -218,6 +266,7 @@ const Accommodations = () => (
       </div>
     </section>
   </div>
-);
+  );
+}
 
 export default Accommodations;

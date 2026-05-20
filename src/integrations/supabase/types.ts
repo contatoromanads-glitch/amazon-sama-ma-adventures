@@ -14,6 +14,51 @@ export type Database = {
   }
   public: {
     Tables: {
+      lodges: {
+        Row: {
+          id: string
+          name: string
+          slug: string
+          description: string | null
+          location: string | null
+          hero_image: string | null
+          images: string[] | null
+          amenities: string[] | null
+          is_active: boolean | null
+          sort_order: number | null
+          created_at: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          id?: string
+          name: string
+          slug: string
+          description?: string | null
+          location?: string | null
+          hero_image?: string | null
+          images?: string[] | null
+          amenities?: string[] | null
+          is_active?: boolean | null
+          sort_order?: number | null
+          created_at?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          id?: string
+          name?: string
+          slug?: string
+          description?: string | null
+          location?: string | null
+          hero_image?: string | null
+          images?: string[] | null
+          amenities?: string[] | null
+          is_active?: boolean | null
+          sort_order?: number | null
+          created_at?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       accommodations: {
         Row: {
           amenities: string[] | null
@@ -23,6 +68,7 @@ export type Database = {
           id: string
           images: string[] | null
           is_active: boolean | null
+          lodge_id: string | null
           name: string
           price_info: string | null
           sort_order: number | null
@@ -36,6 +82,7 @@ export type Database = {
           id?: string
           images?: string[] | null
           is_active?: boolean | null
+          lodge_id?: string | null
           name: string
           price_info?: string | null
           sort_order?: number | null
@@ -49,12 +96,21 @@ export type Database = {
           id?: string
           images?: string[] | null
           is_active?: boolean | null
+          lodge_id?: string | null
           name?: string
           price_info?: string | null
           sort_order?: number | null
           updated_at?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "accommodations_lodge_id_fkey"
+            columns: ["lodge_id"]
+            isOneToOne: false
+            referencedRelation: "lodges"
+            referencedColumns: ["id"]
+          }
+        ]
       }
       banners: {
         Row: {

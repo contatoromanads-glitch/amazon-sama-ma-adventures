@@ -1,20 +1,31 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Plus, Pencil, Trash2, Eye, EyeOff, GripVertical, ImagePlus, X } from "lucide-react";
+import { useSearchParams, Link } from "react-router-dom";
+import { Plus, Pencil, Trash2, Eye, EyeOff, ImagePlus, X, Building2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import type { Accommodation } from "@/types/admin";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Switch } from "@/components/ui/switch";
 import { toast } from "@/hooks/use-toast";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel,
   AlertDialogContent, AlertDialogDescription, AlertDialogFooter,
   AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Switch } from "@/components/ui/switch";
+import {
+  Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+} from "@/components/ui/select";
+
+type Accommodation = {
+  id: string; lodge_id: string | null; name: string; description: string;
+  capacity: string; price_info: string | null; amenities: string[] | null;
+  images: string[] | null; is_active: boolean | null; sort_order: number | null;
+};
+
+type Lodge = { id: string; name: string; slug: string };
 
 const ALL_AMENITIES = [
   "Ar-Condicionado", "Wi-Fi Starlink", "Água Quente", "Cama de Casal",
@@ -22,45 +33,75 @@ const ALL_AMENITIES = [
   "Limpeza Diária", "Restaurante Incluso", "Frigobar",
 ];
 
-const EMPTY: Omit<Accommodation, "id" | "created_at" | "updated_at"> = {
+const EMPTY = {
+  lodge_id: "" as string | null,
   name: "", description: "", capacity: "", price_info: "",
-  amenities: [], images: [], is_active: true, sort_order: 0,
+  amenities: [] as string[], images: [] as string[], is_active: true, sort_order: 0,
 };
-
-type FormState = typeof EMPTY;
 
 export default function AccommodationsManager() {
   const qc = useQueryClient();
-  const [form, setForm] = useState<FormState>(EMPTY);
+  const [searchParams] = useSearchParams();
+  const preselectedLodge = searchParams.get("lodge");
+
+  const [form, setForm] = useState({ ...EMPTY, lodge_id: preselectedLodge ?? null });
   const [editId, setEditId] = useState<string | null>(null);
   const [showForm, setShowForm] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [filterLodge, setFilterLodge] = useState<string>(preselectedLodge ?? "all");
 
-  const { data: accommodations = [], isLoading } = useQuery({
-    queryKey: ["accommodations"],
+  useEffect(() => {
+    if (preselectedLodge) {
+      setFilterLodge(preselectedLodge);
+      setForm((f) => ({ ...f, lodge_id: preselectedLodge }));
+    }
+  }, [preselectedLodge]);
+
+  // Busca todas as pousadas para o seletor
+  const { data: lodges = [] } = useQuery<Lodge[]>({
+    queryKey: ["lodges-select"],
     queryFn: async () => {
-      const { data, error } = await (supabase as any)
-        .from("accommodations")
-        .select("*")
-        .order("sort_order");
+      const { data, error } = await supabase.from("lodges" as any).select("id, name, slug").order("sort_order");
+      if (error) return [];
+      return (data ?? []) as Lodge[];
+    },
+  });
+
+  const { data: accommodations = [], isLoading } = useQuery<Accommodation[]>({
+    queryKey: ["accommodations-admin", filterLodge],
+    queryFn: async () => {
+      let query = supabase.from("accommodations" as any).select("*").order("sort_order");
+      if (filterLodge !== "all") {
+        query = filterLodge === "none"
+          ? query.is("lodge_id", null)
+          : query.eq("lodge_id", filterLodge);
+      }
+      const { data, error } = await query;
       if (error) throw error;
-      return data as Accommodation[];
+      return (data ?? []) as Accommodation[];
     },
   });
 
   const save = useMutation({
     mutationFn: async () => {
+      const payload = {
+        ...form,
+        lodge_id: form.lodge_id || null,
+        updated_at: new Date().toISOString(),
+      };
       if (editId) {
-        const { error } = await (supabase as any).from("accommodations").update({ ...form, updated_at: new Date().toISOString() }).eq("id", editId);
+        const { error } = await supabase.from("accommodations" as any).update(payload).eq("id", editId);
         if (error) throw error;
       } else {
-        const { error } = await (supabase as any).from("accommodations").insert({ ...form, sort_order: accommodations.length });
+        const { error } = await supabase.from("accommodations" as any).insert({ ...payload, sort_order: accommodations.length });
         if (error) throw error;
       }
     },
     onSuccess: () => {
-      qc.invalidateQueries({ queryKey: ["accommodations"] });
-      toast({ title: editId ? "Acomodação atualizada!" : "Acomodação criada!" });
+      qc.invalidateQueries({ queryKey: ["accommodations-admin"] });
+      qc.invalidateQueries({ queryKey: ["accommodations-public"] });
+      qc.invalidateQueries({ queryKey: ["lodges-room-counts"] });
+      toast({ title: editId ? "Quarto atualizado!" : "Quarto criado!" });
       closeForm();
     },
     onError: (e: Error) => toast({ title: "Erro", description: e.message, variant: "destructive" }),
@@ -68,32 +109,42 @@ export default function AccommodationsManager() {
 
   const remove = useMutation({
     mutationFn: async (id: string) => {
-      const { error } = await (supabase as any).from("accommodations").delete().eq("id", id);
+      const { error } = await supabase.from("accommodations" as any).delete().eq("id", id);
       if (error) throw error;
     },
     onSuccess: () => {
-      qc.invalidateQueries({ queryKey: ["accommodations"] });
-      toast({ title: "Acomodação excluída." });
+      qc.invalidateQueries({ queryKey: ["accommodations-admin"] });
+      qc.invalidateQueries({ queryKey: ["lodges-room-counts"] });
+      toast({ title: "Quarto excluído." });
     },
     onError: (e: Error) => toast({ title: "Erro", description: e.message, variant: "destructive" }),
   });
 
   const toggleActive = useMutation({
     mutationFn: async ({ id, is_active }: { id: string; is_active: boolean }) => {
-      const { error } = await (supabase as any).from("accommodations").update({ is_active, updated_at: new Date().toISOString() }).eq("id", id);
+      const { error } = await supabase.from("accommodations" as any).update({ is_active, updated_at: new Date().toISOString() }).eq("id", id);
       if (error) throw error;
     },
-    onSuccess: () => qc.invalidateQueries({ queryKey: ["accommodations"] }),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["accommodations-admin"] });
+      qc.invalidateQueries({ queryKey: ["accommodations-public"] });
+    },
   });
 
   const openEdit = (acc: Accommodation) => {
-    setForm({ name: acc.name, description: acc.description, capacity: acc.capacity, price_info: acc.price_info ?? "", amenities: acc.amenities, images: acc.images, is_active: acc.is_active, sort_order: acc.sort_order });
+    setForm({
+      lodge_id: acc.lodge_id,
+      name: acc.name, description: acc.description,
+      capacity: acc.capacity, price_info: acc.price_info ?? "",
+      amenities: acc.amenities ?? [], images: acc.images ?? [],
+      is_active: acc.is_active ?? true, sort_order: acc.sort_order ?? 0,
+    });
     setEditId(acc.id);
     setShowForm(true);
   };
 
   const closeForm = () => {
-    setForm(EMPTY);
+    setForm({ ...EMPTY, lodge_id: filterLodge !== "all" && filterLodge !== "none" ? filterLodge : null });
     setEditId(null);
     setShowForm(false);
   };
@@ -110,37 +161,88 @@ export default function AccommodationsManager() {
   };
 
   const removeImage = (url: string) => setForm((f) => ({ ...f, images: f.images.filter((i) => i !== url) }));
-
   const toggleAmenity = (a: string) =>
     setForm((f) => ({ ...f, amenities: f.amenities.includes(a) ? f.amenities.filter((x) => x !== a) : [...f.amenities, a] }));
+
+  const lodgeName = (id: string | null) => lodges.find((l) => l.id === id)?.name ?? "Sem pousada";
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-serif">Acomodações</h1>
-          <p className="text-muted-foreground">Gerencie os quartos do lodge</p>
+          <h1 className="text-3xl font-serif">Quartos</h1>
+          <p className="text-muted-foreground">Gerencie os quartos de cada pousada</p>
         </div>
-        <Button onClick={() => setShowForm(true)} className="gap-2">
-          <Plus size={16} /> Nova Acomodação
-        </Button>
+        <div className="flex gap-2">
+          {lodges.length === 0 && (
+            <Button variant="outline" asChild>
+              <Link to="/admin/pousadas">
+                <Building2 size={16} className="mr-2" /> Criar Pousada Primeiro
+              </Link>
+            </Button>
+          )}
+          <Button onClick={() => setShowForm(true)} className="gap-2">
+            <Plus size={16} /> Novo Quarto
+          </Button>
+        </div>
       </div>
 
-      {/* Form */}
+      {/* Filtro por pousada */}
+      <div className="flex items-center gap-3">
+        <Label className="shrink-0">Filtrar por pousada:</Label>
+        <Select value={filterLodge} onValueChange={setFilterLodge}>
+          <SelectTrigger className="w-64">
+            <SelectValue placeholder="Todas as pousadas" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">Todas as pousadas</SelectItem>
+            <SelectItem value="none">Sem pousada vinculada</SelectItem>
+            {lodges.map((l) => (
+              <SelectItem key={l.id} value={l.id}>{l.name}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+
+      {/* Formulário */}
       {showForm && (
         <Card>
           <CardHeader>
-            <CardTitle className="font-serif">{editId ? "Editar Acomodação" : "Nova Acomodação"}</CardTitle>
+            <CardTitle className="font-serif">{editId ? "Editar Quarto" : "Novo Quarto"}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-5">
+            {/* Vincular à pousada */}
+            <div className="space-y-2">
+              <Label>Pousada *</Label>
+              <Select
+                value={form.lodge_id ?? "none"}
+                onValueChange={(v) => setForm({ ...form, lodge_id: v === "none" ? null : v })}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Selecione a pousada..." />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="none">— Sem pousada (avulso) —</SelectItem>
+                  {lodges.map((l) => (
+                    <SelectItem key={l.id} value={l.id}>{l.name}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              {lodges.length === 0 && (
+                <p className="text-xs text-amber-600">
+                  Você ainda não tem pousadas. <Link to="/admin/pousadas" className="underline">Criar uma pousada →</Link>
+                </p>
+              )}
+            </div>
+
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="acc-name">Nome do Quarto *</Label>
-                <Input id="acc-name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Ex: Quarto Standard" required />
+                <Input id="acc-name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Ex: Quarto Standard" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="acc-capacity">Capacidade *</Label>
-                <Input id="acc-capacity" value={form.capacity} onChange={(e) => setForm({ ...form, capacity: e.target.value })} placeholder="Ex: 2 pessoas" required />
+                <Input id="acc-capacity" value={form.capacity} onChange={(e) => setForm({ ...form, capacity: e.target.value })} placeholder="Ex: 2 pessoas" />
               </div>
             </div>
 
@@ -151,10 +253,9 @@ export default function AccommodationsManager() {
 
             <div className="space-y-2">
               <Label htmlFor="acc-desc">Descrição *</Label>
-              <Textarea id="acc-desc" rows={4} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="Descreva o quarto com detalhes..." required />
+              <Textarea id="acc-desc" rows={4} value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} placeholder="Descreva o quarto com detalhes..." />
             </div>
 
-            {/* Amenities */}
             <div className="space-y-2">
               <Label>Comodidades</Label>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -167,7 +268,6 @@ export default function AccommodationsManager() {
               </div>
             </div>
 
-            {/* Images */}
             <div className="space-y-2">
               <Label>Fotos</Label>
               <div className="flex flex-wrap gap-3">
@@ -194,7 +294,7 @@ export default function AccommodationsManager() {
 
             <div className="flex gap-3 pt-2">
               <Button onClick={() => save.mutate()} disabled={save.isPending || !form.name || !form.capacity || !form.description}>
-                {save.isPending ? "Salvando..." : editId ? "Salvar Alterações" : "Criar Acomodação"}
+                {save.isPending ? "Salvando..." : editId ? "Salvar Alterações" : "Criar Quarto"}
               </Button>
               <Button variant="outline" onClick={closeForm}>Cancelar</Button>
             </div>
@@ -202,24 +302,29 @@ export default function AccommodationsManager() {
         </Card>
       )}
 
-      {/* List */}
+      {/* Lista */}
       {isLoading ? (
         <div className="flex justify-center py-12"><div className="w-8 h-8 border-2 border-gold border-t-transparent rounded-full animate-spin" /></div>
       ) : accommodations.length === 0 ? (
-        <Card><CardContent className="py-12 text-center text-muted-foreground">Nenhuma acomodação cadastrada ainda. Clique em "Nova Acomodação" para começar.</CardContent></Card>
+        <Card><CardContent className="py-12 text-center text-muted-foreground">Nenhum quarto encontrado. Clique em "Novo Quarto" para começar.</CardContent></Card>
       ) : (
         <div className="space-y-3">
           {accommodations.map((acc) => (
             <Card key={acc.id} className={!acc.is_active ? "opacity-60" : ""}>
               <CardContent className="p-4 flex items-center gap-4">
-                <GripVertical size={16} className="text-muted-foreground shrink-0" />
-                {acc.images[0] && (
-                  <img src={acc.images[0]} alt={acc.name} className="w-16 h-16 object-cover rounded shrink-0" />
+                {(acc.images ?? [])[0] && (
+                  <img src={(acc.images ?? [])[0]} alt={acc.name} className="w-16 h-16 object-cover rounded shrink-0" />
                 )}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
                     <p className="font-semibold">{acc.name}</p>
                     <span className="text-xs bg-sand-light text-forest px-2 py-0.5 rounded-full">{acc.capacity}</span>
+                    {acc.lodge_id && (
+                      <span className="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full">{lodgeName(acc.lodge_id)}</span>
+                    )}
+                    {!acc.lodge_id && (
+                      <span className="text-xs bg-amber-50 text-amber-700 px-2 py-0.5 rounded-full">Sem pousada</span>
+                    )}
                     {!acc.is_active && <span className="text-xs bg-muted text-muted-foreground px-2 py-0.5 rounded-full">Oculto</span>}
                   </div>
                   <p className="text-sm text-muted-foreground truncate">{acc.description}</p>
@@ -239,8 +344,8 @@ export default function AccommodationsManager() {
                     </AlertDialogTrigger>
                     <AlertDialogContent>
                       <AlertDialogHeader>
-                        <AlertDialogTitle>Excluir acomodação?</AlertDialogTitle>
-                        <AlertDialogDescription>Esta ação não pode ser desfeita. A acomodação "{acc.name}" será removida permanentemente.</AlertDialogDescription>
+                        <AlertDialogTitle>Excluir quarto?</AlertDialogTitle>
+                        <AlertDialogDescription>Esta ação não pode ser desfeita. O quarto "{acc.name}" será removido permanentemente.</AlertDialogDescription>
                       </AlertDialogHeader>
                       <AlertDialogFooter>
                         <AlertDialogCancel>Cancelar</AlertDialogCancel>

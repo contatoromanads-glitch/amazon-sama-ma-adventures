@@ -1,5 +1,5 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import { LayoutDashboard, BedDouble, MessageSquareQuote, Image, HelpCircle, Settings, LogOut } from "lucide-react";
+import { LayoutDashboard, BedDouble, MessageSquareQuote, Image, HelpCircle, Settings, LogOut, Building2 } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -16,12 +16,13 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 
 const items = [
-  { title: "Dashboard", url: "/admin", icon: LayoutDashboard, end: true },
-  { title: "Acomodações", url: "/admin/acomodacoes", icon: BedDouble },
-  { title: "Depoimentos", url: "/admin/depoimentos", icon: MessageSquareQuote },
-  { title: "Banners", url: "/admin/banners", icon: Image },
-  { title: "FAQs", url: "/admin/faqs", icon: HelpCircle },
-  { title: "Configurações", url: "/admin/configuracoes", icon: Settings },
+  { title: "Dashboard",    url: "/admin",              icon: LayoutDashboard,    end: true },
+  { title: "Pousadas",     url: "/admin/pousadas",     icon: Building2 },
+  { title: "Quartos",      url: "/admin/acomodacoes",  icon: BedDouble },
+  { title: "Depoimentos",  url: "/admin/depoimentos",  icon: MessageSquareQuote },
+  { title: "Banners",      url: "/admin/banners",      icon: Image },
+  { title: "FAQs",         url: "/admin/faqs",         icon: HelpCircle },
+  { title: "Configurações",url: "/admin/configuracoes",icon: Settings },
 ];
 
 const AdminSidebar = () => (

@@ -15,6 +15,7 @@ import ErrorBoundary from "@/components/ErrorBoundary";
 
 // Lazy-load non-landing pages for smaller initial bundle
 const Accommodations = lazy(() => import("./pages/Accommodations"));
+const LodgeDetail    = lazy(() => import("./pages/LodgeDetail"));
 const Ecotourism = lazy(() => import("./pages/Ecotourism"));
 const Fishing = lazy(() => import("./pages/Fishing"));
 const About = lazy(() => import("./pages/About"));
@@ -24,6 +25,7 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 // Admin pages — lazy-loaded, only downloaded when admin accesses them
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
+const LodgesManager         = lazy(() => import("./pages/admin/LodgesManager"));
 const AccommodationsManager = lazy(() => import("./pages/admin/AccommodationsManager"));
 const BannersManager = lazy(() => import("./pages/admin/BannersManager"));
 const TestimonialsManager = lazy(() => import("./pages/admin/TestimonialsManager"));
@@ -73,6 +75,7 @@ const App = () => (
                   {/* Public */}
                   <Route path="/" element={<Index />} />
                   <Route path="/acomodacoes" element={<Accommodations />} />
+                  <Route path="/acomodacoes/:slug" element={<LodgeDetail />} />
                   <Route path="/ecoturismo" element={<Ecotourism />} />
                   <Route path="/pesca" element={<Fishing />} />
                   <Route path="/sobre" element={<About />} />
@@ -91,6 +94,7 @@ const App = () => (
                     }
                   >
                     <Route index element={<AdminDashboard />} />
+                    <Route path="pousadas" element={<LodgesManager />} />
                     <Route path="acomodacoes" element={<AccommodationsManager />} />
                     <Route path="banners" element={<BannersManager />} />
                     <Route path="depoimentos" element={<TestimonialsManager />} />

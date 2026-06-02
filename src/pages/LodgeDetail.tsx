@@ -33,7 +33,7 @@ export default function LodgeDetail() {
         .eq("is_active", true)
         .maybeSingle();
       if (error || !data) return null;
-      return data as Lodge;
+      return data as unknown as Lodge;
     },
     enabled: !!slug,
   });
@@ -48,7 +48,7 @@ export default function LodgeDetail() {
         .eq("is_active", true)
         .order("sort_order");
       if (error) return [];
-      return (data ?? []) as Room[];
+      return (data ?? []) as unknown as Room[];
     },
     enabled: !!lodge?.id,
   });

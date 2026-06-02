@@ -62,7 +62,7 @@ export default function LodgesManager() {
     queryFn: async () => {
       const { data, error } = await supabase.from("lodges" as any).select("*").order("sort_order");
       if (error) throw error;
-      return (data ?? []) as Lodge[];
+      return (data ?? []) as unknown as Lodge[];
     },
   });
 
@@ -75,7 +75,7 @@ export default function LodgesManager() {
         .not("lodge_id", "is", null);
       if (error) return {};
       const counts: Record<string, number> = {};
-      (data as { lodge_id: string }[]).forEach(({ lodge_id }) => {
+      (data as unknown as { lodge_id: string }[]).forEach(({ lodge_id }) => {
         counts[lodge_id] = (counts[lodge_id] ?? 0) + 1;
       });
       return counts;

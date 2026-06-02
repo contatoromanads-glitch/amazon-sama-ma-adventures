@@ -63,7 +63,7 @@ export default function AccommodationsManager() {
     queryFn: async () => {
       const { data, error } = await supabase.from("lodges" as any).select("id, name, slug").order("sort_order");
       if (error) return [];
-      return (data ?? []) as Lodge[];
+      return (data ?? []) as unknown as Lodge[];
     },
   });
 
@@ -78,7 +78,7 @@ export default function AccommodationsManager() {
       }
       const { data, error } = await query;
       if (error) throw error;
-      return (data ?? []) as Accommodation[];
+      return (data ?? []) as unknown as Accommodation[];
     },
   });
 

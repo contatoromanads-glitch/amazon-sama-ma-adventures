@@ -129,7 +129,7 @@ function Accommodations() {
         .eq("is_active", true)
         .order("sort_order");
       if (error) return [];
-      return (data ?? []) as Lodge[];
+      return (data ?? []) as unknown as Lodge[];
     },
     staleTime: 5 * 60 * 1000,
   });
@@ -144,7 +144,7 @@ function Accommodations() {
         .not("lodge_id", "is", null);
       if (error) return {};
       const counts: Record<string, number> = {};
-      (data as { lodge_id: string }[]).forEach(({ lodge_id }) => {
+      (data as unknown as { lodge_id: string }[]).forEach(({ lodge_id }) => {
         counts[lodge_id] = (counts[lodge_id] ?? 0) + 1;
       });
       return counts;

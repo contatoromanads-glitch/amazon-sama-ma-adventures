@@ -16,14 +16,14 @@ interface ConfigMap {
 }
 
 const DEFAULTS: ConfigMap = {
-  whatsapp_number: "559293839110",
+  whatsapp_number: "5592993839110",
   instagram_handle: "amazon_samauma_lodge",
   best_fishing_season: "Setembro a Janeiro",
   lodge_tagline: "Pousada flutuante no coração da Amazônia",
 };
 
 const CONFIG_LABELS: Record<keyof ConfigMap, { label: string; desc: string; placeholder: string }> = {
-  whatsapp_number: { label: "Número do WhatsApp", desc: "Somente números, com código do país. Ex: 559293839110", placeholder: "559293839110" },
+  whatsapp_number: { label: "Número do WhatsApp", desc: "Somente números, com código do país. Ex: 5592993839110", placeholder: "5592993839110" },
   instagram_handle: { label: "Instagram (usuário)", desc: "Somente o @ sem o arroba. Ex: amazon_samauma_lodge", placeholder: "amazon_samauma_lodge" },
   best_fishing_season: { label: "Melhor Época para Pesca", desc: "Exibido no rodapé e na página de pesca", placeholder: "Setembro a Janeiro" },
   lodge_tagline: { label: "Tagline do Lodge", desc: "Frase curta exibida no rodapé", placeholder: "Pousada flutuante no coração da Amazônia" },

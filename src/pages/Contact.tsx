@@ -4,7 +4,7 @@ import SEOHead from "@/components/SEOHead";
 import heroImg from "@/assets/hero-lodge.webp";
 import BookingModal from "@/components/BookingModal";
 
-const WHATSAPP = "https://wa.me/559293839110";
+const WHATSAPP = "https://wa.me/5592993839110";
 
 const Contact = () => (
   <div className="bg-background pt-20" id="contato">
@@ -48,7 +48,7 @@ const Contact = () => (
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href={`${WHATSAPP}?text=${encodeURIComponent("Olá! Vim pelo site do Amazon Samaúma Lodge e gostaria de fazer uma reserva.")}`}
+              href={`${WHATSAPP}?text=${encodeURIComponent("Olá, vim do site. Como funciona a reserva no Amazon Samaúma?")}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#25D366] text-white font-body font-bold text-sm tracking-widest uppercase rounded hover:bg-[#1ebe5a] transition-colors duration-300 shadow-md"
@@ -57,7 +57,7 @@ const Contact = () => (
               Fazer Reserva
             </a>
             <a
-              href={`${WHATSAPP}?text=${encodeURIComponent("Olá! Vim pelo site do Amazon Samaúma Lodge e gostaria de tirar algumas dúvidas.")}`}
+              href={`${WHATSAPP}?text=${encodeURIComponent("Olá, vim do site. Tenho algumas dúvidas sobre o Amazon Samaúma.")}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-3 px-8 py-4 border-2 border-[#25D366] text-[#1a7a3a] font-body font-bold text-sm tracking-widest uppercase rounded hover:bg-[#25D366] hover:text-white transition-colors duration-300"
@@ -67,7 +67,7 @@ const Contact = () => (
             </a>
           </div>
           <p className="mt-6 text-sm text-muted-foreground">
-            WhatsApp: <strong className="text-foreground">+55 (92) 9383-9110</strong> · Atendimento todos os dias
+            WhatsApp / Ligação: <a href="tel:+5592993839110" className="font-semibold text-foreground hover:text-gold transition-colors">+55 (92) 9 9383-9110</a> · Atendimento todos os dias
           </p>
         </SectionFadeIn>
       </div>
@@ -120,14 +120,20 @@ const Contact = () => (
             <li className="flex items-start gap-4 p-4 bg-background rounded-lg border border-border">
               <MessageCircle className="text-gold mt-1 shrink-0" size={20} />
               <div>
-                <p className="font-body font-semibold text-sm mb-1">WhatsApp (Reservas)</p>
+                <p className="font-body font-semibold text-sm mb-1">WhatsApp / Ligação</p>
                 <a
-                  href={`${WHATSAPP}?text=${encodeURIComponent("Olá! Vim pelo site do Amazon Samaúma Lodge e gostaria de fazer uma reserva.")}`}
+                  href={`${WHATSAPP}?text=${encodeURIComponent("Olá, vim do site. Como funciona a reserva no Amazon Samaúma?")}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-gold hover:underline"
+                  className="text-sm text-gold hover:underline block"
                 >
-                  +55 (92) 9383-9110
+                  +55 (92) 9 9383-9110 (WhatsApp)
+                </a>
+                <a
+                  href="tel:+5592993839110"
+                  className="text-sm text-gold hover:underline block mt-1"
+                >
+                  +55 (92) 9 9383-9110 (Ligar)
                 </a>
               </div>
             </li>

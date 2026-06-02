@@ -22,7 +22,7 @@ const Footer = () => (
             <Instagram size={22} />
           </a>
           <a
-            href="https://wa.me/559293839110?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20Amazon%20Sama%C3%BAma%20Lodge%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es."
+            href="https://wa.me/5592993839110?text=Ol%C3%A1%2C%20vim%20do%20site.%20Quero%20conhecer%20as%20pousadas%20flutuantes%20e%20pacotes%20do%20Amazon%20Sama%C3%BAma."
             target="_blank"
             rel="noopener noreferrer"
             className="text-primary-foreground/60 hover:text-gold transition-colors"
@@ -66,12 +66,21 @@ const Footer = () => (
           <li className="flex items-center gap-2">
             <MessageCircle size={16} className="text-gold shrink-0" />
             <a
-              href="https://wa.me/559293839110?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20Amazon%20Sama%C3%BAma%20Lodge%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es."
+              href="https://wa.me/5592993839110?text=Ol%C3%A1%2C%20vim%20do%20site.%20Quero%20conhecer%20as%20pousadas%20flutuantes%20e%20pacotes%20do%20Amazon%20Sama%C3%BAma."
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm hover:text-gold transition-colors"
             >
-              +55 (92) 9383-9110 (WhatsApp)
+              +55 (92) 9 9383-9110 (WhatsApp)
+            </a>
+          </li>
+          <li className="flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gold shrink-0"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3-8.59A2 2 0 0 1 3.72 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.72a16 16 0 0 0 6.29 6.29l1.08-1.08a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <a
+              href="tel:+5592993839110"
+              className="text-sm hover:text-gold transition-colors"
+            >
+              +55 (92) 9 9383-9110 (Ligação)
             </a>
           </li>
           <li className="flex items-center gap-2">
@@ -99,56 +108,23 @@ const Footer = () => (
       <div className="container-lodge px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center gap-4">
         <span className="text-xs text-primary-foreground/50 shrink-0 uppercase tracking-widest">Formas de Pagamento:</span>
         <div className="flex flex-wrap items-center gap-2">
-          {/* Visa */}
-          <span className="flex items-center justify-center bg-white rounded px-2 py-1 h-7">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 16" height="14" aria-label="Visa">
-              <text x="0" y="13" fontFamily="Arial, sans-serif" fontWeight="bold" fontSize="14" fill="#1A1F71">VISA</text>
-            </svg>
-          </span>
-          {/* Mastercard */}
-          <span className="flex items-center justify-center bg-white rounded px-2 py-1 h-7 gap-0.5">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 20" height="16" aria-label="Mastercard">
-              <circle cx="11" cy="10" r="9" fill="#EB001B"/>
-              <circle cx="21" cy="10" r="9" fill="#F79E1B"/>
-              <path d="M16 3.8a9 9 0 0 1 0 12.4A9 9 0 0 1 16 3.8z" fill="#FF5F00"/>
-            </svg>
-          </span>
-          {/* Elo */}
-          <span className="flex items-center justify-center bg-black rounded px-2 py-1 h-7">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 16" height="12" aria-label="Elo">
-              <text x="0" y="12" fontFamily="Arial, sans-serif" fontWeight="bold" fontSize="13" fill="#FFCB05">elo</text>
-            </svg>
-          </span>
-          {/* Pix */}
-          <span className="flex items-center justify-center bg-white rounded px-2 py-1 h-7 gap-1">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" height="14" aria-label="Pix">
-              <path d="M9.5 2L13 5.5 9.5 9 6 5.5z" fill="#32BCAD"/>
-              <path d="M13 5.5L16.5 9 13 12.5 9.5 9z" fill="#32BCAD"/>
-              <path d="M9.5 9L13 12.5 9.5 16 6 12.5z" fill="#32BCAD"/>
-              <path d="M6 5.5L9.5 9 6 12.5 2.5 9z" fill="#32BCAD"/>
-            </svg>
-            <span style={{fontFamily:"Arial,sans-serif",fontWeight:"bold",fontSize:"11px",color:"#32BCAD"}}>PIX</span>
-          </span>
-          {/* Hipercard */}
-          <span className="flex items-center justify-center rounded px-2 py-1 h-7" style={{background:"#B3131B"}}>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 16" height="12" aria-label="Hipercard">
-              <text x="0" y="12" fontFamily="Arial, sans-serif" fontWeight="bold" fontSize="11" fill="white">hiper</text>
-            </svg>
-          </span>
-          {/* American Express */}
-          <span className="flex items-center justify-center rounded px-2 py-1 h-7" style={{background:"#2E77BC"}}>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 16" height="11" aria-label="American Express">
-              <text x="0" y="12" fontFamily="Arial, sans-serif" fontWeight="bold" fontSize="10" fill="white">AMEX</text>
-            </svg>
-          </span>
-          {/* Boleto */}
-          <span className="flex items-center justify-center bg-white rounded px-2 py-1 h-7 gap-1">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 16" height="14" aria-label="Boleto">
-              {[0,2,4,5,7,9,11,12,14,16,18,19,21,23,25].map((x) => (
-                <rect key={x} x={x} y="0" width={x % 3 === 0 ? 2 : 1} height="14" fill="#222"/>
-              ))}
-            </svg>
-          </span>
+          {[
+            { src: "/pagamentos/elo.svg",        alt: "Elo" },
+            { src: "/pagamentos/mastercard.svg", alt: "Mastercard" },
+            { src: "/pagamentos/visa.svg",       alt: "Visa" },
+            { src: "/pagamentos/hipercard.svg",  alt: "Hipercard" },
+            { src: "/pagamentos/amex.svg",       alt: "American Express" },
+            { src: "/pagamentos/pix.svg",        alt: "Pix" },
+          ].map((b) => (
+            <img
+              key={b.alt}
+              src={b.src}
+              alt={`Pagamento ${b.alt}`}
+              className="h-8 w-auto rounded shadow-sm"
+              loading="lazy"
+              width={50} height={32}
+            />
+          ))}
         </div>
       </div>
     </div>

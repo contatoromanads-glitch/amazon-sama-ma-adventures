@@ -2,24 +2,28 @@ import React from 'react';
 import { Calendar as CalendarIcon } from 'lucide-react';
 
 /* <!-- Booking system: WhatsApp link with service-specific pre-filled messages --> */
-const WHATSAPP_NUMBER = '559293839110';
+const WHATSAPP_NUMBER = '5592993839110';
 
 function buildMessage(defaultInterest?: string, defaultRoom?: string): string {
-  // Room-specific message takes priority
+  // Quarto específico tem prioridade
   if (defaultRoom) {
-    return `Olá! Tenho interesse em reservar o "${defaultRoom}" no Amazon Samaúma Lodge. Poderia me enviar valores, datas disponíveis e o que está incluso?`;
+    return `Olá, vim do site. Tenho interesse no ${defaultRoom} no Amazon Samaúma. Como funciona a reserva?`;
   }
 
-  // Service-specific messages
+  // Mensagens por serviço / passeio
   switch (defaultInterest) {
     case 'Pesca Esportiva':
-      return `Olá! Tenho interesse no pacote de Pesca Esportiva do Amazon Samaúma Lodge. Gostaria de saber valores, datas disponíveis, espécies da temporada e o que está incluso (guia, equipamentos, refeições).`;
+      return `Olá, vim do site. Tenho interesse na pesca esportiva no Amazon Samaúma.`;
     case 'Ecoturismo':
-      return `Olá! Tenho interesse nos passeios de Ecoturismo do Amazon Samaúma Lodge (trilhas, observação de fauna, passeios de barco). Poderia me enviar valores, datas disponíveis e roteiros?`;
+      return `Olá, vim do site. Tenho interesse nos passeios de ecoturismo no Amazon Samaúma.`;
     case 'Relaxar/Descansar':
-      return `Olá! Quero reservar uma estadia de descanso no Amazon Samaúma Lodge. Poderia me enviar valores das diárias, datas disponíveis e o que está incluso (refeições, traslado)?`;
+      return `Olá, vim do site. Como funciona a reserva no Amazon Samaúma?`;
+    case 'Pacote Gavião Real':
+      return `Olá, vim do site. Tenho interesse no Pacote Gavião Real (6 dias e 5 noites).`;
+    case 'Pacote Irápuru':
+      return `Olá, vim do site. Tenho interesse no Pacote Irápuru (5 dias e 4 noites).`;
     default:
-      return `Olá! Gostaria de fazer uma reserva no Amazon Samaúma Lodge. Poderia me enviar mais informações sobre valores, datas disponíveis e pacotes?`;
+      return `Olá, vim do site. Quero conhecer as pousadas flutuantes e pacotes do Amazon Samaúma.`;
   }
 }
 

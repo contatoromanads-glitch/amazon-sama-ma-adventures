@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import {
   MapPin, MessageCircle, ArrowRight,
-  AirVent, Droplets, Wifi, Sparkles, BedDouble, Utensils, CheckCircle2,
+  AirVent, Droplets, Wifi, Sparkles, BedDouble, Utensils,
+  UserCheck, Footprints, Sunrise, TreePine, Moon, Flower2,
+  Ship, Compass, ShieldCheck, Leaf, ChevronDown, CalendarDays,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -36,34 +38,68 @@ const amenities = [
   { icon: Utensils,   label: "Restaurante Incluso"  },
 ];
 
-const packages = [
+type ItineraryDay = { day: string; text: string; icon: typeof UserCheck };
+type Package = {
+  num: string; name: string; emoji: string;
+  days: string; nights: string; price: string; installments: string;
+  interest: string; itinerary: ItineraryDay[];
+};
+
+const packages: Package[] = [
   {
-    name:     "Pacote Gavião Real",
-    duration: "6 dias · 5 noites",
-    image:    "/fotos_reais_amazon/eco-new-21.webp",
+    num: "01", name: "Arara", emoji: "🦜",
+    days: "3 dias", nights: "2 noites", price: "1.690", installments: "3x",
+    interest: "Pacote Arara",
+    itinerary: [
+      { day: "Dia 01", text: "Recepção do turista", icon: UserCheck },
+      { day: "Dia 02", text: "Caminhada na floresta + pescaria de piranha", icon: Footprints },
+      { day: "Dia 03", text: "Nascer do Sol + casa nativa", icon: Sunrise },
+    ],
+  },
+  {
+    num: "02", name: "Uirapuru", emoji: "🐦",
+    days: "4 dias", nights: "3 noites", price: "2.490", installments: "4x",
+    interest: "Pacote Uirapuru",
+    itinerary: [
+      { day: "Dia 01", text: "Recepção do turista", icon: UserCheck },
+      { day: "Dia 02", text: "Caminhada na floresta + pescaria de piranha + focagem de jacaré", icon: Footprints },
+      { day: "Dia 03", text: "Nascer do Sol + casa nativa + 1 noite na floresta", icon: Sunrise },
+      { day: "Dia 04", text: "Visita a Sumaúma", icon: TreePine },
+    ],
+  },
+  {
+    num: "03", name: "Onça Pintada", emoji: "🐆",
+    days: "5 dias", nights: "4 noites", price: "3.290", installments: "5x",
+    interest: "Pacote Onça Pintada",
+    itinerary: [
+      { day: "Dia 01", text: "Recepção do cliente", icon: UserCheck },
+      { day: "Dia 02", text: "Caminhada na floresta + pescaria de piranha + focagem de jacaré", icon: Footprints },
+      { day: "Dia 03", text: "Nascer do sol + casa nativa + 1 noite na selva", icon: Sunrise },
+      { day: "Dia 04", text: "Visita à seringueira + visita a Sumaúma", icon: TreePine },
+      { day: "Dia 05", text: "Remagem + pôr do sol + caminhada noturna", icon: Moon },
+    ],
+  },
+  {
+    num: "04", name: "Gavião Real", emoji: "🦅",
+    days: "6 dias", nights: "5 noites", price: "4.290", installments: "6x",
     interest: "Pacote Gavião Real",
-    includes: [
-      "5 noites de hospedagem completa",
-      "Café da manhã, almoço e jantar",
-      "Transfer aeroporto / lodge",
-      "Caminhada noturna guiada",
-      "Passeios de barco pelo rio",
-      "Pesca esportiva com guia",
+    itinerary: [
+      { day: "Dia 01", text: "Recepção do cliente", icon: UserCheck },
+      { day: "Dia 02", text: "Caminhada na floresta + pescaria de piranha + focagem de jacaré", icon: Footprints },
+      { day: "Dia 03", text: "Nascer do sol + casa nativa e 2 noites na selva", icon: Sunrise },
+      { day: "Dia 04", text: "Visitar a seringueira e visita a Sumaúma", icon: TreePine },
+      { day: "Dia 05", text: "Remagem + pôr do sol + caminhada noturna", icon: Moon },
+      { day: "Dia 06", text: "Visita ao orquidário", icon: Flower2 },
     ],
   },
-  {
-    name:     "Pacote Irápuru",
-    duration: "5 dias · 4 noites",
-    image:    "/fotos_reais_amazon/eco-new-25.webp",
-    interest: "Pacote Irápuru",
-    includes: [
-      "4 noites de hospedagem completa",
-      "Café da manhã, almoço e jantar",
-      "Transfer aeroporto / lodge",
-      "Caminhada noturna guiada",
-      "Observação de fauna amazônica",
-    ],
-  },
+];
+
+const packageIncludes = [
+  { icon: BedDouble,   label: "Hospedagem",  desc: "em acomodações confortáveis" },
+  { icon: Utensils,    label: "Alimentação", desc: "comida típica regional" },
+  { icon: Ship,        label: "Transporte",  desc: "fluvial durante todo o roteiro" },
+  { icon: Compass,     label: "Guia Local",  desc: "especializado" },
+  { icon: ShieldCheck, label: "Seguro",      desc: "aventura" },
 ];
 
 // ── Fallback lodges (exibido quando banco não retorna dados) ──────────────────
@@ -88,6 +124,104 @@ type Lodge  = {
   location: string | null; hero_image: string | null;
   amenities: string[] | null; is_active: boolean | null;
 };
+
+// ── Card de pacote interativo (roteiro expansível) ────────────────────────────
+function PackageCard({ pkg, defaultOpen = false }: { pkg: Package; defaultOpen?: boolean }) {
+  const [open, setOpen] = useState(defaultOpen);
+
+  return (
+    <motion.div
+      whileHover={{ y: -4 }}
+      className="bg-background rounded-xl border border-border overflow-hidden shadow-sm hover:shadow-lg transition-shadow flex flex-col"
+    >
+      {/* Cabeçalho */}
+      <div className="flex items-center justify-between gap-3 p-5 bg-primary text-primary-foreground">
+        <div>
+          <span className="text-xs font-body font-semibold tracking-[3px] uppercase text-gold">
+            Pacote {pkg.num}
+          </span>
+          <h3 className="font-heading text-2xl leading-tight flex items-center gap-2">
+            <span aria-hidden>{pkg.emoji}</span> {pkg.name}
+          </h3>
+        </div>
+        <div className="text-right shrink-0 bg-forest-light/40 rounded-lg px-3 py-2">
+          <span className="block font-body font-bold text-sm">{pkg.days}</span>
+          <span className="block text-xs text-primary-foreground/70">{pkg.nights}</span>
+        </div>
+      </div>
+
+      {/* Preço */}
+      <div className="flex items-end justify-between px-5 py-4 bg-card border-b border-border">
+        <div>
+          <span className="block text-[11px] text-muted-foreground uppercase tracking-widest">
+            Valor por pessoa
+          </span>
+          <p className="font-heading text-3xl text-forest leading-none mt-1">
+            R$ {pkg.price}<span className="text-base align-top">,00</span>
+          </p>
+        </div>
+        <span className="text-xs text-muted-foreground text-right leading-tight">
+          à vista ou<br />em até <strong className="text-forest">{pkg.installments}</strong>
+        </span>
+      </div>
+
+      {/* Toggle roteiro */}
+      <button
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        className="flex items-center justify-between gap-2 px-5 py-3 text-sm font-body font-semibold text-forest hover:bg-sand-light/40 transition-colors"
+      >
+        <span className="flex items-center gap-2">
+          <CalendarDays size={16} className="text-gold" />
+          Ver roteiro dia a dia
+        </span>
+        <motion.span animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.2 }}>
+          <ChevronDown size={18} />
+        </motion.span>
+      </button>
+
+      {/* Roteiro expansível */}
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="overflow-hidden"
+          >
+            <ul className="px-5 pb-4 pt-1 space-y-3">
+              {pkg.itinerary.map((d) => (
+                <li key={d.day} className="flex gap-3">
+                  <div className="shrink-0 w-9 h-9 rounded-full bg-sand-light flex items-center justify-center mt-0.5">
+                    <d.icon size={16} className="text-forest" />
+                  </div>
+                  <div>
+                    <p className="font-body font-semibold text-sm text-foreground">{d.day}</p>
+                    <p className="text-sm text-muted-foreground leading-snug">{d.text}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* CTA */}
+      <div className="mt-auto p-5 pt-3">
+        <BookingModal defaultInterest={pkg.interest} className="w-full">
+          <motion.button
+            className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-accent text-accent-foreground font-body font-bold text-sm tracking-widest uppercase rounded hover:bg-gold-light transition-colors duration-300"
+            whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
+          >
+            <MessageCircle size={16} className="shrink-0" />
+            Quero o Pacote {pkg.name}
+          </motion.button>
+        </BookingModal>
+      </div>
+    </motion.div>
+  );
+}
 
 // ── Componente ────────────────────────────────────────────────────────────────
 function Accommodations() {
@@ -367,56 +501,52 @@ function Accommodations() {
         </div>
       </section>
 
-      {/* ── Pacotes ──────────────────────────────────────────────────────── */}
+      {/* ── Pacotes de Ecoturismo ────────────────────────────────────────── */}
       <section className="section-padding bg-card">
         <div className="container-lodge">
           <SectionFadeIn>
-            <h2 className="heading-lg text-center mb-4">Nossos Pacotes</h2>
-            <p className="text-body text-center text-muted-foreground max-w-xl mx-auto mb-16">
-              Experiências exclusivas na Amazônia com guias especializados e imersão total na floresta.
+            <span className="block text-center text-sm font-body font-semibold tracking-[4px] uppercase text-gold mb-3">
+              Natureza, aventura e experiências únicas
+            </span>
+            <h2 className="heading-lg text-center mb-4">Pacotes de Ecoturismo na Amazônia</h2>
+            <p className="text-body text-center text-muted-foreground max-w-xl mx-auto mb-12">
+              Escolha o roteiro ideal e toque em <strong>"Ver roteiro dia a dia"</strong> para conhecer
+              cada experiência. Todos com guia local, hospedagem e alimentação inclusos.
             </p>
           </SectionFadeIn>
 
-          <div className="grid md:grid-cols-2 gap-8 items-stretch">
-            {packages.map((pkg) => (
-              <SectionFadeIn key={pkg.name} className="h-full">
-                <motion.div
-                  whileHover={{ y: -4 }}
-                  className="bg-background rounded-lg border border-border overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col h-full"
-                >
-                  <div className="hover-zoom overflow-hidden">
-                    <img
-                      src={pkg.image}
-                      alt={pkg.name}
-                      className="w-full h-56 object-cover"
-                      loading="lazy" width={800} height={600}
-                    />
-                  </div>
-                  <div className="p-6 flex flex-col flex-1">
-                    <h3 className="font-heading text-xl mb-1">{pkg.name}</h3>
-                    <p className="text-gold font-body font-semibold text-sm mb-4">{pkg.duration}</p>
-                    <ul className="space-y-2 mb-6 flex-1">
-                      {pkg.includes.map((item) => (
-                        <li key={item} className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <CheckCircle2 size={14} className="text-gold shrink-0" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                    <BookingModal defaultInterest={pkg.interest} className="mt-auto w-full">
-                      <motion.button
-                        className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-accent text-accent-foreground font-body font-bold text-sm tracking-widest uppercase rounded hover:bg-gold-light transition-colors duration-300"
-                        whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
-                      >
-                        <MessageCircle size={16} className="shrink-0" />
-                        Quero Este Pacote
-                      </motion.button>
-                    </BookingModal>
-                  </div>
-                </motion.div>
+          <div className="grid md:grid-cols-2 gap-8 items-start">
+            {packages.map((pkg, i) => (
+              <SectionFadeIn key={pkg.num}>
+                <PackageCard pkg={pkg} defaultOpen={i === 0} />
               </SectionFadeIn>
             ))}
           </div>
+
+          {/* Incluso em todos os pacotes */}
+          <SectionFadeIn>
+            <div className="mt-12 bg-background rounded-xl border border-border p-6 sm:p-8">
+              <div className="flex items-center justify-center gap-2 mb-8">
+                <Leaf size={20} className="text-gold" />
+                <h3 className="font-heading text-xl text-center">Incluso em todos os pacotes</h3>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
+                {packageIncludes.map((inc) => (
+                  <div key={inc.label} className="flex flex-col items-center text-center">
+                    <div className="w-14 h-14 rounded-full bg-sand-light flex items-center justify-center mb-3">
+                      <inc.icon size={24} className="text-forest" />
+                    </div>
+                    <span className="font-body font-semibold text-sm text-foreground">{inc.label}</span>
+                    <span className="text-xs text-muted-foreground mt-1 leading-snug">{inc.desc}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </SectionFadeIn>
+
+          <p className="text-xs text-center text-muted-foreground mt-6">
+            Valores por pessoa. Consulte condições de pagamento e disponibilidade.
+          </p>
         </div>
       </section>
 

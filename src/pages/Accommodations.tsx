@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import {
-  MapPin, MessageCircle, ArrowRight,
+  MapPin, ArrowRight,
   AirVent, Droplets, Wifi, Sparkles, BedDouble, Utensils,
   UserCheck, Footprints, Sunrise, TreePine, Moon, Flower2,
   Ship, Compass, ShieldCheck, Leaf, ChevronDown, CalendarDays,
@@ -13,6 +13,7 @@ import { supabase } from "@/integrations/supabase/client";
 import SEOHead from "@/components/SEOHead";
 import SectionFadeIn from "@/components/SectionFadeIn";
 import BookingModal from "@/components/BookingModal";
+import { WhatsappIcon } from "@/components/WhatsappIcon";
 import {
   Carousel, CarouselContent, CarouselItem,
   CarouselPrevious, CarouselNext, type CarouselApi,
@@ -263,7 +264,7 @@ function PackageCard({ pkg, defaultOpen = false }: { pkg: Package; defaultOpen?:
             className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-accent text-accent-foreground font-body font-bold text-sm tracking-widest uppercase rounded hover:bg-gold-light transition-colors duration-300"
             whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
           >
-            <MessageCircle size={16} className="shrink-0" />
+            <WhatsappIcon size={16} className="shrink-0" />
             Quero o Pacote {pkg.name}
           </motion.button>
         </BookingModal>
@@ -392,7 +393,7 @@ function Accommodations() {
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-accent text-accent-foreground font-body font-bold text-sm tracking-widest uppercase rounded hover:bg-gold-light transition-colors duration-300 min-h-[50px]"
                 whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
               >
-                <MessageCircle size={18} className="shrink-0" />
+                <WhatsappIcon size={18} className="shrink-0" />
                 Consultar Disponibilidade
               </motion.button>
             </BookingModal>
@@ -536,9 +537,9 @@ function Accommodations() {
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
             {amenities.map((a) => (
               <SectionFadeIn key={a.label}>
-                <div className="flex items-center gap-4 p-6 bg-card rounded-lg border border-border">
-                  <a.icon className="text-gold shrink-0" size={28} />
-                  <span className="font-body font-medium">{a.label}</span>
+                <div className="flex flex-col items-center justify-center text-center gap-3 p-6 h-32 bg-card rounded-lg border border-border">
+                  <a.icon className="text-gold shrink-0" size={32} />
+                  <span className="font-body font-medium leading-tight text-sm sm:text-base">{a.label}</span>
                 </div>
               </SectionFadeIn>
             ))}
@@ -625,7 +626,7 @@ function Accommodations() {
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-accent text-accent-foreground font-body font-bold text-sm tracking-widest uppercase rounded hover:bg-gold-light transition-colors duration-300 min-h-[50px]"
                 whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
               >
-                <MessageCircle size={18} className="shrink-0" />
+                <WhatsappIcon size={18} className="shrink-0" />
                 Reserve Sua Estadia
               </motion.button>
             </BookingModal>

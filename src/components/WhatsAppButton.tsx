@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import BookingModal from "./BookingModal";
-import { Calendar } from "lucide-react";
+import { WhatsappIcon } from "./WhatsappIcon";
 import { useState } from "react";
 
 const WhatsAppButton = () => {
@@ -20,7 +20,7 @@ const WhatsAppButton = () => {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <Calendar size={22} className="shrink-0" />
+        <WhatsappIcon size={22} className="shrink-0" />
         
         <AnimatePresence>
           {isHovered && (

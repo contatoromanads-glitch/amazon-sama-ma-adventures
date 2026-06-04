@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Utensils, Wifi, Leaf, TreePine, Fish, Binoculars, ChevronDown, Star, MapPin, Phone, MessageCircle, ChevronUp } from "lucide-react";
+import { Utensils, Wifi, Leaf, TreePine, Fish, Binoculars, ChevronDown, Star, MapPin, Phone, ChevronUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -7,6 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import SectionFadeIn from "@/components/SectionFadeIn";
 import SEOHead from "@/components/SEOHead";
 import BookingModal from "@/components/BookingModal";
+import { WhatsappIcon } from "@/components/WhatsappIcon";
 import { photos } from "@/lib/photos";
 
 const MAPS_URL = "https://www.google.com/maps/search/?api=1&query=Paran%C3%A1+do+Mamori+Careiro+Castanho+AM";
@@ -155,8 +156,8 @@ const Index = () => {
   return (
     <div className="bg-background">
       <SEOHead
-        title="Amazon Samaúma Lodge | Pousada Flutuante na Amazônia"
-        description="Pousada flutuante no Paraná do Mamori, Careiro Castanho – AM. Ecoturismo, pesca esportiva do Tucunaré, culinária amazônica e imersão total na Floresta Amazônica."
+        title="Amazon Samaúma Lodge | Hospedagem em Manaus e Aventuras na Selva"
+        description="Excelente hospedagem próxima a Manaus (Careiro Castanho – AM). Venha viver grandes aventuras, fazer trilhas e conhecer a cultura da selva no Amazonas com guia profissional."
         canonicalPath="/"
       />
       {/* Hero */}
@@ -229,7 +230,7 @@ const Index = () => {
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
               >
-                <MessageCircle size={18} className="shrink-0" />
+                <WhatsappIcon size={18} className="shrink-0" />
                 Reserve Agora
               </motion.button>
             </BookingModal>
@@ -508,14 +509,6 @@ const Index = () => {
       <section className="section-padding bg-primary text-primary-foreground text-center">
         <div className="container-lodge">
           <SectionFadeIn>
-            <img
-              src="/logo-amazon-samauma.png"
-              alt="Amazon Samaúma Lodge"
-              className="h-28 sm:h-32 w-auto mx-auto mb-8"
-              width={128}
-              height={128}
-              loading="lazy"
-            />
             <h2 className="heading-lg mb-6">Pronto para Viver a Amazônia de Verdade?</h2>
             <p className="text-body-lg text-primary-foreground/80 max-w-xl mx-auto mb-10">
               Entre em contato agora e planeje sua estadia no Amazon Samaúma Lodge. A Floresta Amazônica espera por você.
@@ -526,7 +519,7 @@ const Index = () => {
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
               >
-                <MessageCircle size={18} className="shrink-0" />
+                <WhatsappIcon size={18} className="shrink-0" />
                 Reserve Agora
               </motion.button>
             </BookingModal>

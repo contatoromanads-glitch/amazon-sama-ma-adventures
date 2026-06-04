@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
-import { MapPin, Instagram, MessageCircle } from "lucide-react";
+import { MapPin, Instagram } from "lucide-react";
 import BookingModal from "@/components/BookingModal";
+import { WhatsappIcon } from "@/components/WhatsappIcon";
 
 const Footer = () => (
   <footer className="bg-primary text-primary-foreground">
-    <div className="container-lodge section-padding grid grid-cols-1 md:grid-cols-3 gap-12">
-      <div>
+    <div className="container-lodge section-padding grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
+      <div className="flex flex-col items-center md:items-start">
         <img
           src="/logo-amazon-samauma.png"
           alt="Amazon Samaúma Lodge"
@@ -36,12 +37,12 @@ const Footer = () => (
             className="text-primary-foreground/60 hover:text-gold transition-colors"
             aria-label="WhatsApp"
           >
-            <MessageCircle size={22} />
+            <WhatsappIcon size={22} />
           </a>
         </div>
       </div>
 
-      <div>
+      <div className="flex flex-col items-center md:items-start">
         <h4 className="font-heading text-xl font-medium mb-4">Explore</h4>
         <ul className="space-y-2 text-primary-foreground/70">
           {[
@@ -64,11 +65,11 @@ const Footer = () => (
         </ul>
       </div>
 
-      <div>
+      <div className="flex flex-col items-center md:items-start">
         <h4 className="font-heading text-xl font-medium mb-4">Contato</h4>
-        <ul className="space-y-4 text-primary-foreground/70">
-          <li className="flex items-start gap-2">
-            <MapPin size={16} className="mt-1 shrink-0 text-gold" />
+        <ul className="space-y-4 text-primary-foreground/70 flex flex-col items-center md:items-start">
+          <li className="flex flex-col md:flex-row items-center md:items-start gap-2">
+            <MapPin size={16} className="md:mt-1 shrink-0 text-gold" />
             <a
               href="https://www.google.com/maps/search/?api=1&query=Paran%C3%A1+do+Mamori+Careiro+Castanho+AM"
               target="_blank"
@@ -79,7 +80,7 @@ const Footer = () => (
             </a>
           </li>
           <li className="flex items-center gap-2">
-            <MessageCircle size={16} className="text-gold shrink-0" />
+            <WhatsappIcon size={16} className="text-gold shrink-0" />
             <a
               href="https://wa.me/5592993839110?text=Ol%C3%A1%2C%20vim%20do%20site.%20Quero%20conhecer%20as%20pousadas%20flutuantes%20e%20pacotes%20do%20Amazon%20Sama%C3%BAma."
               target="_blank"
@@ -120,9 +121,9 @@ const Footer = () => (
     </div>
 
     <div className="border-t border-forest-light">
-      <div className="container-lodge px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center gap-4">
-        <span className="text-xs text-primary-foreground/50 shrink-0 uppercase tracking-widest">Formas de Pagamento:</span>
-        <div className="flex flex-wrap items-center gap-2">
+      <div className="container-lodge px-4 sm:px-6 lg:px-8 py-5 flex flex-col md:flex-row items-center justify-center md:justify-start gap-4">
+        <span className="text-xs text-primary-foreground/50 shrink-0 uppercase tracking-widest text-center md:text-left">Formas de Pagamento:</span>
+        <div className="flex flex-wrap items-center justify-center gap-2">
           {[
             { src: "/pagamentos/elo.svg",        alt: "Elo" },
             { src: "/pagamentos/mastercard.svg", alt: "Mastercard" },

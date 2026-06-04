@@ -213,7 +213,7 @@ const values = [
 
 const timeline = [
   { icon: "🌱", year: "A Origem", title: "Uma Paixão Nasce", desc: "O lodge surge de um amor genuíno pela Amazônia — rio, floresta, pesca e o povo ribeirinho do Paraná do Mamori." },
-  { icon: "🏗️", year: "A Estrutura", title: "Lodge Flutuante", desc: "Uma pousada flutuante com 5 acomodações é construída sobre o rio — integrada à natureza, sem agredi-la." },
+  { icon: "🏗️", year: "A Estrutura", title: "Lodge Flutuante", desc: "Pousadas flutuantes construídas sobre o rio — integradas à natureza, sem agredi-la." },
   { icon: "👥", year: "As Pessoas", title: "Equipe 100% Local", desc: "Guias, cozinheiros e funcionários criados na região — donos do conhecimento mais precioso: a Amazônia vivida por dentro." },
   { icon: "⭐", year: "Hoje", title: "Avaliação 5 Estrelas", desc: "Centenas de hóspedes de todo o Brasil e do mundo. Avaliação média 5.0 — reflexo do cuidado em cada detalhe." },
 ];
@@ -443,13 +443,21 @@ const About = () => {
           style={{ backgroundImage: "repeating-linear-gradient(0deg,hsl(147,30%,20%) 0%,transparent 50%)", backgroundSize: "4px 4px" }} />
         <div className="container-lodge grid lg:grid-cols-2 gap-16 items-center relative z-10">
           <SectionFadeIn>
+            <img
+              src="/logo-amazon-samauma.png"
+              alt="Amazon Samaúma Lodge"
+              className="h-24 w-auto mb-5"
+              width={96}
+              height={96}
+              loading="lazy"
+            />
             <span className="text-sm font-body font-semibold tracking-widest uppercase text-gold">Nossa História</span>
             <h2 className="heading-lg mt-2 mb-6">Nascido da Paixão<br />pela Amazônia</h2>
             <p className="text-body text-muted-foreground mb-4">
               O Amazon Samaúma Lodge é uma pousada flutuante localizada no Paraná do Mamori, Careiro Castanho, no coração do Amazonas. Aqui, o acesso é feito exclusivamente de barco — e esse já é o começo da experiência.
             </p>
             <p className="text-body text-muted-foreground mb-4">
-              Com 5 acomodações aconchegantes, restaurante com culinária regional e guias especializados, oferecemos o contato mais autêntico possível com a floresta amazônica.
+              Com duas pousadas flutuantes e quartos aconchegantes, restaurante com culinária regional e guias especializados, oferecemos o contato mais autêntico possível com a floresta amazônica.
             </p>
             <p className="text-body text-muted-foreground mb-8">
               Nossa filosofia é simples: conexões reais — com a natureza, com a cultura ribeirinha e consigo mesmo.

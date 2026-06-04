@@ -6,6 +6,7 @@ import {
   AirVent, Droplets, Wifi, Sparkles, BedDouble, Utensils,
   UserCheck, Footprints, Sunrise, TreePine, Moon, Flower2,
   Ship, Compass, ShieldCheck, Leaf, ChevronDown, CalendarDays,
+  Tent, Users,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -39,10 +40,15 @@ const amenities = [
 ];
 
 type ItineraryDay = { day: string; text: string; icon: typeof UserCheck };
+type Highlight   = { text: string; icon: typeof UserCheck };
 type Package = {
   num: string; name: string; emoji: string;
   days: string; nights: string; price: string; installments: string;
-  interest: string; itinerary: ItineraryDay[];
+  interest: string;
+  subtitle?: string;
+  itinerary?: ItineraryDay[];
+  description?: string;
+  highlights?: Highlight[];
 };
 
 const packages: Package[] = [
@@ -92,6 +98,20 @@ const packages: Package[] = [
       { day: "Dia 06", text: "Visita ao orquidário", icon: Flower2 },
     ],
   },
+  {
+    num: "05", name: "Curupira", emoji: "🧭",
+    days: "5 dias", nights: "4 noites", price: "4.390", installments: "5x",
+    interest: "Pacote Curupira",
+    subtitle: "Sobreviver na Floresta Amazônica",
+    description: "Uma experiência única de imersão na Floresta Amazônica, com atividades voltadas para a sobrevivência na selva: técnicas básicas de orientação, identificação de plantas úteis, obtenção de água, montagem de abrigo e conhecimentos tradicionais da floresta.",
+    highlights: [
+      { text: "Identificação de plantas úteis", icon: Leaf },
+      { text: "Obtenção de água na floresta", icon: Droplets },
+      { text: "Montagem de abrigo", icon: Tent },
+      { text: "Orientação na selva", icon: Compass },
+      { text: "Conhecimentos tradicionais", icon: Users },
+    ],
+  },
 ];
 
 const packageIncludes = [
@@ -111,8 +131,8 @@ const fallbackLodges = [
     desc: "Pousada flutuante no coração da Amazônia. Quartos privativos sobre o rio com ar-condicionado, Wi-Fi Starlink e restaurante incluso.",
   },
   {
-    name: "Joshuas Amazon Expeditions",
-    slug: "joshuas-amazon-expeditions",
+    name: "Amazon Apuí Lodge",
+    slug: "amazon-apui-lodge",
     img:  "/pousada-2/pousada-flutuante-amazonas-vista-externa-rio-por-do-sol.jpeg",
     desc: "Nossa segunda pousada flutuante com estrutura ampla, deck panorâmico e 6 quartos confortáveis à beira do rio.",
   },
@@ -128,6 +148,8 @@ type Lodge  = {
 // ── Card de pacote interativo (roteiro expansível) ────────────────────────────
 function PackageCard({ pkg, defaultOpen = false }: { pkg: Package; defaultOpen?: boolean }) {
   const [open, setOpen] = useState(defaultOpen);
+  const hasItinerary = !!pkg.itinerary?.length;
+  const toggleLabel  = hasItinerary ? "Ver roteiro dia a dia" : "Ver detalhes da experiência";
 
   return (
     <motion.div
@@ -143,6 +165,9 @@ function PackageCard({ pkg, defaultOpen = false }: { pkg: Package; defaultOpen?:
           <h3 className="font-heading text-2xl leading-tight flex items-center gap-2">
             <span aria-hidden>{pkg.emoji}</span> {pkg.name}
           </h3>
+          {pkg.subtitle && (
+            <p className="text-xs text-primary-foreground/70 mt-1 italic">{pkg.subtitle}</p>
+          )}
         </div>
         <div className="text-right shrink-0 bg-forest-light/40 rounded-lg px-3 py-2">
           <span className="block font-body font-bold text-sm">{pkg.days}</span>
@@ -165,22 +190,22 @@ function PackageCard({ pkg, defaultOpen = false }: { pkg: Package; defaultOpen?:
         </span>
       </div>
 
-      {/* Toggle roteiro */}
+      {/* Toggle conteúdo */}
       <button
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         className="flex items-center justify-between gap-2 px-5 py-3 text-sm font-body font-semibold text-forest hover:bg-sand-light/40 transition-colors"
       >
         <span className="flex items-center gap-2">
-          <CalendarDays size={16} className="text-gold" />
-          Ver roteiro dia a dia
+          {hasItinerary ? <CalendarDays size={16} className="text-gold" /> : <Leaf size={16} className="text-gold" />}
+          {toggleLabel}
         </span>
         <motion.span animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.2 }}>
           <ChevronDown size={18} />
         </motion.span>
       </button>
 
-      {/* Roteiro expansível */}
+      {/* Conteúdo expansível */}
       <AnimatePresence initial={false}>
         {open && (
           <motion.div
@@ -190,19 +215,43 @@ function PackageCard({ pkg, defaultOpen = false }: { pkg: Package; defaultOpen?:
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="overflow-hidden"
           >
-            <ul className="px-5 pb-4 pt-1 space-y-3">
-              {pkg.itinerary.map((d) => (
-                <li key={d.day} className="flex gap-3">
-                  <div className="shrink-0 w-9 h-9 rounded-full bg-sand-light flex items-center justify-center mt-0.5">
-                    <d.icon size={16} className="text-forest" />
-                  </div>
-                  <div>
-                    <p className="font-body font-semibold text-sm text-foreground">{d.day}</p>
-                    <p className="text-sm text-muted-foreground leading-snug">{d.text}</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
+            {/* Descrição (pacotes temáticos) */}
+            {pkg.description && (
+              <p className="px-5 pt-1 pb-3 text-sm text-muted-foreground leading-relaxed">
+                {pkg.description}
+              </p>
+            )}
+
+            {/* Roteiro dia a dia */}
+            {hasItinerary && (
+              <ul className="px-5 pb-4 pt-1 space-y-3">
+                {pkg.itinerary!.map((d) => (
+                  <li key={d.day} className="flex gap-3">
+                    <div className="shrink-0 w-9 h-9 rounded-full bg-sand-light flex items-center justify-center mt-0.5">
+                      <d.icon size={16} className="text-forest" />
+                    </div>
+                    <div>
+                      <p className="font-body font-semibold text-sm text-foreground">{d.day}</p>
+                      <p className="text-sm text-muted-foreground leading-snug">{d.text}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            {/* Atividades / vivências (pacotes temáticos) */}
+            {pkg.highlights && (
+              <ul className="px-5 pb-4 pt-1 space-y-3">
+                {pkg.highlights.map((h) => (
+                  <li key={h.text} className="flex items-center gap-3">
+                    <div className="shrink-0 w-9 h-9 rounded-full bg-sand-light flex items-center justify-center">
+                      <h.icon size={16} className="text-forest" />
+                    </div>
+                    <p className="text-sm text-foreground leading-snug">{h.text}</p>
+                  </li>
+                ))}
+              </ul>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
@@ -375,10 +424,6 @@ function Accommodations() {
                 <CarouselPrevious className="left-3" />
                 <CarouselNext className="right-3" />
               </Carousel>
-              {/* Indicador de slides */}
-              <p className="text-xs text-center text-muted-foreground mt-2 font-body">
-                Gerencie as fotos em <strong>Admin → Banners</strong>
-              </p>
             </div>
           </SectionFadeIn>
         </div>
@@ -510,8 +555,8 @@ function Accommodations() {
             </span>
             <h2 className="heading-lg text-center mb-4">Pacotes de Ecoturismo na Amazônia</h2>
             <p className="text-body text-center text-muted-foreground max-w-xl mx-auto mb-12">
-              Escolha o roteiro ideal e toque em <strong>"Ver roteiro dia a dia"</strong> para conhecer
-              cada experiência. Todos com guia local, hospedagem e alimentação inclusos.
+              Escolha o pacote ideal e toque para conhecer os detalhes de cada experiência.
+              Todos com guia local, hospedagem e alimentação inclusos.
             </p>
           </SectionFadeIn>
 
@@ -521,30 +566,36 @@ function Accommodations() {
                 <PackageCard pkg={pkg} defaultOpen={i === 0} />
               </SectionFadeIn>
             ))}
+
+            {/* Incluso em todos os pacotes — ocupa a metade ao lado do último pacote no desktop */}
+            <SectionFadeIn>
+              <div className="bg-background rounded-xl border border-border p-6 sm:p-8">
+                <div className="flex items-center gap-2 mb-6">
+                  <Leaf size={20} className="text-gold" />
+                  <h3 className="font-heading text-xl">Incluso em todos os pacotes</h3>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
+                  {[packageIncludes.slice(0, 3), packageIncludes.slice(3)].map((col, ci) => (
+                    <ul key={ci} className="space-y-4">
+                      {col.map((inc) => (
+                        <li key={inc.label} className="flex items-center gap-4">
+                          <div className="shrink-0 w-12 h-12 rounded-full bg-sand-light flex items-center justify-center">
+                            <inc.icon size={22} className="text-forest" />
+                          </div>
+                          <div>
+                            <span className="block font-body font-semibold text-sm text-foreground">{inc.label}</span>
+                            <span className="text-xs text-muted-foreground leading-snug">{inc.desc}</span>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  ))}
+                </div>
+              </div>
+            </SectionFadeIn>
           </div>
 
-          {/* Incluso em todos os pacotes */}
-          <SectionFadeIn>
-            <div className="mt-12 bg-background rounded-xl border border-border p-6 sm:p-8">
-              <div className="flex items-center justify-center gap-2 mb-8">
-                <Leaf size={20} className="text-gold" />
-                <h3 className="font-heading text-xl text-center">Incluso em todos os pacotes</h3>
-              </div>
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
-                {packageIncludes.map((inc) => (
-                  <div key={inc.label} className="flex flex-col items-center text-center">
-                    <div className="w-14 h-14 rounded-full bg-sand-light flex items-center justify-center mb-3">
-                      <inc.icon size={24} className="text-forest" />
-                    </div>
-                    <span className="font-body font-semibold text-sm text-foreground">{inc.label}</span>
-                    <span className="text-xs text-muted-foreground mt-1 leading-snug">{inc.desc}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </SectionFadeIn>
-
-          <p className="text-xs text-center text-muted-foreground mt-6">
+          <p className="text-xs text-center text-muted-foreground mt-8">
             Valores por pessoa. Consulte condições de pagamento e disponibilidade.
           </p>
         </div>

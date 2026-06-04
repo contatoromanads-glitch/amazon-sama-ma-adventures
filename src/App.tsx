@@ -7,6 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import MobileCTABar from "@/components/MobileCTABar";
 import Index from "./pages/Index";
 import { AuthProvider } from "@/hooks/useAuth";
 import ProtectedRoute from "@/components/admin/ProtectedRoute";
@@ -57,6 +58,7 @@ const PublicChrome = ({ children }: { children: React.ReactNode }) => {
       {children}
       <Footer />
       <WhatsAppButton />
+      <MobileCTABar />
     </>
   );
 };

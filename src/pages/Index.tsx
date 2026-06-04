@@ -2,10 +2,14 @@ import { Link } from "react-router-dom";
 import { Utensils, Wifi, Leaf, TreePine, Fish, Binoculars, ChevronDown, Star, MapPin, Phone, MessageCircle, ChevronUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 import SectionFadeIn from "@/components/SectionFadeIn";
 import SEOHead from "@/components/SEOHead";
 import BookingModal from "@/components/BookingModal";
 import { photos } from "@/lib/photos";
+
+const MAPS_URL = "https://www.google.com/maps/search/?api=1&query=Paran%C3%A1+do+Mamori+Careiro+Castanho+AM";
 const accommodationImg = photos.quartoStandard;
 const ecotourismImg    = "/00d47a7f-6c10-4e3a-b79d-625befed8282.jpg";
 const fishingImg       = "/fotos_reais_amazon/home-pesca.jpg";
@@ -62,7 +66,7 @@ const experiences = [
 ];
 
 const stats = [
-  { value: "5", label: "Quartos Privativos" },
+  { value: "2", label: "Pousadas Flutuantes" },
   { value: "100%", label: "Acesso por Barco" },
   { value: "24h", label: "Contato WhatsApp" },
   { value: "★ 5.0", label: "Avaliação dos Hóspedes" },
@@ -120,6 +124,27 @@ const Index = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [morphIndex, setMorphIndex] = useState(0);
 
+  // Depoimentos do banco (gerenciáveis no admin) — com fallback para os fixos
+  const { data: dbTestimonials = [] } = useQuery({
+    queryKey: ["home-testimonials"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("testimonials")
+        .select("author_name, location, text, stars")
+        .eq("is_active", true)
+        .order("sort_order");
+      if (error || !data) return [];
+      return data.map((t) => ({
+        text:   t.text,
+        author: t.author_name,
+        from:   t.location ?? "",
+        stars:  t.stars ?? 5,
+      }));
+    },
+    staleTime: 5 * 60 * 1000,
+  });
+  const displayTestimonials = dbTestimonials.length > 0 ? dbTestimonials : testimonials;
+
   useEffect(() => {
     const interval = setInterval(() => {
       setMorphIndex((prev) => (prev + 1) % morphWords.length);
@@ -135,7 +160,7 @@ const Index = () => {
         canonicalPath="/"
       />
       {/* Hero */}
-      <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[100svh] min-h-[600px] flex items-center justify-center overflow-hidden">
         <video
           autoPlay
           loop
@@ -167,7 +192,7 @@ const Index = () => {
             Viva a Amazônia de Verdade —{" "}
             <span className="inline-block">
               Uma experiência{" "}
-              <span className="relative inline-block min-w-[14rem]">
+              <span className="relative inline-block min-w-[10rem] sm:min-w-[14rem]">
                 <AnimatePresence mode="wait">
                   <motion.span
                     key={morphIndex}
@@ -255,7 +280,7 @@ const Index = () => {
               O Amazon Samaúma Lodge é uma pousada flutuante localizada no Paraná do Mamori, região de Careiro Castanho, no coração do Amazonas. Aqui, o acesso é feito exclusivamente de barco — e esse já é o começo da experiência.
             </p>
             <p className="text-body text-muted-foreground mb-8">
-              Com 5 acomodações aconchegantes, restaurante com culinária regional amazônica e guias especializados, oferecemos o contato mais autêntico possível com a floresta amazônica. Seja para pesca esportiva, explorar a fauna local, ou simplesmente descansar ao som do rio — o Samaúma é o seu destino.
+              Com duas pousadas flutuantes e quartos aconchegantes, restaurante com culinária regional amazônica e guias especializados, oferecemos o contato mais autêntico possível com a floresta amazônica. Seja para pesca esportiva, explorar a fauna local, ou simplesmente descansar ao som do rio — o Samaúma é o seu destino.
             </p>
             <Link
               to="/sobre"
@@ -364,13 +389,19 @@ const Index = () => {
               Ao confirmar sua reserva, enviamos todas as instruções de acesso diretamente pelo WhatsApp — incluindo como chegar a Careiro Castanho a partir de Manaus.
             </p>
             <div className="flex flex-col gap-4">
-              <div className="flex items-start gap-4 p-4 bg-card rounded-lg border border-border">
+              <a
+                href={MAPS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-4 p-4 bg-card rounded-lg border border-border hover:border-gold transition-colors group"
+              >
                 <MapPin className="text-gold mt-1 shrink-0" size={20} />
                 <div>
                   <p className="font-body font-semibold text-sm">Localização</p>
                   <p className="text-sm text-muted-foreground">Paraná do Mamori, Careiro Castanho – AM, Brasil</p>
+                  <span className="text-sm text-gold font-semibold group-hover:underline">Ver no Google Maps →</span>
                 </div>
-              </div>
+              </a>
               <div className="flex items-start gap-4 p-4 bg-card rounded-lg border border-border">
                 <Phone className="text-gold mt-1 shrink-0" size={20} />
                 <div>
@@ -407,7 +438,7 @@ const Index = () => {
             </p>
           </SectionFadeIn>
           <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((t, i) => (
+            {displayTestimonials.map((t, i) => (
               <SectionFadeIn key={i}>
                 <div className="bg-background p-8 rounded-lg shadow-sm border border-border h-full flex flex-col">
                   <div className="flex gap-1 mb-4">
@@ -477,6 +508,14 @@ const Index = () => {
       <section className="section-padding bg-primary text-primary-foreground text-center">
         <div className="container-lodge">
           <SectionFadeIn>
+            <img
+              src="/logo-amazon-samauma.png"
+              alt="Amazon Samaúma Lodge"
+              className="h-28 sm:h-32 w-auto mx-auto mb-8"
+              width={128}
+              height={128}
+              loading="lazy"
+            />
             <h2 className="heading-lg mb-6">Pronto para Viver a Amazônia de Verdade?</h2>
             <p className="text-body-lg text-primary-foreground/80 max-w-xl mx-auto mb-10">
               Entre em contato agora e planeje sua estadia no Amazon Samaúma Lodge. A Floresta Amazônica espera por você.

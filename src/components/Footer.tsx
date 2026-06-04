@@ -6,6 +6,14 @@ const Footer = () => (
   <footer className="bg-primary text-primary-foreground">
     <div className="container-lodge section-padding grid grid-cols-1 md:grid-cols-3 gap-12">
       <div>
+        <img
+          src="/logo-amazon-samauma.png"
+          alt="Amazon Samaúma Lodge"
+          className="h-24 w-auto mb-4"
+          width={96}
+          height={96}
+          loading="lazy"
+        />
         <h3 className="font-heading text-2xl font-semibold mb-2 text-gold">Amazon Samaúma Lodge</h3>
         <p className="text-sm text-primary-foreground/60 uppercase tracking-widest mb-4 font-body">Paraná do Mamori · Amazônia</p>
         <p className="text-body text-primary-foreground/70 leading-relaxed mb-6">
@@ -61,7 +69,14 @@ const Footer = () => (
         <ul className="space-y-4 text-primary-foreground/70">
           <li className="flex items-start gap-2">
             <MapPin size={16} className="mt-1 shrink-0 text-gold" />
-            <span className="text-sm">Paraná do Mamori, Careiro Castanho – AM, Brasil</span>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Paran%C3%A1+do+Mamori+Careiro+Castanho+AM"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm hover:text-gold transition-colors"
+            >
+              Paraná do Mamori, Careiro Castanho – AM, Brasil
+            </a>
           </li>
           <li className="flex items-center gap-2">
             <MessageCircle size={16} className="text-gold shrink-0" />

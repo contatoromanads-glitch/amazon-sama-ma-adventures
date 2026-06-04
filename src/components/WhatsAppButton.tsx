@@ -7,7 +7,7 @@ const WhatsAppButton = () => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <BookingModal className="fixed bottom-6 right-6 z-50">
+    <BookingModal className="hidden lg:inline-block fixed bottom-6 right-6 z-50">
       <motion.button
         className="flex items-center justify-center gap-2 rounded-full shadow-[0_4px_20px_rgba(194,155,71,0.5)] px-4 py-4 font-body font-semibold text-sm transition-all duration-300"
         style={{ background: 'linear-gradient(135deg, #d4af37, #aa8529)', color: 'white' }}

@@ -26,6 +26,8 @@ function buildMessage(defaultInterest?: string, defaultRoom?: string): string {
       return `Olá, vim do site. Tenho interesse no Pacote Onça Pintada (5 dias e 4 noites).`;
     case 'Pacote Gavião Real':
       return `Olá, vim do site. Tenho interesse no Pacote Gavião Real (6 dias e 5 noites).`;
+    case 'Pacote Curupira':
+      return `Olá, vim do site. Tenho interesse no Pacote Curupira de sobrevivência (5 dias e 4 noites).`;
     default:
       return `Olá, vim do site. Quero conhecer as pousadas flutuantes e pacotes do Amazon Samaúma.`;
   }

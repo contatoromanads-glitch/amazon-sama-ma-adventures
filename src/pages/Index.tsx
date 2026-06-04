@@ -241,18 +241,18 @@ const Index = () => {
               Conheça o Lodge
             </Link>
           </motion.div>
+          
+          {/* Scroll indicator - now in flow for mobile to prevent overlap */}
+          <motion.div
+            className="mt-12 mx-auto w-fit lg:absolute lg:bottom-12 lg:left-1/2 lg:-translate-x-1/2"
+            animate={{ y: [0, 10, 0] }}
+            transition={{ repeat: Infinity, duration: 2 }}
+          >
+            <div className="w-6 h-10 border-2 border-primary-foreground/40 rounded-full flex justify-center pt-2">
+              <div className="w-1.5 h-3 bg-primary-foreground/60 rounded-full" />
+            </div>
+          </motion.div>
         </div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
-        >
-          <div className="w-6 h-10 border-2 border-primary-foreground/40 rounded-full flex justify-center pt-2">
-            <div className="w-1.5 h-3 bg-primary-foreground/60 rounded-full" />
-          </div>
-        </motion.div>
       </section>
 
       {/* Stats bar */}

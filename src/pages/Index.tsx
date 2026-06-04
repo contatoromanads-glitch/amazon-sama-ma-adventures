@@ -156,9 +156,21 @@ const Index = () => {
   return (
     <div className="bg-background">
       <SEOHead
-        title="Amazon Samaúma Lodge | Hospedagem em Manaus e Aventuras na Selva"
-        description="Excelente hospedagem próxima a Manaus (Careiro Castanho – AM). Venha viver grandes aventuras, fazer trilhas e conhecer a cultura da selva no Amazonas com guia profissional."
+        title="Amazon Samaúma Lodge | Hospedagem de Selva em Manaus"
+        description="Excelente hospedagem de selva próxima a Manaus. Ecoturismo, pesca esportiva, trilhas na floresta amazônica e imersão cultural com guia local. Hospede-se conosco no Paraná do Mamori!"
         canonicalPath="/"
+        schemaData={{
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "name": "Amazon Samaúma Lodge | Hospedagem de Selva em Manaus",
+          "description": "Excelente hospedagem de selva próxima a Manaus. Ecoturismo, pesca esportiva, trilhas na floresta amazônica e imersão cultural com guia local.",
+          "url": "https://amazon-samauma-lodge.com.br",
+          "publisher": {
+            "@type": "LodgingBusiness",
+            "name": "Amazon Samaúma Lodge",
+            "image": "https://amazon-samauma-lodge.com.br/fotos_reais_amazon/lodge.webp"
+          }
+        }}
       />
       {/* Hero */}
       <section className="relative h-[100svh] min-h-[600px] flex items-center justify-center overflow-hidden">

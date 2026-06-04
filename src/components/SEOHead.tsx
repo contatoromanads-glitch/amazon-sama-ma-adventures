@@ -5,12 +5,13 @@ interface SEOHeadProps {
   description: string;
   canonicalPath?: string;
   ogImage?: string;
+  schemaData?: Record<string, any>;
 }
 
 const BASE_URL = "https://amazon-samauma-lodge.com.br";
 const DEFAULT_IMAGE = `${BASE_URL}/fotos_reais_amazon/lodge.webp`;
 
-export function SEOHead({ title, description, canonicalPath = "/", ogImage = DEFAULT_IMAGE }: SEOHeadProps) {
+export function SEOHead({ title, description, canonicalPath = "/", ogImage = DEFAULT_IMAGE, schemaData }: SEOHeadProps) {
   const fullTitle = title.includes("Amazon Samaúma") ? title : `${title} | Amazon Samaúma Lodge`;
   const canonicalUrl = `${BASE_URL}${canonicalPath}`;
 
@@ -50,7 +51,18 @@ export function SEOHead({ title, description, canonicalPath = "/", ogImage = DEF
     setMeta('meta[name="twitter:title"]', fullTitle);
     setMeta('meta[name="twitter:description"]', description);
     setMeta('meta[name="twitter:image"]', ogImage);
-  }, [fullTitle, description, canonicalUrl, ogImage]);
+
+    if (schemaData) {
+      let scriptEl = document.querySelector('script[type="application/ld+json"][data-dynamic="true"]') as HTMLScriptElement | null;
+      if (!scriptEl) {
+        scriptEl = document.createElement("script");
+        scriptEl.type = "application/ld+json";
+        scriptEl.setAttribute("data-dynamic", "true");
+        document.head.appendChild(scriptEl);
+      }
+      scriptEl.textContent = JSON.stringify(schemaData);
+    }
+  }, [fullTitle, description, canonicalUrl, ogImage, schemaData]);
 
   return null;
 }

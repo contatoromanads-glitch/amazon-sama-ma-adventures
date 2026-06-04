@@ -694,16 +694,22 @@ const Ecotourism = () => {
   return (
     <div className="bg-background pt-20">
       <SEOHead
-        title="Ecoturismo na Amazônia | Amazon Samaúma Lodge"
-        description="Explore a Floresta Amazônica com trilhas guiadas, safáris noturnos, observação de botos e jacarés, passeios de canoa e muito mais no Paraná do Mamori, Careiro Castanho – AM."
+        title="Trilhas, Aventuras e Ecoturismo na Amazônia | Amazon Samaúma"
+        description="Explore a selva amazônica com trilhas guiadas, safáris noturnos, observação de botos e jacarés, passeios de canoa e pesca esportiva em Manaus (Careiro Castanho)."
         canonicalPath="/ecoturismo"
         ogImage="https://amazon-samauma-lodge.com.br/fotos_reais_amazon/eco-new-38.webp"
+        schemaData={{
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "name": "Trilhas, Aventuras e Ecoturismo na Amazônia | Amazon Samaúma",
+          "description": "Explore a selva amazônica com trilhas guiadas, safáris noturnos, observação de botos e jacarés, passeios de canoa e pesca esportiva em Manaus (Careiro Castanho)."
+        }}
       />
       {/* Hero */}
       <section className="relative h-[55vh] min-h-[400px] flex items-center justify-center overflow-hidden">
         <img
           src={ecotourismImg}
-          alt="Ecoturismo na Amazônia — Amazon Samaúma Lodge"
+          alt="Ecoturismo e aventuras na floresta amazônica perto de Manaus"
           className="absolute inset-0 w-full h-full object-cover"
           width={1200}
           height={800}

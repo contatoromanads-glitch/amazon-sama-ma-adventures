@@ -295,16 +295,22 @@ function Accommodations() {
   return (
     <div className="bg-background pt-20">
       <SEOHead
-        title="Acomodações | Amazon Samaúma Lodge"
-        description="Pousadas flutuantes no Paraná do Mamori. Quartos privativos com ar-condicionado, Wi-Fi Starlink, água quente e restaurante incluso. Careiro Castanho – AM."
+        title="Pacotes e Acomodações | Hospedagem de Selva em Manaus"
+        description="Conheça nossas pousadas flutuantes no Paraná do Mamori e pacotes de ecoturismo e pesca esportiva na Amazônia. Quartos privativos com ar-condicionado e Wi-Fi Starlink."
         canonicalPath="/acomodacoes"
+        schemaData={{
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "name": "Pacotes e Acomodações | Hospedagem de Selva em Manaus",
+          "description": "Conheça nossas pousadas flutuantes no Paraná do Mamori e pacotes de ecoturismo e pesca esportiva na Amazônia. Quartos privativos com ar-condicionado e Wi-Fi Starlink."
+        }}
       />
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="relative h-[55vh] min-h-[400px] flex items-center justify-center overflow-hidden">
         <img
           src={accommodationImg}
-          alt="Acomodações do Amazon Samaúma Lodge"
+          alt="Acomodações em pousada flutuante de selva no Amazonas"
           className="absolute inset-0 w-full h-full object-cover"
           width={1200} height={800}
         />

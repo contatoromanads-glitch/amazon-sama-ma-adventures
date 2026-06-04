@@ -14,6 +14,7 @@ import SEOHead from "@/components/SEOHead";
 import SectionFadeIn from "@/components/SectionFadeIn";
 import BookingModal from "@/components/BookingModal";
 import { WhatsappIcon } from "@/components/WhatsappIcon";
+import { DynamicIcon } from "@/components/DynamicIcon";
 import {
   Carousel, CarouselContent, CarouselItem,
   CarouselPrevious, CarouselNext, type CarouselApi,
@@ -40,80 +41,19 @@ const amenities = [
   { icon: Utensils,   label: "Restaurante Incluso"  },
 ];
 
-type ItineraryDay = { day: string; text: string; icon: typeof UserCheck };
-type Highlight   = { text: string; icon: typeof UserCheck };
+type ItineraryDay = { day: string; text: string; icon: string };
+type Highlight   = { text: string; icon: string };
 type Package = {
+  id?: string;
   num: string; name: string; emoji: string;
-  days: string; nights: string; price: string; installments: string;
+  days_text: string; nights_text: string; price: string; installments: string;
   interest: string;
   subtitle?: string;
   itinerary?: ItineraryDay[];
   description?: string;
   highlights?: Highlight[];
+  is_active?: boolean;
 };
-
-const packages: Package[] = [
-  {
-    num: "01", name: "Arara", emoji: "🦜",
-    days: "3 dias", nights: "2 noites", price: "1.690", installments: "3x",
-    interest: "Pacote Arara",
-    itinerary: [
-      { day: "Dia 01", text: "Recepção do turista", icon: UserCheck },
-      { day: "Dia 02", text: "Caminhada na floresta + pescaria de piranha", icon: Footprints },
-      { day: "Dia 03", text: "Nascer do Sol + casa nativa", icon: Sunrise },
-    ],
-  },
-  {
-    num: "02", name: "Uirapuru", emoji: "🐦",
-    days: "4 dias", nights: "3 noites", price: "2.490", installments: "4x",
-    interest: "Pacote Uirapuru",
-    itinerary: [
-      { day: "Dia 01", text: "Recepção do turista", icon: UserCheck },
-      { day: "Dia 02", text: "Caminhada na floresta + pescaria de piranha + focagem de jacaré", icon: Footprints },
-      { day: "Dia 03", text: "Nascer do Sol + casa nativa + 1 noite na floresta", icon: Sunrise },
-      { day: "Dia 04", text: "Visita a Sumaúma", icon: TreePine },
-    ],
-  },
-  {
-    num: "03", name: "Onça Pintada", emoji: "🐆",
-    days: "5 dias", nights: "4 noites", price: "3.290", installments: "5x",
-    interest: "Pacote Onça Pintada",
-    itinerary: [
-      { day: "Dia 01", text: "Recepção do cliente", icon: UserCheck },
-      { day: "Dia 02", text: "Caminhada na floresta + pescaria de piranha + focagem de jacaré", icon: Footprints },
-      { day: "Dia 03", text: "Nascer do sol + casa nativa + 1 noite na selva", icon: Sunrise },
-      { day: "Dia 04", text: "Visita à seringueira + visita a Sumaúma", icon: TreePine },
-      { day: "Dia 05", text: "Remagem + pôr do sol + caminhada noturna", icon: Moon },
-    ],
-  },
-  {
-    num: "04", name: "Gavião Real", emoji: "🦅",
-    days: "6 dias", nights: "5 noites", price: "4.290", installments: "6x",
-    interest: "Pacote Gavião Real",
-    itinerary: [
-      { day: "Dia 01", text: "Recepção do cliente", icon: UserCheck },
-      { day: "Dia 02", text: "Caminhada na floresta + pescaria de piranha + focagem de jacaré", icon: Footprints },
-      { day: "Dia 03", text: "Nascer do sol + casa nativa e 2 noites na selva", icon: Sunrise },
-      { day: "Dia 04", text: "Visitar a seringueira e visita a Sumaúma", icon: TreePine },
-      { day: "Dia 05", text: "Remagem + pôr do sol + caminhada noturna", icon: Moon },
-      { day: "Dia 06", text: "Visita ao orquidário", icon: Flower2 },
-    ],
-  },
-  {
-    num: "05", name: "Curupira", emoji: "🧭",
-    days: "5 dias", nights: "4 noites", price: "4.390", installments: "5x",
-    interest: "Pacote Curupira",
-    subtitle: "Sobreviver na Floresta Amazônica",
-    description: "Uma experiência única de imersão na Floresta Amazônica, com atividades voltadas para a sobrevivência na selva: técnicas básicas de orientação, identificação de plantas úteis, obtenção de água, montagem de abrigo e conhecimentos tradicionais da floresta.",
-    highlights: [
-      { text: "Identificação de plantas úteis", icon: Leaf },
-      { text: "Obtenção de água na floresta", icon: Droplets },
-      { text: "Montagem de abrigo", icon: Tent },
-      { text: "Orientação na selva", icon: Compass },
-      { text: "Conhecimentos tradicionais", icon: Users },
-    ],
-  },
-];
 
 const packageIncludes = [
   { icon: BedDouble,   label: "Hospedagem",  desc: "em acomodações confortáveis" },
@@ -171,8 +111,8 @@ function PackageCard({ pkg, defaultOpen = false }: { pkg: Package; defaultOpen?:
           )}
         </div>
         <div className="text-right shrink-0 bg-forest-light/40 rounded-lg px-3 py-2">
-          <span className="block font-body font-bold text-sm">{pkg.days}</span>
-          <span className="block text-xs text-primary-foreground/70">{pkg.nights}</span>
+          <span className="block font-body font-bold text-sm">{pkg.days_text}</span>
+          <span className="block text-xs text-primary-foreground/70">{pkg.nights_text}</span>
         </div>
       </div>
 
@@ -229,7 +169,7 @@ function PackageCard({ pkg, defaultOpen = false }: { pkg: Package; defaultOpen?:
                 {pkg.itinerary!.map((d) => (
                   <li key={d.day} className="flex gap-3">
                     <div className="shrink-0 w-9 h-9 rounded-full bg-sand-light flex items-center justify-center mt-0.5">
-                      <d.icon size={16} className="text-forest" />
+                      <DynamicIcon name={d.icon} size={16} className="text-forest" />
                     </div>
                     <div>
                       <p className="font-body font-semibold text-sm text-foreground">{d.day}</p>
@@ -246,7 +186,7 @@ function PackageCard({ pkg, defaultOpen = false }: { pkg: Package; defaultOpen?:
                 {pkg.highlights.map((h) => (
                   <li key={h.text} className="flex items-center gap-3">
                     <div className="shrink-0 w-9 h-9 rounded-full bg-sand-light flex items-center justify-center">
-                      <h.icon size={16} className="text-forest" />
+                      <DynamicIcon name={h.icon} size={16} className="text-forest" />
                     </div>
                     <p className="text-sm text-foreground leading-snug">{h.text}</p>
                   </li>
@@ -332,6 +272,20 @@ function Accommodations() {
         counts[lodge_id] = (counts[lodge_id] ?? 0) + 1;
       });
       return counts;
+    },
+    staleTime: 5 * 60 * 1000,
+  });
+
+  const { data: packages = [] } = useQuery<Package[]>({
+    queryKey: ["public-packages"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("packages")
+        .select("*")
+        .eq("is_active", true)
+        .order("sort_order");
+      if (error) return [];
+      return data as Package[];
     },
     staleTime: 5 * 60 * 1000,
   });

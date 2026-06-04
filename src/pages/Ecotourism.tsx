@@ -1,10 +1,11 @@
 import { useState, useEffect, useCallback } from "react";
-import { TreePine, Bird, Moon, Users, Map, Footprints, MessageCircle, Sunrise, X, ChevronLeft, ChevronRight, Clock, Star } from "lucide-react";
+import { TreePine, Bird, Moon, Users, Map, Footprints, Sunrise, X, ChevronLeft, ChevronRight, Clock, Star } from "lucide-react";
 import { motion, AnimatePresence, useSpring, useMotionValue } from "framer-motion";
 import SectionFadeIn from "@/components/SectionFadeIn";
 import SEOHead from "@/components/SEOHead";
 import { Link } from "react-router-dom";
 import BookingModal from "@/components/BookingModal";
+import { WhatsappIcon } from "@/components/WhatsappIcon";
 
 // ─── Images ──────────────────────────────────────────────────────────────────
 import { photos } from "@/lib/photos";
@@ -475,7 +476,7 @@ function TourModal({ tour, onClose }: { tour: Tour; onClose: () => void }) {
               whileTap={{ scale: 0.97 }}
               transition={springConfig}
             >
-              <MessageCircle size={17} className="shrink-0" />
+              <WhatsappIcon size={17} className="shrink-0" />
               Reservar este Passeio
             </motion.button>
           </BookingModal>
@@ -756,7 +757,7 @@ const Ecotourism = () => {
                 whileTap={{ scale: 0.97 }}
                 transition={springConfig}
               >
-                <MessageCircle size={18} className="shrink-0" />
+                <WhatsappIcon size={18} className="shrink-0" />
                 Fazer Reserva
               </motion.button>
             </BookingModal>

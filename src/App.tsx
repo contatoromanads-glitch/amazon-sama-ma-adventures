@@ -28,6 +28,7 @@ const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
 const LodgesManager         = lazy(() => import("./pages/admin/LodgesManager"));
 const AccommodationsManager = lazy(() => import("./pages/admin/AccommodationsManager"));
+const PackagesManager       = lazy(() => import("./pages/admin/PackagesManager"));
 const BannersManager = lazy(() => import("./pages/admin/BannersManager"));
 const TestimonialsManager = lazy(() => import("./pages/admin/TestimonialsManager"));
 const FAQsManager = lazy(() => import("./pages/admin/FAQsManager"));
@@ -109,6 +110,7 @@ const App = () => (
                     <Route index element={<AdminDashboard />} />
                     <Route path="pousadas" element={<LodgesManager />} />
                     <Route path="acomodacoes" element={<AccommodationsManager />} />
+                    <Route path="pacotes" element={<PackagesManager />} />
                     <Route path="banners" element={<BannersManager />} />
                     <Route path="depoimentos" element={<TestimonialsManager />} />
                     <Route path="faqs" element={<FAQsManager />} />

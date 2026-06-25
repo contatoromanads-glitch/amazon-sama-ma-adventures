@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import { Utensils, Wifi, Leaf, TreePine, Fish, Binoculars, ChevronDown, Star, MapPin, Phone, ChevronUp } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import SectionFadeIn from "@/components/SectionFadeIn";
 import SEOHead from "@/components/SEOHead";
@@ -19,111 +20,47 @@ const restaurantImg    = "/3db69c3c-08ab-40d3-aac2-5f1d435fbcf8.jpg";
 import heroVideoAsset from "@/assets/hero-drone.mp4.asset.json";
 const HERO_VIDEO_URL = heroVideoAsset.url;
 
-const morphWords = ["selvagem", "luxuosa", "inesquecível", "autêntica"];
 
-const features = [
-  {
-    icon: Utensils,
-    title: "Culinária Amazônica",
-    desc: "Restaurante com pratos típicos regionais, feitos com peixes frescos pescados nas águas do Paraná do Mamori e ingredientes locais.",
-  },
-  {
-    icon: Wifi,
-    title: "Wi-Fi Starlink",
-    desc: "Conexão de alta velocidade em plena Amazônia, para compartilhar suas experiências com quem você ama.",
-  },
-  {
-    icon: Leaf,
-    title: "Sustentabilidade",
-    desc: "Operamos com práticas de baixo impacto ambiental, em harmonia com a floresta e as comunidades ribeirinhas.",
-  },
-];
-
-const experiences = [
-  {
-    img: ecotourismImg,
-    title: "Ecoturismo",
-    desc: "Expedições guiadas pelos igarapés, fauna e flora amazônica. Botos, jacarés, macacos e centenas de espécies de aves.",
-    link: "/ecoturismo",
-    icon: TreePine,
-    tag: "Todo o ano",
-  },
-  {
-    img: fishingImg,
-    title: "Pesca Esportiva",
-    desc: "Saídas guiadas no Paraná do Mamori para a captura do lendário Tucunaré e outras espécies. Modalidade Pesque & Solte.",
-    link: "/pesca",
-    icon: Fish,
-    tag: "Set – Jan",
-  },
-  {
-    img: restaurantImg,
-    title: "Pôr do Sol no Rio",
-    desc: "Um dos momentos mais especiais: saia de barco no entardecer e contemple o pôr do sol sobre o rio Amazonas.",
-    link: "/contato",
-    icon: Binoculars,
-    tag: "Imperdível",
-  },
-];
-
-const stats = [
-  { value: "2", label: "Pousadas Flutuantes" },
-  { value: "100%", label: "Acesso por Barco" },
-  { value: "24h", label: "Contato WhatsApp" },
-  { value: "★ 5.0", label: "Avaliação dos Hóspedes" },
-];
-
-const testimonials = [
-  {
-    text: "Uma experiência transformadora. O contato com a natureza amazônica, a hospitalidade do Arlos e a estrutura do lodge superaram todas as expectativas.",
-    author: "Carlos M.",
-    from: "São Paulo, SP",
-    stars: 5,
-  },
-  {
-    text: "A pesca esportiva no Paraná do Mamori é incomparável. Guia experiente, barco bem equipado e tucunarés enormes. Voltarei com certeza!",
-    author: "Ricardo S.",
-    from: "Curitiba, PR",
-    stars: 5,
-  },
-  {
-    text: "O silêncio da floresta à noite, o som do rio ao amanhecer... a minha família saiu transformada. O lodge é um presente para a alma.",
-    author: "Ana L.",
-    from: "Brasília, DF",
-    stars: 5,
-  },
-];
-
-const faqs = [
-  {
-    q: "Como funciona o acesso ao lodge?",
-    a: "O acesso é feito exclusivamente de barco, saindo de Careiro Castanho — e essa já é parte da experiência! Ao confirmar sua reserva, enviamos todas as instruções detalhadas de acesso pelo WhatsApp.",
-  },
-  {
-    q: "Tem sinal de celular ou internet no lodge?",
-    a: "O lodge utiliza internet via Starlink, garantindo boa conexão Wi-Fi. Porém, sinal de operadoras de celular não chega ao local. Consideramos isso uma vantagem: é uma desconexão real com a vida corrida das cidades.",
-  },
-  {
-    q: "A pesca esportiva é para qualquer nível?",
-    a: "Sim! Atendemos tanto iniciantes quanto pescadores experientes. Nosso proprietário também atua como guia, adaptando a experiência conforme o perfil do hóspede. Equipamentos básicos estão disponíveis.",
-  },
-  {
-    q: "As refeições estão inclusas na estadia?",
-    a: "Entre em contato via WhatsApp para confirmar os detalhes do pacote atual, incluindo refeições, translado e atividades.",
-  },
-  {
-    q: "Qual é a melhor época para visitar?",
-    a: "Para pesca esportiva, a temporada é de setembro a janeiro (período de seca). Para ecoturismo, observação de fauna e passeios de barco, o lodge recebe visitantes durante todo o ano.",
-  },
-  {
-    q: "Vocês atendem grupos e famílias?",
-    a: "Sim! O lodge tem capacidade para grupos e é excelente para famílias que buscam uma experiência autêntica e segura na Amazônia. Entre em contato para verificar disponibilidade e montar um pacote especial.",
-  },
-];
 
 const Index = () => {
+  const { t } = useTranslation();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [morphIndex, setMorphIndex] = useState(0);
+  
+  const morphWords = useMemo(() => [
+    t("index.morphWords.0"),
+    t("index.morphWords.1"),
+    t("index.morphWords.2"),
+    t("index.morphWords.3")
+  ], [t]);
+
+  const features = useMemo(() => [
+    { icon: Utensils, title: t("index.features.cuisine"), desc: t("index.features.cuisineDesc") },
+    { icon: Wifi, title: t("index.features.wifi"), desc: t("index.features.wifiDesc") },
+    { icon: Leaf, title: t("index.features.sustainability"), desc: t("index.features.sustainabilityDesc") },
+  ], [t]);
+
+  const experiences = useMemo(() => [
+    { img: ecotourismImg, title: t("index.experiences.ecotourism"), desc: t("index.experiences.ecotourismDesc"), link: "/ecoturismo", icon: TreePine, tag: t("index.experiences.ecotourismTag") },
+    { img: fishingImg, title: t("index.experiences.fishing"), desc: t("index.experiences.fishingDesc"), link: "/pesca", icon: Fish, tag: t("index.experiences.fishingTag") },
+    { img: restaurantImg, title: t("index.experiences.sunset"), desc: t("index.experiences.sunsetDesc"), link: "/contato", icon: Binoculars, tag: t("index.experiences.sunsetTag") },
+  ], [t]);
+
+  const stats = useMemo(() => [
+    { value: "2", label: t("index.stats.floatingLodges") },
+    { value: "100%", label: t("index.stats.boatAccess") },
+    { value: "24h", label: t("index.stats.whatsappContact") },
+    { value: "★ 5.0", label: t("index.stats.guestRating") },
+  ], [t]);
+
+  const faqs = useMemo(() => [
+    { q: t("index.faq.q1"), a: t("index.faq.a1") },
+    { q: t("index.faq.q2"), a: t("index.faq.a2") },
+    { q: t("index.faq.q3"), a: t("index.faq.a3") },
+    { q: t("index.faq.q4"), a: t("index.faq.a4") },
+    { q: t("index.faq.q5"), a: t("index.faq.a5") },
+    { q: t("index.faq.q6"), a: t("index.faq.a6") },
+  ], [t]);
 
   // Depoimentos do banco (gerenciáveis no admin) — com fallback para os fixos
   const { data: dbTestimonials = [] } = useQuery({
@@ -148,7 +85,7 @@ const Index = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setMorphIndex((prev) => (prev + 1) % morphWords.length);
+      setMorphIndex((prev) => (prev + 1) % 4);
     }, 2500);
     return () => clearInterval(interval);
   }, []);
@@ -194,7 +131,7 @@ const Index = () => {
             transition={{ duration: 0.8 }}
             className="inline-block text-gold font-body text-sm font-semibold tracking-[4px] uppercase mb-4"
           >
-            Paraná do Mamori · Careiro Castanho · AM
+            {t("index.heroLocation")}
           </motion.span>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
@@ -202,9 +139,9 @@ const Index = () => {
             transition={{ duration: 1, delay: 0.2 }}
             className="heading-xl text-primary-foreground mb-6"
           >
-            Viva a Amazônia de Verdade —{" "}
+            {t("index.heroTitle1")}
             <span className="inline-block">
-              Uma experiência{" "}
+              {t("index.heroTitle2")}
               <span className="relative inline-block min-w-[10rem] sm:min-w-[14rem]">
                 <AnimatePresence mode="wait">
                   <motion.span
@@ -227,8 +164,7 @@ const Index = () => {
             transition={{ duration: 1, delay: 0.5 }}
             className="text-body-lg text-primary-foreground/85 mb-10 max-w-2xl mx-auto"
           >
-            Pousada flutuante no Paraná do Mamori, a poucos minutos de Careiro Castanho.
-            Natureza, silêncio e aventura — em um só lugar.
+            {t("index.heroDesc")}
           </motion.p>
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -243,14 +179,14 @@ const Index = () => {
                 whileTap={{ scale: 0.97 }}
               >
                 <WhatsappIcon size={18} className="shrink-0" />
-                Reserve Agora
+                {t("header.bookNow")}
               </motion.button>
             </BookingModal>
             <Link
               to="/sobre"
               className="inline-block px-8 py-4 border-2 border-primary-foreground/50 text-primary-foreground font-body font-semibold text-sm tracking-widest uppercase rounded hover:border-gold hover:text-gold transition-colors duration-300"
             >
-              Conheça o Lodge
+              {t("index.knowLodge")}
             </Link>
           </motion.div>
           
@@ -287,19 +223,19 @@ const Index = () => {
       <section className="section-padding">
         <div className="container-lodge grid lg:grid-cols-2 gap-12 items-center">
           <SectionFadeIn>
-            <span className="text-sm font-body font-semibold tracking-widest uppercase text-gold">Sobre o Lodge</span>
-            <h2 className="heading-lg mt-2 mb-6">Uma Pousada Flutuante no Coração da Amazônia</h2>
+            <span className="text-sm font-body font-semibold tracking-widest uppercase text-gold">{t("index.aboutTeaser.label")}</span>
+            <h2 className="heading-lg mt-2 mb-6">{t("index.aboutTeaser.title")}</h2>
             <p className="text-body text-muted-foreground mb-4">
-              O Amazon Samaúma Lodge é uma pousada flutuante localizada no Paraná do Mamori, região de Careiro Castanho, no coração do Amazonas. Aqui, o acesso é feito exclusivamente de barco — e esse já é o começo da experiência.
+              {t("index.aboutTeaser.p1")}
             </p>
             <p className="text-body text-muted-foreground mb-8">
-              Com duas pousadas flutuantes e quartos aconchegantes, restaurante com culinária regional amazônica e guias especializados, oferecemos o contato mais autêntico possível com a floresta amazônica. Seja para pesca esportiva, explorar a fauna local, ou simplesmente descansar ao som do rio — o Samaúma é o seu destino.
+              {t("index.aboutTeaser.p2")}
             </p>
             <Link
               to="/sobre"
               className="inline-block font-body font-semibold text-forest hover:text-gold transition-colors border-b-2 border-forest hover:border-gold pb-1"
             >
-              Nossa História →
+              {t("index.aboutTeaser.link")}
             </Link>
           </SectionFadeIn>
           <SectionFadeIn>
@@ -323,9 +259,9 @@ const Index = () => {
       <section className="section-padding bg-card">
         <div className="container-lodge">
           <SectionFadeIn>
-            <h2 className="heading-lg text-center mb-4">Uma Experiência Completa</h2>
+            <h2 className="heading-lg text-center mb-4">{t("index.features.title")}</h2>
             <p className="text-body text-center text-muted-foreground max-w-xl mx-auto mb-16">
-              No Amazon Samaúma Lodge, cada detalhe foi pensado para que você viva a Amazônia com conforto e autenticidade.
+              {t("index.features.subtitle")}
             </p>
           </SectionFadeIn>
           <div className="grid md:grid-cols-3 gap-8">
@@ -351,9 +287,9 @@ const Index = () => {
       <section className="section-padding bg-primary">
         <div className="container-lodge">
           <SectionFadeIn>
-            <h2 className="heading-lg text-center text-primary-foreground mb-4">Experiências Inesquecíveis</h2>
+            <h2 className="heading-lg text-center text-primary-foreground mb-4">{t("index.experiences.title")}</h2>
             <p className="text-body text-center text-primary-foreground/70 max-w-xl mx-auto mb-16">
-              Aventure-se pelo coração da Amazônia com nossos guias especializados e crie memórias para a vida toda.
+              {t("index.experiences.subtitle")}
             </p>
           </SectionFadeIn>
           <div className="grid md:grid-cols-3 gap-8">
@@ -393,13 +329,13 @@ const Index = () => {
       <section className="section-padding">
         <div className="container-lodge grid lg:grid-cols-2 gap-12 items-center">
           <SectionFadeIn>
-            <span className="text-sm font-body font-semibold tracking-widest uppercase text-gold">Como Chegar</span>
-            <h2 className="heading-lg mt-2 mb-6">Acesso Exclusivo por Barco</h2>
+            <span className="text-sm font-body font-semibold tracking-widest uppercase text-gold">{t("index.howToGetThere.label")}</span>
+            <h2 className="heading-lg mt-2 mb-6">{t("index.howToGetThere.title")}</h2>
             <p className="text-body text-muted-foreground mb-4">
-              Estamos localizados no Paraná do Mamori, em Careiro Castanho — AM. O acesso é feito por barco, saindo da cidade de Careiro Castanho.
+              {t("index.howToGetThere.p1")}
             </p>
             <p className="text-body text-muted-foreground mb-8">
-              Ao confirmar sua reserva, enviamos todas as instruções de acesso diretamente pelo WhatsApp — incluindo como chegar a Careiro Castanho a partir de Manaus.
+              {t("index.howToGetThere.p2")}
             </p>
             <div className="flex flex-col gap-4">
               <a
@@ -410,16 +346,16 @@ const Index = () => {
               >
                 <MapPin className="text-gold mt-1 shrink-0" size={20} />
                 <div>
-                  <p className="font-body font-semibold text-sm">Localização</p>
+                  <p className="font-body font-semibold text-sm">{t("index.howToGetThere.location")}</p>
                   <p className="text-sm text-muted-foreground">Paraná do Mamori, Careiro Castanho – AM, Brasil</p>
-                  <span className="text-sm text-gold font-semibold group-hover:underline">Ver no Google Maps →</span>
+                  <span className="text-sm text-gold font-semibold group-hover:underline">{t("index.howToGetThere.viewOnMaps")}</span>
                 </div>
               </a>
               <div className="flex items-start gap-4 p-4 bg-card rounded-lg border border-border">
                 <Phone className="text-gold mt-1 shrink-0" size={20} />
                 <div>
-                  <p className="font-body font-semibold text-sm">Reservas & Informações</p>
-                  <p className="text-sm text-muted-foreground">Atendimento via WhatsApp — rápido e fácil</p>
+                  <p className="font-body font-semibold text-sm">{t("index.howToGetThere.reservations")}</p>
+                  <p className="text-sm text-muted-foreground">{t("index.howToGetThere.reservationsDesc")}</p>
                 </div>
               </div>
             </div>
@@ -445,9 +381,9 @@ const Index = () => {
       <section className="section-padding bg-sand-light">
         <div className="container-lodge">
           <SectionFadeIn>
-            <h2 className="heading-lg text-center mb-4">O Que Dizem Nossos Hóspedes</h2>
+            <h2 className="heading-lg text-center mb-4">{t("index.testimonials.title")}</h2>
             <p className="text-body text-center text-muted-foreground max-w-xl mx-auto mb-16">
-              Experiências reais de pessoas que viveram a Amazônia com o Amazon Samaúma Lodge.
+              {t("index.testimonials.subtitle")}
             </p>
           </SectionFadeIn>
           <div className="grid md:grid-cols-3 gap-8">
@@ -475,9 +411,9 @@ const Index = () => {
       <section className="section-padding bg-card">
         <div className="container-lodge max-w-3xl">
           <SectionFadeIn>
-            <h2 className="heading-lg text-center mb-4">Perguntas Frequentes</h2>
+            <h2 className="heading-lg text-center mb-4">{t("index.faq.title")}</h2>
             <p className="text-body text-center text-muted-foreground mb-16">
-              Tire suas dúvidas sobre o lodge, acesso, passeios e reservas.
+              {t("index.faq.subtitle")}
             </p>
           </SectionFadeIn>
           <div className="space-y-3">
@@ -521,9 +457,9 @@ const Index = () => {
       <section className="section-padding bg-primary text-primary-foreground text-center">
         <div className="container-lodge">
           <SectionFadeIn>
-            <h2 className="heading-lg mb-6">Pronto para Viver a Amazônia de Verdade?</h2>
+            <h2 className="heading-lg mb-6">{t("index.cta.title")}</h2>
             <p className="text-body-lg text-primary-foreground/80 max-w-xl mx-auto mb-10">
-              Entre em contato agora e planeje sua estadia no Amazon Samaúma Lodge. A Floresta Amazônica espera por você.
+              {t("index.cta.subtitle")}
             </p>
             <BookingModal>
               <motion.button
@@ -532,7 +468,7 @@ const Index = () => {
                 whileTap={{ scale: 0.97 }}
               >
                 <WhatsappIcon size={18} className="shrink-0" />
-                Reserve Agora
+                {t("header.bookNow")}
               </motion.button>
             </BookingModal>
           </SectionFadeIn>

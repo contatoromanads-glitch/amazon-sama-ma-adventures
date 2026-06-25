@@ -1,5 +1,6 @@
 import React from 'react';
 import { Calendar as CalendarIcon } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 /* <!-- Booking system: WhatsApp link with service-specific pre-filled messages --> */
 const WHATSAPP_NUMBER = '5592993839110';
@@ -34,6 +35,7 @@ function buildMessage(defaultInterest?: string, defaultRoom?: string): string {
 }
 
 export default function BookingModal({ children, className, defaultInterest, defaultRoom }: { children?: React.ReactNode, className?: string, defaultInterest?: string, defaultRoom?: string }) {
+  const { t } = useTranslation();
   const textMessage = buildMessage(defaultInterest, defaultRoom);
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(textMessage)}`;
 
@@ -47,7 +49,7 @@ export default function BookingModal({ children, className, defaultInterest, def
       {children || (
         <button className="group relative overflow-hidden bg-stone-800 hover:bg-stone-700 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-xl transition-all flex items-center gap-3">
           <CalendarIcon size={20} className="group-hover:animate-bounce" />
-          <span>RESERVE AGORA</span>
+          <span>{t('booking.bookNow')}</span>
         </button>
       )}
     </a>

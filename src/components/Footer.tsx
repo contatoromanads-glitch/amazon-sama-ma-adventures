@@ -2,9 +2,12 @@ import { Link } from "react-router-dom";
 import { MapPin, Instagram } from "lucide-react";
 import BookingModal from "@/components/BookingModal";
 import { WhatsappIcon } from "@/components/WhatsappIcon";
+import { useTranslation } from "react-i18next";
 
-const Footer = () => (
-  <footer className="bg-primary text-primary-foreground">
+const Footer = () => {
+  const { t } = useTranslation();
+  return (
+    <footer className="bg-primary text-primary-foreground">
     <div className="container-lodge section-padding grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
       <div className="flex flex-col items-center md:items-start">
         <img
@@ -16,9 +19,9 @@ const Footer = () => (
           loading="lazy"
         />
         <h3 className="font-heading text-2xl font-semibold mb-2 text-gold">Amazon Samaúma Lodge</h3>
-        <p className="text-sm text-primary-foreground/60 uppercase tracking-widest mb-4 font-body">Paraná do Mamori · Amazônia</p>
+        <p className="text-sm text-primary-foreground/60 uppercase tracking-widest mb-4 font-body">{t('footer.location')}</p>
         <p className="text-body text-primary-foreground/70 leading-relaxed mb-6">
-          Pousada flutuante no coração da Amazônia. Pesca esportiva, ecoturismo e imersão total na floresta amazônica com conforto e autenticidade.
+          {t('footer.description')}
         </p>
         <div className="flex gap-4">
           <a
@@ -43,15 +46,15 @@ const Footer = () => (
       </div>
 
       <div className="flex flex-col items-center md:items-start">
-        <h4 className="font-heading text-xl font-medium mb-4">Explore</h4>
+        <h4 className="font-heading text-xl font-medium mb-4">{t('footer.explore')}</h4>
         <ul className="space-y-2 text-primary-foreground/70">
           {[
-            { label: "Início", path: "/" },
-            { label: "Acomodações", path: "/acomodacoes" },
-            { label: "Ecoturismo", path: "/ecoturismo" },
-            { label: "Pesca Esportiva", path: "/pesca" },
-            { label: "Sobre Nós", path: "/sobre" },
-            { label: "Dúvidas & Ajuda", path: "/contato" },
+            { label: t('nav.home'), path: "/" },
+            { label: t('nav.accommodations'), path: "/acomodacoes" },
+            { label: t('nav.ecotourism'), path: "/ecoturismo" },
+            { label: t('nav.fishing'), path: "/pesca" },
+            { label: t('nav.about'), path: "/sobre" },
+            { label: t('nav.contact'), path: "/contato" },
           ].map((l) => (
             <li key={l.path}>
               <Link
@@ -66,7 +69,7 @@ const Footer = () => (
       </div>
 
       <div className="flex flex-col items-center md:items-start">
-        <h4 className="font-heading text-xl font-medium mb-4">Contato</h4>
+        <h4 className="font-heading text-xl font-medium mb-4">{t('footer.contact')}</h4>
         <ul className="space-y-4 text-primary-foreground/70 flex flex-col items-center md:items-start">
           <li className="flex flex-col md:flex-row items-center md:items-start gap-2">
             <MapPin size={16} className="md:mt-1 shrink-0 text-gold" />
@@ -113,8 +116,8 @@ const Footer = () => (
         </ul>
         <div className="mt-6 p-4 bg-forest-light/30 rounded-lg">
           <p className="text-xs text-primary-foreground/60 font-body">
-            <strong className="text-gold">Melhor época para pesca:</strong> Setembro a Janeiro<br />
-            <strong className="text-gold">Ecoturismo:</strong> Disponível o ano todo
+            <strong className="text-gold">{t('footer.bestFishingTime')}</strong> {t('footer.fishingTimeValue')}<br />
+            <strong className="text-gold">{t('footer.ecotourismTime')}</strong> {t('footer.ecotourismValue')}
           </p>
         </div>
       </div>
@@ -122,7 +125,7 @@ const Footer = () => (
 
     <div className="border-t border-forest-light">
       <div className="container-lodge px-4 sm:px-6 lg:px-8 py-5 flex flex-col md:flex-row items-center justify-center md:justify-start gap-4">
-        <span className="text-xs text-primary-foreground/50 shrink-0 uppercase tracking-widest text-center md:text-left">Formas de Pagamento:</span>
+        <span className="text-xs text-primary-foreground/50 shrink-0 uppercase tracking-widest text-center md:text-left">{t('footer.paymentMethods')}</span>
         <div className="flex flex-wrap items-center justify-center gap-2">
           {[
             { src: "/pagamentos/elo.svg",        alt: "Elo" },
@@ -147,11 +150,12 @@ const Footer = () => (
 
     <div className="border-t border-forest-light/40">
       <div className="container-lodge px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-primary-foreground/50">
-        <span>© {new Date().getFullYear()} Amazon Samaúma Lodge. Todos os direitos reservados.</span>
-        <span className="text-xs">Paraná do Mamori · Careiro Castanho · Amazonas · Brasil</span>
+        <span>{t('footer.rights', { year: new Date().getFullYear() })}</span>
+        <span className="text-xs">{t('footer.addressDetails')}</span>
       </div>
     </div>
   </footer>
-);
+  );
+};
 
 export default Footer;

@@ -1,0 +1,110 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "accommodations": "Alojamientos",
+    "ecotourism": "Ecoturismo",
+    "fishing": "Pesca Deportiva",
+    "about": "Sobre Nosotros",
+    "contact": "Dudas / Ayuda"
+  },
+  "header": {
+    "bookNow": "Reservar Ahora",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "whatsappText": "Hablar por WhatsApp"
+  },
+  "footer": {
+    "location": "Río Mamori · Amazonia",
+    "description": "Posada flotante en el corazón de la Amazonia. Pesca deportiva, ecoturismo e inmersión total en la selva amazónica con confort y autenticidad.",
+    "explore": "Explorar",
+    "contact": "Contacto",
+    "bestFishingTime": "Mejor época para la pesca:",
+    "fishingTimeValue": "Septiembre a Enero",
+    "ecotourismTime": "Ecoturismo:",
+    "ecotourismValue": "Disponible todo el año",
+    "paymentMethods": "Formas de Pago:",
+    "rights": "© {{year}} Amazon Samaúma Lodge. Todos los derechos reservados.",
+    "addressDetails": "Río Mamori · Careiro Castanho · Amazonas · Brasil"
+  },
+  "booking": {
+    "bookNow": "RESERVAR AHORA"
+  },
+  "index": {
+    "heroLocation": "Río Mamori · Careiro Castanho · AM",
+    "heroTitle1": "Vive la Verdadera Amazonia — ",
+    "heroTitle2": "Una experiencia ",
+    "morphWords": { "0": "salvaje", "1": "lujosa", "2": "inolvidable", "3": "auténtica" },
+    "heroDesc": "Posada flotante en el río Mamori, a pocos minutos de Careiro Castanho. Naturaleza, silencio y aventura — en un solo lugar.",
+    "knowLodge": "Conoce el Lodge",
+    "stats": {
+      "floatingLodges": "Posadas Flotantes",
+      "boatAccess": "Acceso en Barco",
+      "whatsappContact": "Contacto WhatsApp",
+      "guestRating": "Calificación de Huéspedes"
+    },
+    "aboutTeaser": {
+      "label": "Sobre el Lodge",
+      "title": "Una Posada Flotante en el Corazón de la Amazonia",
+      "p1": "El Amazon Samaúma Lodge es una posada flotante ubicada en el río Mamori, en la región de Careiro Castanho, en el corazón del Amazonas. Aquí, el acceso es exclusivamente en barco, y eso ya es el comienzo de la experiencia.",
+      "p2": "Con dos posadas flotantes y habitaciones acogedoras, un restaurante con cocina regional amazónica y guías especializados, ofrecemos el contacto más auténtico posible con la selva amazónica. Ya sea para pesca deportiva, explorar la fauna local o simplemente descansar al son del río, el Samaúma es tu destino.",
+      "link": "Nuestra Historia →"
+    },
+    "features": {
+      "title": "Una Experiencia Completa",
+      "subtitle": "En el Amazon Samaúma Lodge, cada detalle ha sido pensado para que vivas la Amazonia con confort y autenticidad.",
+      "cuisine": "Cocina Amazónica",
+      "cuisineDesc": "Restaurante con platos típicos regionales, preparados con pescados frescos capturados en las aguas del río Mamori e ingredientes locales.",
+      "wifi": "Wi-Fi Starlink",
+      "wifiDesc": "Conexión de alta velocidad en plena Amazonia, para compartir tus experiencias con quienes amas.",
+      "sustainability": "Sostenibilidad",
+      "sustainabilityDesc": "Operamos con prácticas de bajo impacto ambiental, en armonía con la selva y las comunidades ribereñas."
+    },
+    "experiences": {
+      "title": "Experiencias Inolvidables",
+      "subtitle": "Aventúrate por el corazón de la Amazonia con nuestros guías especializados y crea recuerdos para toda la vida.",
+      "ecotourism": "Ecoturismo",
+      "ecotourismDesc": "Expediciones guiadas por los igarapés, fauna y flora amazónica. Delfines, caimanes, monos y cientos de especies de aves.",
+      "ecotourismTag": "Todo el año",
+      "fishing": "Pesca Deportiva",
+      "fishingDesc": "Salidas guiadas en el río Mamori para la captura del legendario Tucunaré y otras especies. Modalidad Pesque y Suelte.",
+      "fishingTag": "Sep – Ene",
+      "sunset": "Puesta de Sol en el Río",
+      "sunsetDesc": "Uno de los momentos más especiales: sal en barco al atardecer y contempla la puesta de sol sobre el río Amazonas.",
+      "sunsetTag": "Imperdible"
+    },
+    "howToGetThere": {
+      "label": "Cómo Llegar",
+      "title": "Acceso Exclusivo en Barco",
+      "p1": "Estamos ubicados en el río Mamori, en Careiro Castanho — AM. El acceso es en barco, saliendo de la ciudad de Careiro Castanho.",
+      "p2": "Al confirmar tu reserva, enviamos todas las instrucciones de acceso directamente por WhatsApp — incluyendo cómo llegar a Careiro Castanho desde Manaos.",
+      "location": "Ubicación",
+      "viewOnMaps": "Ver en Google Maps →",
+      "reservations": "Reservas e Información",
+      "reservationsDesc": "Atención vía WhatsApp — rápida y fácil"
+    },
+    "testimonials": {
+      "title": "Lo que Dicen Nuestros Huéspedes",
+      "subtitle": "Experiencias reales de personas que vivieron la Amazonia con el Amazon Samaúma Lodge."
+    },
+    "faq": {
+      "title": "Preguntas Frecuentes",
+      "subtitle": "Resuelve tus dudas sobre el lodge, acceso, paseos y reservas.",
+      "q1": "¿Cómo funciona el acceso al lodge?",
+      "a1": "El acceso es exclusivamente en barco, saliendo de Careiro Castanho — ¡y eso ya es parte de la experiencia! Al confirmar tu reserva, enviamos todas las instrucciones detalladas de acceso por WhatsApp.",
+      "q2": "¿Hay señal de celular o internet en el lodge?",
+      "a2": "El lodge utiliza internet vía Starlink, garantizando buena conexión Wi-Fi. Sin embargo, la señal de operadores celulares no llega al lugar. Consideramos esto una ventaja: es una desconexión real de la vida acelerada de las ciudades.",
+      "q3": "¿La pesca deportiva es para cualquier nivel?",
+      "a3": "¡Sí! Atendemos tanto a principiantes como a pescadores experimentados. Nuestro propietario también actúa como guía, adaptando la experiencia según el perfil del huésped. Equipos básicos están disponibles.",
+      "q4": "¿Las comidas están incluidas en la estadía?",
+      "a4": "Contáctanos vía WhatsApp para confirmar los detalles del paquete actual, incluyendo comidas, traslados y actividades.",
+      "q5": "¿Cuál es la mejor época para visitar?",
+      "a5": "Para pesca deportiva, la temporada es de septiembre a enero (período seco). Para ecoturismo, observación de fauna y paseos en barco, el lodge recibe visitantes durante todo el año.",
+      "q6": "¿Atienden grupos y familias?",
+      "a6": "¡Sí! El lodge tiene capacidad para grupos y es excelente para familias que buscan una experiencia auténtica y segura en la Amazonia. Contáctanos para verificar disponibilidad y armar un paquete especial."
+    },
+    "cta": {
+      "title": "¿Listo para Vivir la Verdadera Amazonia?",
+      "subtitle": "Ponte en contacto ahora y planifica tu estadía en el Amazon Samaúma Lodge. La Selva Amazónica te espera."
+    }
+  }
+}

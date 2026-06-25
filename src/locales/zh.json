@@ -1,0 +1,110 @@
+{
+  "nav": {
+    "home": "首页",
+    "accommodations": "住宿",
+    "ecotourism": "生态旅游",
+    "fishing": "运动钓鱼",
+    "about": "关于我们",
+    "contact": "常见问题 / 帮助"
+  },
+  "header": {
+    "bookNow": "立即预订",
+    "openMenu": "打开菜单",
+    "closeMenu": "关闭菜单",
+    "whatsappText": "WhatsApp聊天"
+  },
+  "footer": {
+    "location": "马莫里河 · 亚马逊",
+    "description": "位于亚马逊心脏地带的水上旅馆。舒适和真实地体验运动钓鱼、生态旅游以及完全沉浸在亚马逊雨林中。",
+    "explore": "探索",
+    "contact": "联系方式",
+    "bestFishingTime": "最佳钓鱼时间:",
+    "fishingTimeValue": "9月至1月",
+    "ecotourismTime": "生态旅游:",
+    "ecotourismValue": "全年开放",
+    "paymentMethods": "支付方式:",
+    "rights": "© {{year}} Amazon Samaúma Lodge. 保留所有权利。",
+    "addressDetails": "马莫里河 · 卡雷罗-卡斯塔纽 · 亚马逊州 · 巴西"
+  },
+  "booking": {
+    "bookNow": "立即预订"
+  },
+  "index": {
+    "heroLocation": "马莫里河 · 卡雷罗-卡斯塔纽 · 亚马逊",
+    "heroTitle1": "体验真正的亚马逊 — ",
+    "heroTitle2": "一次体验，",
+    "morphWords": { "0": "狂野", "1": "奢华", "2": "难忘", "3": "真实" },
+    "heroDesc": "位于马莫里河的水上旅馆，距离卡雷罗-卡斯塔纽仅几分钟路程。自然、宁静与冒险——尽在一个地方。",
+    "knowLodge": "了解旅馆",
+    "stats": {
+      "floatingLodges": "水上旅馆",
+      "boatAccess": "船只通行",
+      "whatsappContact": "WhatsApp联系",
+      "guestRating": "宾客评分"
+    },
+    "aboutTeaser": {
+      "label": "关于旅馆",
+      "title": "亚马逊心脏地带的水上旅馆",
+      "p1": "Amazon Samaúma Lodge是一家位于马莫里河的水上旅馆，地处卡雷罗-卡斯塔纽地区，位于亚马逊心脏地带。在这里，只能乘船到达——而这已经是体验的开始。",
+      "p2": "我们拥有两座水上旅馆和温馨的客房、提供亚马逊地区美食的餐厅以及专业向导，为您提供与亚马逊雨林最真实的接触。无论是运动钓鱼、探索当地野生动物，还是仅仅在河流的声音中放松——Samaúma就是您的目的地。",
+      "link": "我们的故事 →"
+    },
+    "features": {
+      "title": "完整的体验",
+      "subtitle": "在Amazon Samaúma Lodge，每一个细节都经过精心设计，让您舒适而真实地体验亚马逊。",
+      "cuisine": "亚马逊美食",
+      "cuisineDesc": "餐厅提供地道的区域菜肴，使用在马莫里河水域捕获的新鲜鱼类和当地食材烹制。",
+      "wifi": "星链Wi-Fi",
+      "wifiDesc": "在亚马逊深处享受高速网络连接，与您爱的人分享您的体验。",
+      "sustainability": "可持续发展",
+      "sustainabilityDesc": "我们采用低环境影响的运营方式，与森林和河岸社区和谐共处。"
+    },
+    "experiences": {
+      "title": "难忘的体验",
+      "subtitle": "与我们的专业向导一起深入亚马逊心脏地带，创造一生的回忆。",
+      "ecotourism": "生态旅游",
+      "ecotourismDesc": "在溪流中进行向导带领的探险，探索亚马逊动植物。海豚、凯门鳄、猴子和数百种鸟类。",
+      "ecotourismTag": "全年",
+      "fishing": "运动钓鱼",
+      "fishingDesc": "在马莫里河上由向导带领的钓鱼之旅，捕捉传奇的孔雀鲈和其他鱼种。钓后放流模式。",
+      "fishingTag": "9月 – 1月",
+      "sunset": "河上日落",
+      "sunsetDesc": "最特别的时刻之一：乘船在黄昏出发，欣赏亚马逊河上的日落。",
+      "sunsetTag": "不容错过"
+    },
+    "howToGetThere": {
+      "label": "如何到达",
+      "title": "专属船只通行",
+      "p1": "我们位于亚马逊州卡雷罗-卡斯塔纽的马莫里河畔。乘船从卡雷罗-卡斯塔纽市出发即可到达。",
+      "p2": "确认预订后，我们将通过WhatsApp直接发送所有交通指南——包括如何从马瑙斯到达卡雷罗-卡斯塔纽。",
+      "location": "位置",
+      "viewOnMaps": "在Google地图上查看 →",
+      "reservations": "预订与信息",
+      "reservationsDesc": "通过WhatsApp联系——快速便捷"
+    },
+    "testimonials": {
+      "title": "宾客评价",
+      "subtitle": "在Amazon Samaúma Lodge体验亚马逊的人们的真实经历。"
+    },
+    "faq": {
+      "title": "常见问题",
+      "subtitle": "了解有关旅馆、交通、游览和预订的信息。",
+      "q1": "如何到达旅馆？",
+      "a1": "只能乘船从卡雷罗-卡斯塔纽出发到达——这已经是体验的一部分！确认预订后，我们将通过WhatsApp发送所有详细的交通指南。",
+      "q2": "旅馆有手机信号或网络吗？",
+      "a2": "旅馆使用星链网络，保证良好的Wi-Fi连接。但是，手机运营商信号无法到达该地点。我们认为这是一个优势：这是对城市快节奏生活的真正脱离。",
+      "q3": "运动钓鱼适合任何水平吗？",
+      "a3": "是的！我们接待初学者和有经验的钓鱼者。我们的老板也担任向导，根据客人的情况调整体验。基本装备已准备就绪。",
+      "q4": "住宿包含餐食吗？",
+      "a4": "请通过WhatsApp联系我们，确认当前套餐的详细信息，包括餐食、接送和活动。",
+      "q5": "最佳游览时间是什么时候？",
+      "a5": "运动钓鱼的季节是9月至1月（旱季）。生态旅游、野生动物观察和乘船游览全年开放。",
+      "q6": "你们接待团体和家庭吗？",
+      "a6": "是的！旅馆可容纳团体，非常适合寻求真实而安全的亚马逊体验的家庭。请联系我们查看可用性并安排特别套餐。"
+    },
+    "cta": {
+      "title": "准备好体验真正的亚马逊了吗？",
+      "subtitle": "立即联系我们，规划您在Amazon Samaúma Lodge的住宿。亚马逊雨林在等待着您。"
+    }
+  }
+}

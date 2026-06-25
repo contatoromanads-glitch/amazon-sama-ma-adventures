@@ -1,22 +1,25 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, MessageCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import BookingModal from "./BookingModal";
-
-const navLinks = [
-  { label: "Início", path: "/" },
-  { label: "Acomodações", path: "/acomodacoes" },
-  { label: "Ecoturismo", path: "/ecoturismo" },
-  { label: "Pesca Esportiva", path: "/pesca" },
-  { label: "Sobre Nós", path: "/sobre" },
-  { label: "Dúvidas / Ajuda", path: "/contato" },
-];
+import { LanguageSwitcher } from "./LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 
 const Header = () => {
+  const { t } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
+
+  const navLinks = useMemo(() => [
+    { label: t("nav.home"), path: "/" },
+    { label: t("nav.accommodations"), path: "/acomodacoes" },
+    { label: t("nav.ecotourism"), path: "/ecoturismo" },
+    { label: t("nav.fishing"), path: "/pesca" },
+    { label: t("nav.about"), path: "/sobre" },
+    { label: t("nav.contact"), path: "/contato" },
+  ], [t]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -75,20 +78,22 @@ const Header = () => {
               {l.label}
             </Link>
           ))}
+          <LanguageSwitcher />
           <BookingModal className="ml-2">
             <button className="px-5 py-2 text-sm font-semibold rounded bg-accent text-accent-foreground hover:bg-gold-light transition-colors duration-300">
-              Reserve Agora
+              {t("header.bookNow")}
             </button>
           </BookingModal>
         </nav>
 
         {/* Mobile: contato rápido + toggle */}
         <div className="flex items-center gap-1 lg:hidden">
+          <LanguageSwitcher />
           <a
             href="https://wa.me/5592993839110?text=Ol%C3%A1%2C%20vim%20do%20site.%20Quero%20conhecer%20as%20pousadas%20flutuantes%20e%20pacotes%20do%20Amazon%20Sama%C3%BAma."
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Falar no WhatsApp"
+            aria-label={t("header.whatsappText")}
             className="p-2 text-primary-foreground hover:text-gold transition-colors"
           >
             <MessageCircle size={22} />
@@ -96,7 +101,7 @@ const Header = () => {
           <button
             className="p-2 text-primary-foreground"
             onClick={() => setMenuOpen(!menuOpen)}
-            aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
+            aria-label={menuOpen ? t("header.closeMenu") : t("header.openMenu")}
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
           >
@@ -131,7 +136,7 @@ const Header = () => {
               ))}
               <BookingModal className="mt-2 w-full">
                 <button className="w-full px-5 py-3 text-center text-sm font-semibold rounded bg-accent text-accent-foreground">
-                  Reserve Agora
+                  {t("header.bookNow")}
                 </button>
               </BookingModal>
             </div>

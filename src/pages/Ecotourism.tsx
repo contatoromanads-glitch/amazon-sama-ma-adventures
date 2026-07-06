@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
 import { TreePine, Bird, Moon, Users, Map, Footprints, Sunrise, X, ChevronLeft, ChevronRight, Clock, Star } from "lucide-react";
 import { motion, AnimatePresence, useSpring, useMotionValue } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import SectionFadeIn from "@/components/SectionFadeIn";
 import SEOHead from "@/components/SEOHead";
-import { Link } from "react-router-dom";
 import BookingModal from "@/components/BookingModal";
 import { WhatsappIcon } from "@/components/WhatsappIcon";
 
@@ -39,144 +39,66 @@ interface Tour {
   gallery: string[];
 }
 
-// ─── Data ─────────────────────────────────────────────────────────────────────
-const tours: Tour[] = [
+// Metadata configuration mapping for merging with i18n content
+const tourMetadata = [
   {
     icon: Bird,
-    title: "Safari Amazônico",
-    subtitle: "Flora & Fauna",
-    desc: "Embarque em uma expedição guiada pelos igarapés e florestas ao redor do lodge. Observe botos, jacarés, macacos, araras e centenas de espécies de pássaros.",
-    tag: "Família",
     tagColor: "from-emerald-400/90 to-teal-500/90",
     preview: tourSafari,
-    duration: "3–4 horas",
-    difficulty: "Fácil",
+    durationKey: "ecotourism.duration.safari",
+    difficultyKey: "ecotourism.difficulty.easy",
+    tagKey: "ecotourism.tag.family",
     rating: 5,
-    longDesc:
-      "O Safari Amazônico é a experiência mais completa que o Amazon Samaúma Lodge oferece. A bordo de um barco silencioso, navegamos pelos igarapés e lagos que cercam o lodge, mergulhando no ecossistema mais rico do planeta. Nossos guias nativos conhecem cada curva do rio, cada pássaro que canta na copa das árvores, cada rastro deixado pela fauna que vive às margens do Paraná do Mamori. É uma aula viva com paredes de floresta e chão de rio.",
-    highlights: [
-      "🐬 Avistamento de botos cor-de-rosa",
-      "🐊 Observação de jacarés às margens",
-      "🦜 Identificação de mais de 50 espécies de aves",
-      "🐒 Macacos prego, uakari e bugio",
-      "🌿 Apresentação de plantas medicinais",
-      "📸 Stops para fotografia em pontos privilegiados",
-    ],
     gallery: [tourSafari, tourSafari2, ecotourismImg, "/fotos_reais_amazon/eco-victoria-regia.webp", "/fotos_reais_amazon/eco-orquidea.webp", "/fotos_reais_amazon/eco-orquidario.webp"],
   },
   {
     icon: Footprints,
-    title: "Trilhas na Floresta",
-    subtitle: "Caminhadas Guiadas",
-    desc: "Explore trilhas pela floresta primária com diferentes níveis de dificuldade. Nossos guias apresentam plantas medicinais, árvores centenárias e segredos da mata.",
-    tag: "Aventura",
     tagColor: "from-amber-400/90 to-orange-500/90",
     preview: tourTrilhas,
-    duration: "2–5 horas",
-    difficulty: "Leve a Moderado",
+    durationKey: "ecotourism.duration.trails",
+    difficultyKey: "ecotourism.difficulty.moderate",
+    tagKey: "ecotourism.tag.adventure",
     rating: 5,
-    longDesc:
-      "Caminhe pela floresta primária amazônica acompanhado por guias que nasceram e cresceram nessa terra. As trilhas percorrem diferentes ambientes: capoeiras, igapós, terra firme e beiras de igarapé. Em cada parada, você aprende sobre as árvores gigantes, os cipós, as plantas medicinais usadas pelos ribeirinhos há séculos e os animais que se camuflam entre as folhas. Uma experiência sensorial única — o cheiro da floresta úmida, o som dos pássaros, a textura do musgo.",
-    highlights: [
-      "🌳 Árvores centenárias como a samaúma",
-      "🌿 Plantas medicinais e seus usos tradicionais",
-      "🦋 Borboletas e insetos rares",
-      "🐸 Anfíbios e repteis da floresta",
-      "🍃 Técnicas de sobrevivência na selva",
-      "📍 Múltiplos níveis: fácil, médio e desafiador",
-    ],
     gallery: [tourTrilhas, tourTrilhas2, heroImg, "/fotos_reais_amazon/eco-larvas-tronco.webp", "/fotos_reais_amazon/eco-peixe-floresta.webp"],
   },
   {
     icon: Sunrise,
-    title: "Pôr do Sol no Rio",
-    subtitle: "Passeio de Barco",
-    desc: "Um dos momentos mais especiais do lodge. Saia de barco no final da tarde e contemple o pôr do sol sobre o Paraná do Mamori em toda a sua glória.",
-    tag: "Imperdível",
     tagColor: "from-rose-400/90 to-orange-400/90",
     preview: tourPorDoSol,
-    duration: "1,5–2 horas",
-    difficulty: "Nenhuma",
+    durationKey: "ecotourism.duration.sunset",
+    difficultyKey: "ecotourism.difficulty.none",
+    tagKey: "ecotourism.tag.mustSee",
     rating: 5,
-    longDesc:
-      "Às 17h, o Paraná do Mamori se transforma em um espelho dourado. O sol amazônico mergulha devagar atrás das copas das árvores, tingindo o céu de vermelho, laranja e violeta — cores que não existem em nenhum outro lugar do mundo. Saímos de barco em pequenos grupos, navegamos até os pontos mais abertos do rio e simplesmente paramos o motor. Silêncio. Natureza. Um pôr do sol que ficará na memória para sempre.",
-    highlights: [
-      "🌅 Vista panorâmica do Paraná do Mamori",
-      "🚤 Passeio em pequenos grupos (mais íntimo)",
-      "🍹 Drinks e petiscos a bordo (sob consulta)",
-      "📸 Oportunidade de fotografia única",
-      "🌙 Retorno ao entardecer com o céu estrelado",
-      "💑 Experiência romântica para casais",
-    ],
     gallery: [tourPorDoSol, ecotourismImg, heroImg],
   },
   {
     icon: Moon,
-    title: "Expedição Noturna",
-    subtitle: "Jacarés & Fauna Noturna",
-    desc: "Para os aventureiros: saídas noturnas de barco para observação de jacarés e pesca noturna. Intensa, segura e guiada por especialistas da região.",
-    tag: "Emocionante",
     tagColor: "from-purple-500/90 to-indigo-600/90",
     preview: tourNoturna,
-    duration: "2–3 horas (noite)",
-    difficulty: "Moderado",
+    durationKey: "ecotourism.duration.night",
+    difficultyKey: "ecotourism.difficulty.medMod",
+    tagKey: "ecotourism.tag.exciting",
     rating: 5,
-    longDesc:
-      "A floresta amazônica à noite é um mundo completamente diferente. Equipados com lanternas e guiados por profissionais que conhecem cada palmo do rio, saímos após o jantar para descobrir a vida noturna do Mamori. Os olhos dos jacarés brilham avermelhados sob a luz da lanterna, os urutaus cantam seu som característico, as ariranhas dormem nas margens. Para quem tem coragem de sentar na proa do barco e olhar para o escuro — essa é a experiência mais visceral da Amazônia.",
-    highlights: [
-      "🐊 Observação de jacarés à noite",
-      "🦉 Urutau, coruja e aves noturnas",
-      "🎣 Pesca noturna artesanal",
-      "⭐ Céu com a via láctea visível",
-      "🦟 Kit repelente fornecido",
-      "🔦 Equipamentos de segurança completos",
-    ],
     gallery: [tourNoturna, tourNoturna2, fishingImg, "/fotos_reais_amazon/eco-banquete-noturno.webp"],
   },
   {
     icon: Users,
-    title: "Cultura Ribeirinha",
-    subtitle: "Comunidades Locais",
-    desc: "Visite comunidades ribeirinhas do Rio Mamori e conheça de perto a cultura, tradições e o modo de vida das populações amazônicas.",
-    tag: "Cultural",
     tagColor: "from-blue-400/90 to-cyan-500/90",
     preview: tourCultura,
-    duration: "4–6 horas",
-    difficulty: "Fácil",
+    durationKey: "ecotourism.duration.culture",
+    difficultyKey: "ecotourism.difficulty.easy",
+    tagKey: "ecotourism.tag.cultural",
     rating: 4.8,
-    longDesc:
-      "As comunidades ribeirinhas do Rio Mamori vivem como vivem há séculos — na pesca artesanal, na extração sustentável da floresta, na cultura oral que passa de geração em geração. Visitamos comunidades parceiras, onde os moradores nos recebem com farinha, tucupi e histórias. Você aprende a fazer farinha de mandioca, ouve lendas da floresta e entende como o amazonense vive em harmonia com o maior rio do mundo. Um encontro humano profundo e transformador.",
-    highlights: [
-      "🏘️ Visita a comunidades ribeirinhas parceiras",
-      "🍚 Culinária regional amazônica",
-      "🎭 Histórias e lendas da floresta",
-      "🎣 Técnicas de pesca artesanal",
-      "🪵 Artesanato local",
-      "🤝 Encontro cultural genuíno",
-    ],
     gallery: [tourCultura, "/fotos_reais_amazon/eco-artesanato-loja.webp", "/fotos_reais_amazon/eco-artesanato-madeira.webp", ecotourismImg],
   },
   {
     icon: Map,
-    title: "Roteiro Personalizado",
-    subtitle: "Experiência sob Medida",
-    desc: "Monte seu roteiro de aventuras de acordo com seus interesses, condicionamento físico e duração da estadia.",
-    tag: "Exclusivo",
     tagColor: "from-gold/80 to-amber-600/90",
     preview: tourRoteiro,
-    duration: "Personalizado",
-    difficulty: "Personalizado",
+    durationKey: "ecotourism.duration.custom",
+    difficultyKey: "ecotourism.difficulty.custom",
+    tagKey: "ecotourism.tag.exclusive",
     rating: 5,
-    longDesc:
-      "Cada viajante é único. Pensando nisso, o Amazon Samaúma Lodge oferece a possibilidade de montar um roteiro completamente personalizado — combinando passeios de barco, trilhas, pesca, visitas culturais e momentos de contemplação, de acordo com o seu perfil, seu tempo disponível e seus interesses. Seja para uma lua de mel, uma viagem de grupo, uma aventura extrema ou um retiro de descanso — nossos guias criam a experiência perfeita para você.",
-    highlights: [
-      "🗺️ Planejamento 100% personalizado",
-      "👨‍👩‍👧 Ideal para famílias, casais e grupos",
-      "🎣 Combinação de pesca + ecoturismo",
-      "🌙 Inclui passeios diurnos e noturnos",
-      "💼 Pacotes especiais para lua de mel",
-      "📞 Atendimento via WhatsApp antes da viagem",
-    ],
     gallery: [tourRoteiro, heroImg, ecotourismImg],
   },
 ];
@@ -212,6 +134,7 @@ const modalSpring = { type: "spring" as const, stiffness: 300, damping: 28, mass
 // ─── Modal Component ──────────────────────────────────────────────────────────
 function TourModal({ tour, onClose }: { tour: Tour; onClose: () => void }) {
   const [activeImg, setActiveImg] = useState(0);
+  const { t } = useTranslation();
 
   // Close on Escape
   useEffect(() => {
@@ -447,7 +370,7 @@ function TourModal({ tour, onClose }: { tour: Tour; onClose: () => void }) {
               border: "1px solid rgba(255,255,255,0.15)",
             }}
           >
-            <p className="text-white/60 text-xs uppercase tracking-widest font-body font-semibold mb-3">O que inclui</p>
+            <p className="text-white/60 text-xs uppercase tracking-widest font-body font-semibold mb-3">{t("ecotourism.modalIncludes")}</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
               {tour.highlights.map((h, i) => (
                 <motion.div
@@ -477,7 +400,7 @@ function TourModal({ tour, onClose }: { tour: Tour; onClose: () => void }) {
               transition={springConfig}
             >
               <WhatsappIcon size={17} className="shrink-0" />
-              Reservar este Passeio
+              {t("ecotourism.modalButton")}
             </motion.button>
           </BookingModal>
         </div>
@@ -487,7 +410,6 @@ function TourModal({ tour, onClose }: { tour: Tour; onClose: () => void }) {
 }
 
 // ─── Tour Card ────────────────────────────────────────────────────────────────
-/** Returns the thumbnail path for a given full-size image */
 function thumb(src: string): string {
   if (src.startsWith("/fotos_reais_amazon/")) {
     return src.replace("/fotos_reais_amazon/", "/fotos_reais_amazon/thumbs/");
@@ -498,6 +420,7 @@ function thumb(src: string): string {
 function TourCard({ tour, index, onClick }: { tour: Tour; index: number; onClick: () => void }) {
   const [hovered, setHovered] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
+  const { t } = useTranslation();
   const touchStartX = useMotionValue(0);
   const images = tour.gallery.length > 0 ? tour.gallery : [tour.preview];
 
@@ -679,7 +602,7 @@ function TourCard({ tour, index, onClick }: { tour: Tour; index: number; onClick
             transition={{ duration: 0.2 }}
           >
             <span className="inline-block w-1 h-1 rounded-full bg-amber-400" />
-            Toque para ver detalhes
+            {t("ecotourism.tourCardTip")}
           </motion.div>
         </div>
       </motion.div>
@@ -690,26 +613,52 @@ function TourCard({ tour, index, onClick }: { tour: Tour; index: number; onClick
 // ─── Page ─────────────────────────────────────────────────────────────────────
 const Ecotourism = () => {
   const [selectedTour, setSelectedTour] = useState<Tour | null>(null);
+  const { t } = useTranslation();
+
+  const translatedList = t("ecotourism.toursList", { returnObjects: true }) as Array<{
+    title: string;
+    subtitle: string;
+    desc: string;
+    longDesc: string;
+    highlights: string[];
+  }>;
+
+  const tours: Tour[] = tourMetadata.map((meta, i) => ({
+    icon: meta.icon,
+    tagColor: meta.tagColor,
+    preview: meta.preview,
+    rating: meta.rating,
+    gallery: meta.gallery,
+    duration: t(meta.durationKey),
+    difficulty: t(meta.difficultyKey),
+    tag: t(meta.tagKey),
+    title: translatedList[i]?.title || "",
+    subtitle: translatedList[i]?.subtitle || "",
+    desc: translatedList[i]?.desc || "",
+    longDesc: translatedList[i]?.longDesc || "",
+    highlights: translatedList[i]?.highlights || [],
+  }));
+
+  const faunaList = t("ecotourism.faunaList", { returnObjects: true }) as string[];
 
   return (
     <div className="bg-background pt-20">
       <SEOHead
-        title="Trilhas, Aventuras e Ecoturismo na Amazônia | Amazon Samaúma"
-        description="Explore a selva amazônica com trilhas guiadas, safáris noturnos, observação de botos e jacarés, passeios de canoa e pesca esportiva em Manaus (Careiro Castanho)."
+        title={t("ecotourism.title")}
+        description={t("ecotourism.description")}
         canonicalPath="/ecoturismo"
-        ogImage="https://amazon-samauma-lodge.com.br/fotos_reais_amazon/eco-new-38.webp"
         schemaData={{
           "@context": "https://schema.org",
           "@type": "WebPage",
-          "name": "Trilhas, Aventuras e Ecoturismo na Amazônia | Amazon Samaúma",
-          "description": "Explore a selva amazônica com trilhas guiadas, safáris noturnos, observação de botos e jacarés, passeios de canoa e pesca esportiva em Manaus (Careiro Castanho)."
+          "name": t("ecotourism.title"),
+          "description": t("ecotourism.description")
         }}
       />
       {/* Hero */}
       <section className="relative h-[55vh] min-h-[400px] flex items-center justify-center overflow-hidden">
         <img
           src={ecotourismImg}
-          alt="Ecoturismo e aventuras na floresta amazônica perto de Manaus"
+          alt="Ecoturismo"
           className="absolute inset-0 w-full h-full object-cover"
           width={1200}
           height={800}
@@ -723,7 +672,7 @@ const Ecotourism = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ ...springConfig, delay: 0.1 }}
           >
-            Amazônia Autêntica · Todo o Ano
+            {t("ecotourism.heroLabel")}
           </motion.span>
           <motion.h1
             className="heading-xl text-primary-foreground"
@@ -731,7 +680,7 @@ const Ecotourism = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ ...springConfig, delay: 0.2 }}
           >
-            Ecoturismo
+            {t("ecotourism.heroTitle")}
           </motion.h1>
           <motion.p
             className="text-body-lg text-primary-foreground/80 mt-4 max-w-lg mx-auto"
@@ -739,7 +688,7 @@ const Ecotourism = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ ...springConfig, delay: 0.3 }}
           >
-            Aventuras guiadas pelo coração da Amazônia, para toda a família.
+            {t("ecotourism.heroDesc")}
           </motion.p>
         </div>
       </section>
@@ -748,13 +697,13 @@ const Ecotourism = () => {
       <section className="section-padding">
         <div className="container-lodge grid lg:grid-cols-2 gap-12 items-center">
           <SectionFadeIn>
-            <span className="text-sm font-body font-semibold tracking-widest uppercase text-gold">Natureza Selvagem</span>
-            <h2 className="heading-lg mt-2 mb-6">A Amazônia no seu Estado Mais Puro</h2>
+            <span className="text-sm font-body font-semibold tracking-widest uppercase text-gold">{t("ecotourism.introLabel")}</span>
+            <h2 className="heading-lg mt-2 mb-6">{t("ecotourism.introTitle")}</h2>
             <p className="text-body text-muted-foreground mb-4">
-              O Amazon Samaúma Lodge está inserido em um dos ecossistemas mais ricos e biodiversos do planeta. A poucos metros do lodge, a floresta amazônica primária oferece experiências de ecoturismo únicas no mundo.
+              {t("ecotourism.introP1")}
             </p>
             <p className="text-body text-muted-foreground mb-8">
-              Botos cor-de-rosa, jacarés, macacos prego, araras azuis, sucuris e centenas de espécies de pássaros habitam a região. A chance de avistamento é alta ao longo de todo o ano.
+              {t("ecotourism.introP2")}
             </p>
             <BookingModal defaultInterest="Ecoturismo">
               <motion.button
@@ -764,7 +713,7 @@ const Ecotourism = () => {
                 transition={springConfig}
               >
                 <WhatsappIcon size={18} className="shrink-0" />
-                Fazer Reserva
+                {t("ecotourism.introButton")}
               </motion.button>
             </BookingModal>
           </SectionFadeIn>
@@ -772,7 +721,7 @@ const Ecotourism = () => {
             <div className="hover-zoom rounded-lg overflow-hidden">
               <img
                 src={heroImg}
-                alt="Passeio de barco nos igarapés da Amazônia"
+                alt="Passeio de barco"
                 className="w-full h-[420px] object-cover"
                 loading="lazy"
                 width={1200}
@@ -792,12 +741,12 @@ const Ecotourism = () => {
       >
         <div className="container-lodge">
           <SectionFadeIn>
-            <h2 className="heading-lg text-center mb-3 text-primary-foreground">Passeios e Atividades</h2>
+            <h2 className="heading-lg text-center mb-3 text-primary-foreground">{t("ecotourism.toursTitle")}</h2>
             <p className="text-body text-center text-primary-foreground/60 max-w-2xl mx-auto mb-4">
-              Toque em qualquer atividade para ver detalhes, galeria de fotos e fazer sua reserva.
+              {t("ecotourism.toursDesc")}
             </p>
             <p className="text-center text-xs text-primary-foreground/35 font-body uppercase tracking-widest mb-14">
-              ↓ Todos os passeios são guiados por especialistas locais
+              {t("ecotourism.toursFootnote")}
             </p>
           </SectionFadeIn>
 
@@ -821,7 +770,7 @@ const Ecotourism = () => {
             <div className="hover-zoom rounded-lg overflow-hidden">
               <img
                 src={fishingImg}
-                alt="Fauna amazônica — observação de animais"
+                alt="Fauna amazônica"
                 className="w-full h-[400px] object-cover"
                 loading="lazy"
                 width={1200}
@@ -830,20 +779,13 @@ const Ecotourism = () => {
             </div>
           </SectionFadeIn>
           <SectionFadeIn>
-            <span className="text-sm font-body font-semibold tracking-widest uppercase text-gold">Fauna Amazônica</span>
-            <h2 className="heading-lg mt-2 mb-6 text-primary-foreground">Uma Biodiversidade Sem Igual</h2>
+            <span className="text-sm font-body font-semibold tracking-widest uppercase text-gold">{t("ecotourism.faunaLabel")}</span>
+            <h2 className="heading-lg mt-2 mb-6 text-primary-foreground">{t("ecotourism.faunaTitle")}</h2>
             <p className="text-body text-primary-foreground/80 mb-4">
-              O Paraná do Mamori e seus arredores abrigam uma das maiores concentrações de espécies da América do Sul. Na região, é possível avistar:
+              {t("ecotourism.faunaDesc")}
             </p>
             <ul className="space-y-2 text-primary-foreground/80 mb-8">
-              {[
-                "🐬 Botos cor-de-rosa (golfinhos de água doce)",
-                "🐊 Jacarés (várias espécies)",
-                "🐒 Macacos: primata, bugio, uakari",
-                "🦜 Araras azuis, papagaios e tucanos",
-                "🐍 Sucuris, jiboias e ariranhas",
-                "🦉 Corujas, urutaus e fauna noturna",
-              ].map(item => (
+              {(faunaList ?? []).map(item => (
                 <li key={item} className="flex items-center gap-2 font-body text-sm">{item}</li>
               ))}
             </ul>
@@ -854,7 +796,7 @@ const Ecotourism = () => {
                 whileTap={{ scale: 0.97 }}
                 transition={springConfig}
               >
-                Agende sua Experiência
+                {t("ecotourism.faunaButton")}
               </motion.button>
             </BookingModal>
           </SectionFadeIn>
@@ -865,9 +807,9 @@ const Ecotourism = () => {
       <section className="section-padding" style={{ background: "hsl(147,27%,8%)" }}>
         <div className="container-lodge">
           <SectionFadeIn>
-            <h2 className="heading-lg text-primary-foreground mb-4">Galeria de Fauna</h2>
+            <h2 className="heading-lg text-primary-foreground mb-4">{t("ecotourism.galleryTitle")}</h2>
             <p className="text-body text-primary-foreground/70 max-w-2xl mb-12">
-              Algumas das espécies incríveis capturadas pelas lentes de nossos visitantes e guias.
+              {t("ecotourism.galleryDesc")}
             </p>
           </SectionFadeIn>
           

@@ -33,7 +33,12 @@
     "heroLocation": "Mamori River · Careiro Castanho · AM",
     "heroTitle1": "Experience the Real Amazon — ",
     "heroTitle2": "An experience that is ",
-    "morphWords": { "0": "wild", "1": "luxurious", "2": "unforgettable", "3": "authentic" },
+    "morphWords": {
+      "0": "wild",
+      "1": "luxurious",
+      "2": "unforgettable",
+      "3": "authentic"
+    },
     "heroDesc": "Floating lodge on the Mamori River, a few minutes from Careiro Castanho. Nature, silence, and adventure — all in one place.",
     "knowLodge": "Meet the Lodge",
     "stats": {
@@ -106,5 +111,504 @@
       "title": "Ready to Experience the Real Amazon?",
       "subtitle": "Get in touch now and plan your stay at Amazon Samaúma Lodge. The Amazon Rainforest awaits you."
     }
+  },
+  "notFound": {
+    "title": "Oops! Page not found",
+    "backHome": "Return to Home"
+  },
+  "contact": {
+    "title": "Questions & Contact | Amazon Samaúma Lodge",
+    "description": "Speak with the Amazon Samaúma Lodge team. Ask questions about reservations, accommodations, ecotourism, and sport fishing in the Mamori River, Careiro Castanho – AM.",
+    "heroLabel": "Contact Us",
+    "heroTitle": "FAQ & Support",
+    "heroDesc": "Have any questions or need help? We are here for you.",
+    "whatsappTitle": "Chat Directly on WhatsApp",
+    "whatsappDesc": "The fastest way to ask questions, check availability, and make your reservation. Our team responds daily.",
+    "buttonBook": "Make Reservation",
+    "buttonQuestions": "Ask Questions",
+    "whatsappHours": "Service every day",
+    "sectionNeedTitle": "What do you need?",
+    "sectionNeedDesc": "Click the corresponding button and we will start the WhatsApp conversation with the right message.",
+    "interestFishing": "Sport Fishing",
+    "interestEcotourism": "Ecotourism",
+    "interestRelax": "Accommodation / Rest",
+    "infoTitle": "Contact Information",
+    "infoLocationLabel": "Location",
+    "infoPhoneLabel": "WhatsApp / Call",
+    "infoInstagramLabel": "Instagram",
+    "infoHoursLabel": "Service Hours",
+    "infoHoursDesc": "WhatsApp available every day",
+    "howToGetTitle": "How to Get There",
+    "howToGetAirTitle": "By Air to Manaus",
+    "howToGetAirDesc": "Fly to Eduardo Gomes Airport (Manaus – MAO). From there, proceed to Careiro Castanho by car, ferry, or bus.",
+    "howToGetBoatTitle": "By Boat to the Lodge",
+    "howToGetBoatDesc": "From Careiro Castanho, exclusive access by boat. Upon reservation confirmation, we send full instructions via WhatsApp.",
+    "tipTitle": "📍 Important Tip",
+    "tipDesc": "Upon confirming your reservation, we send all detailed access information directly via WhatsApp — including the exact boarding point in Careiro Castanho.",
+    "bookingQuery": "Hello, I came from the website. How does the reservation work at Amazon Samaúma?",
+    "faqQuery": "Hello, I came from the website. I have some questions about Amazon Samaúma."
+  },
+  "lodgeDetail": {
+    "notFound": "Lodge not found",
+    "backToAccommodations": "← See all accommodations",
+    "allAccommodations": "All accommodations",
+    "aboutLodge": "About the Lodge",
+    "checkAvailability": "Check Availability",
+    "roomTypes": "Room Types",
+    "roomTypesDesc": "Choose the perfect room for your stay and get in touch to check availability.",
+    "roomTypesDescEmpty": "Get in touch to check availability and room details.",
+    "bookThisRoom": "Book This Room"
+  },
+  "accommodations": {
+    "title": "Packages & Accommodations | Jungle Lodging in Manaus",
+    "description": "Discover our floating lodges in the Mamori River and ecotourism and sport fishing packages in the Amazon. Private rooms with air conditioning and Starlink Wi-Fi.",
+    "heroLabel": "Comfort in the Amazon",
+    "heroTitle": "Accommodations",
+    "heroDesc": "Floating lodges on the river, offering comfort and total immersion in the Amazon rainforest.",
+    "introLabel": "Our Lodges",
+    "introTitle": "Your Floating Refuge in the Amazon",
+    "introP1": "Our lodges were designed to offer comfort and immersion in nature. Wake up to the view of the river, breathe in the fresh Amazon air, and feel how time operates differently here.",
+    "introP2": "Each accommodation features comfortable beds, air conditioning, hot water, Starlink Wi-Fi, and a private bathroom. The floating structure provides a unique experience of sleeping on the waters of the Mamori River.",
+    "introP3": "At dawn, the landscape of the river and forest is your natural alarm clock. At dusk, the deck is the perfect spot to contemplate the Amazon sunset.",
+    "amenitiesTitle": "What we offer in all accommodations",
+    "packagesLabel": "Nature, adventure, and unique experiences",
+    "packagesTitle": "Ecotourism Packages in the Amazon",
+    "packagesDesc": "Choose the ideal package and tap to see the details of each experience. All include a local guide, lodging, and meals.",
+    "packagesIncludesTitle": "Included in all packages",
+    "packagesFootnote": "Prices per person. Consult payment terms and availability.",
+    "restaurantLabel": "Restaurant",
+    "restaurantTitle": "Authentic Amazonian Cuisine",
+    "restaurantP1": "At Amazon Samaúma Lodge, the dining experience is part of the adventure. Our restaurant serves typical Amazonian dishes, featuring fresh fish caught in the Mamori River waters.",
+    "restaurantP2": "Home-cooked, tasty meals prepared with local ingredients — a journey through the authentic flavors of the Amazon.",
+    "restaurantButton": "Book Your Stay",
+    "viewItinerary": "View daily itinerary",
+    "viewDetails": "View experience details",
+    "roomLabel": "Room:",
+    "interestLabel": "Interest:",
+    "dayLabel": "Day",
+    "wantPackage": "I want this package",
+    "fromPrice": "from",
+    "orPrice": "or",
+    "noInterest": "interest-free",
+    "consultPrice": "Inquire about rates via WhatsApp",
+    "lodgesAndRooms": "Lodges & Rooms",
+    "roomsAvailable": "Rooms available:",
+    "viewDetailsArrow": "View Details →",
+    "package": "Package",
+    "perPerson": "Price per person",
+    "cashOr": "cash or",
+    "upTo": "up to",
+    "wantThisPackage": "I want the Package",
+    "fallbackLodge1": {
+      "desc": "Floating lodge in the heart of the Amazon. Private rooms on the river with air conditioning, Starlink Wi-Fi, and restaurant included."
+    },
+    "fallbackLodge2": {
+      "desc": "Our second floating lodge featuring a spacious structure, panoramic deck, and 6 comfortable riverside rooms."
+    },
+    "amenity": {
+      "beds": "Comfortable Beds",
+      "ac": "Air Conditioning",
+      "cleaning": "Daily Cleaning",
+      "wifi": "Starlink Wi-Fi",
+      "hotWater": "Hot Water",
+      "restaurant": "Restaurant Included"
+    },
+    "includes": {
+      "lodging": {
+        "label": "Lodging",
+        "desc": "in comfortable accommodations"
+      },
+      "food": {
+        "label": "Meals",
+        "desc": "typical regional cuisine"
+      },
+      "transport": {
+        "label": "Transport",
+        "desc": "by boat throughout the itinerary"
+      },
+      "guide": {
+        "label": "Local Guide",
+        "desc": "specialized guide"
+      },
+      "insurance": {
+        "label": "Insurance",
+        "desc": "adventure insurance"
+      }
+    }
+  },
+  "about": {
+    "title": "About Us | Amazon Samaúma Lodge",
+    "description": "Discover the history of Amazon Samaúma Lodge — a floating lodge on the Mamori River, Careiro Castanho – AM. Arlos, the owner, and the team that makes every stay unforgettable.",
+    "heroLabel": "Mamori River · Careiro Castanho · AM",
+    "heroTitle": "About Us",
+    "heroSubtitle": "The floating lodge born from a passion for the Amazon.",
+    "statBeds": "Private Accommodations",
+    "statFishing": "Catch & Release",
+    "statSpecies": "Fish Species",
+    "statRating": "Guest Rating ★",
+    "storyLabel": "Our Story",
+    "storyTitle": "Born from Passion\nfor the Amazon",
+    "storyP1": "Amazon Samaúma Lodge is a floating lodge located on the Mamori River, Careiro Castanho, in the heart of the Amazon. Here, access is exclusively by boat — and that's already the start of the experience.",
+    "storyP2": "With two floating lodges and cozy rooms, a restaurant serving regional cuisine, and specialized guides, we offer the most authentic contact possible with the Amazon rainforest.",
+    "storyP3": "Our philosophy is simple: real connections — with nature, with the riverside culture, and with yourself.",
+    "storyButton": "Book Your Stay",
+    "storyGuideLink": "Meet the Guide →",
+    "storyLocationLabel": "Location",
+    "timelineTitle": "Our Journey",
+    "timelineDesc": "From dream to reality — every step built with love for the Amazon.",
+    "restaurantLabel": "Gastronomy",
+    "restaurantTitle": "Cuisine is Part of the Adventure",
+    "restaurantP1": "At Amazon Samaúma Lodge, the dining experience is an integral part of the adventure. Our restaurant serves typical dishes of Amazonian cuisine — highlighting fresh fish caught in the Mamori River.",
+    "restaurantP2": "Home-cooked, tasty meals prepared with local ingredients — a journey through the authentic flavors of the Amazon.",
+    "restaurantTags": [
+      "🐟 Grilled fish",
+      "🍚 Regional manioc flour",
+      "🍴 Amazonian fish stew",
+      "🌿 Forest juices"
+    ],
+    "valuesTitle": "Our Values",
+    "valuesDesc": "The principles that guide every experience we offer.",
+    "valuesClickTip": "↓ Click on each value to learn more",
+    "valuesCardTip": "Tap to learn more",
+    "ctaTitle": "Come Meet Us in Person",
+    "ctaDesc": "The best way to understand Amazon Samaúma Lodge is to live the experience. Get in touch and plan your visit.",
+    "ctaButtonContact": "Get in Touch / Inquiry",
+    "ctaButtonBook": "Make Reservation",
+    "ownerModalLabel": "Guide & Owner",
+    "ownerModalTitle": "Amazon Samaúma Lodge",
+    "ownerModalDesc": "Raised on the banks of the Mamori River, our guide knows every curve of the river, every bird of the forest, and every fish in the dark waters of the Paraná. The Amazon experienced from the inside — passed down from generation to generation.",
+    "ownerModalTags": [
+      "🎣 Sport Fishing",
+      "🌿 Jungle Trekking",
+      "🐊 Nocturnal Fauna",
+      "🌅 Sunset Tours"
+    ],
+    "ownerModalButton": "Chat with the Guide",
+    "values": {
+      "sustainability": {
+        "title": "Sustainability",
+        "short": "Low environmental impact",
+        "long": "Every decision at Amazon Samaúma Lodge is guided by respect for the forest. We use energy consciously, reduce plastic use, and work in harmony with the nature that shelters us. Preserving the Amazon is our commitment to future generations."
+      },
+      "hospitality": {
+        "title": "Hospitality",
+        "short": "We welcome you like family",
+        "long": "Every guest is welcomed with a genuine smile, fresh coffee, and the full attention of our team. Our hospitality is born from the riverside culture — warm, spontaneous, and true. We want you to feel at home in the heart of the Amazon."
+      },
+      "safety": {
+        "title": "Safety",
+        "short": "Experienced guides & top equipment",
+        "long": "All tours are led by local guides with extensive knowledge of the river and forest. We maintain quality safety equipment, life jackets, and first aid on all outings. Your family can relax with total peace of mind."
+      },
+      "community": {
+        "title": "Community",
+        "short": "We value the riverside people",
+        "long": "We work with local residents, buy from riverside producers, and contribute to the prosperity of the Paraná do Mamori community. The tourism we practice respects the people who have guarded the forest for centuries."
+      },
+      "fishing": {
+        "title": "Responsible Fishing",
+        "short": "Always Catch & Release",
+        "long": "We practice Catch & Release on all fishing trips. Each peacock bass caught is carefully returned to the river, ensuring that species reproduce and that Mamori remains one of the best sport fishing destinations in the world."
+      },
+      "authenticity": {
+        "title": "Authenticity",
+        "short": "Real Amazon, unfiltered",
+        "long": "Amazon Samaúma Lodge is not a resort. It is a real dive into the Amazon — with its unique sounds, smells, tastes, and rhythms. The sunset over the Mamori, the pink dolphin appearing out of nowhere, the silence of the forest at night — all real. This authenticity is our greatest asset."
+      }
+    },
+    "timeline": [
+      {
+        "year": "The Origin",
+        "title": "A Passion is Born",
+        "desc": "The lodge arises from a genuine love for the Amazon — river, forest, fishing, and the riverside people of Paraná do Mamori."
+      },
+      {
+        "year": "The Structure",
+        "title": "Floating Lodge",
+        "desc": "Floating lodges built on the river — integrated with nature, without harming it."
+      },
+      {
+        "year": "The People",
+        "title": "100% Local Team",
+        "desc": "Guides, cooks, and staff raised in the region — owners of the most precious knowledge: the Amazon lived from within."
+      },
+      {
+        "year": "Today",
+        "title": "5-Star Rating",
+        "desc": "Hundreds of guests from all over Brazil and the world. 5.0 average rating — reflecting care in every detail."
+      }
+    ]
+  },
+  "ecotourism": {
+    "title": "Trails, Adventures, and Ecotourism in the Amazon | Amazon Samaúma",
+    "description": "Explore the Amazon jungle with guided trails, nocturnal safaris, dolphin and alligator watching, canoe trips, and sport fishing in Manaus (Careiro Castanho).",
+    "heroLabel": "Authentic Amazon · All Year Round",
+    "heroTitle": "Ecotourism",
+    "heroDesc": "Guided adventures through the heart of the Amazon, for the whole family.",
+    "introLabel": "Wild Nature",
+    "introTitle": "The Amazon in its Purest State",
+    "introP1": "Amazon Samaúma Lodge is embedded in one of the richest and most biodiverse ecosystems on the planet. Just a few meters from the lodge, the primary Amazon rainforest offers unique ecotourism experiences.",
+    "introP2": "Pink river dolphins, alligators, capuchin monkeys, blue macaws, anacondas, and hundreds of bird species inhabit the region. The chance of sightings is high throughout the year.",
+    "introButton": "Make Reservation",
+    "toursTitle": "Tours & Activities",
+    "toursDesc": "Tap on any activity to view details, photo gallery, and make your reservation.",
+    "toursFootnote": "↓ All tours are guided by local experts",
+    "tourCardTip": "Tap to view details",
+    "modalIncludes": "What's included",
+    "modalButton": "Book this Tour",
+    "faunaLabel": "Amazonian Fauna",
+    "faunaTitle": "Unparalleled Biodiversity",
+    "faunaDesc": "The Paraná do Mamori and its surroundings host one of the largest concentrations of species in South America. In this region, you can spot:",
+    "faunaList": [
+      "🐬 Pink river dolphins (freshwater dolphins)",
+      "🐊 Alligators (various species)",
+      "🐒 Monkeys: capuchin, howler, uakari",
+      "🦜 Blue macaws, parrots, and toucans",
+      "🐍 Anacondas, boas, and giant otters",
+      "🦉 Owls, potoos, and nocturnal fauna"
+    ],
+    "faunaButton": "Schedule Your Experience",
+    "galleryTitle": "Fauna Gallery",
+    "galleryDesc": "Some of the incredible species captured by the lenses of our visitors and guides.",
+    "difficulty": {
+      "easy": "Easy",
+      "none": "None",
+      "moderate": "Mild to Moderate",
+      "medMod": "Moderate",
+      "custom": "Custom"
+    },
+    "duration": {
+      "safari": "3–4 hours",
+      "trails": "2–5 hours",
+      "sunset": "1.5–2 hours",
+      "night": "2–3 hours (night)",
+      "culture": "4–6 hours",
+      "custom": "Custom"
+    },
+    "tag": {
+      "family": "Family",
+      "adventure": "Adventure",
+      "mustSee": "Must See",
+      "exciting": "Exciting",
+      "cultural": "Cultural",
+      "exclusive": "Exclusive"
+    },
+    "toursList": [
+      {
+        "title": "Amazonian Safari",
+        "subtitle": "Flora & Fauna",
+        "desc": "Embark on a guided expedition through the streams and forests around the lodge. Spot dolphins, caimans, monkeys, macaws, and hundreds of bird species.",
+        "longDesc": "The Amazonian Safari is the most complete experience offered by Amazon Samaúma Lodge. Aboard a quiet boat, we navigate the streams and lakes surrounding the lodge, diving into the richest ecosystem on the planet. Our native guides know every curve of the river, every bird that sings in the canopy, every trace left by the fauna living on the Mamori River banks. It's a living classroom with forest walls and a river floor.",
+        "highlights": [
+          "🐬 Pink river dolphin sightings",
+          "🐊 Alligator observation along the banks",
+          "🦜 Identification of over 50 bird species",
+          "🐒 Capuchin, uakari, and howler monkeys",
+          "🌿 Presentation of medicinal plants",
+          "📸 Photo stops at privileged locations"
+        ]
+      },
+      {
+        "title": "Forest Trails",
+        "subtitle": "Guided Hikes",
+        "desc": "Explore trails through the primary forest with different difficulty levels. Our guides introduce medicinal plants, ancient trees, and jungle secrets.",
+        "longDesc": "Walk through the primary Amazon forest accompanied by guides who were born and raised on this land. The trails cross different environments: capoeiras, igapós, dry land, and stream edges. At each stop, you learn about giant trees, vines, medicinal plants used by riverside communities for centuries, and animals that camouflage among the leaves. A unique sensory experience — the smell of the humid forest, the sound of birds, the texture of moss.",
+        "highlights": [
+          "🌳 Ancient trees like the samaúma",
+          "🌿 Medicinal plants and their traditional uses",
+          "🦋 Butterflies and rare insects",
+          "🐸 Forest amphibians and reptiles",
+          "🍃 Jungle survival techniques",
+          "📍 Multiple levels: easy, medium, and challenging"
+        ]
+      },
+      {
+        "title": "Sunset on the River",
+        "subtitle": "Boat Ride",
+        "desc": "One of the most special moments at the lodge. Go out by boat in the late afternoon and contemplate the sunset over the Mamori River in all its glory.",
+        "longDesc": "At 5 PM, the Mamori River turns into a golden mirror. The Amazonian sun slowly dives behind the tree canopies, dyeing the sky red, orange, and violet — colors that exist nowhere else in the world. We head out by boat in small groups, navigate to the open parts of the river, and simply stop the engine. Silence. Nature. A sunset that will remain in your memory forever.",
+        "highlights": [
+          "🌅 Panoramic view of the Mamori River",
+          "🚤 Small group tour (more intimate)",
+          "🍹 Drinks and snacks on board (on request)",
+          "📸 Unique photography opportunity",
+          "🌙 Return at dusk with a starry sky",
+          "💑 Romantic experience for couples"
+        ]
+      },
+      {
+        "title": "Nocturnal Expedition",
+        "subtitle": "Alligators & Night Fauna",
+        "desc": "For adventurers: night boat outings for alligator spotting and night fishing. Intense, safe, and guided by local specialists.",
+        "longDesc": "The Amazon forest at night is a completely different world. Equipped with flashlights and guided by professionals who know every inch of the river, we go out after dinner to discover Mamori's nightlife. Alligators' eyes glow red under the flashlight, potoos sing their characteristic sound, giant otters sleep on the banks. For those who dare to sit at the boat's bow and peer into the dark — this is the most visceral Amazon experience.",
+        "highlights": [
+          "🐊 Alligator observation at night",
+          "🦉 Potoos, owls, and nocturnal birds",
+          "🎣 Traditional night fishing",
+          "⭐ Sky with the visible Milky Way",
+          "🦟 Repellent kit provided",
+          "🔦 Full safety equipment"
+        ]
+      },
+      {
+        "title": "Riverside Culture",
+        "subtitle": "Local Communities",
+        "desc": "Visit Mamori River communities and get a close look at the culture, traditions, and lifestyle of the Amazonian people.",
+        "longDesc": "The Mamori River communities live as they have for centuries — on artisanal fishing, sustainable forest extraction, and oral culture passed down through generations. We visit partner communities, where residents welcome us with cassava flour, tucupi, and stories. You learn to make manioc flour, hear jungle legends, and understand how Amazonians live in harmony with the world's largest river. A deep, life-changing human encounter.",
+        "highlights": [
+          "🏘️ Visits to partner riverside communities",
+          "🍚 Typical regional Amazonian cuisine",
+          "🎭 Forest stories and legends",
+          "🎣 Artisanal fishing techniques",
+          "🪵 Local craftsmanship",
+          "🤝 Genuine cultural encounter"
+        ]
+      },
+      {
+        "title": "Customized Itinerary",
+        "subtitle": "Tailor-Made Experience",
+        "desc": "Build your adventure itinerary according to your interests, fitness level, and length of stay.",
+        "longDesc": "Every traveler is unique. With this in mind, Amazon Samaúma Lodge offers the possibility of planning a fully customized itinerary — combining boat rides, trekking, fishing, cultural visits, and moments of contemplation, matching your profile, available time, and interests. Whether for a honeymoon, a group trip, an extreme adventure, or a restful retreat — our guides will create the perfect experience for you.",
+        "highlights": [
+          "🗺️ 100% personalized planning",
+          "👨‍👩‍👧 Ideal for families, couples, and groups",
+          "🎣 Combination of fishing + ecotourism",
+          "🌙 Includes daytime and nighttime tours",
+          "💼 Special packages for honeymoons",
+          "📞 WhatsApp support prior to travel"
+        ]
+      }
+    ]
+  },
+  "fishing": {
+    "title": "Sport Fishing in the Amazon | Amazon Samaúma Lodge",
+    "description": "Sport fishing in the Mamori River — Peacock Bass, Tambaqui, and more. Experienced guides, equipped boats, Catch & Release. Season: Sep–Jan. Careiro Castanho – AM.",
+    "heroLabel": "Mamori River · Season: Sep – Jan",
+    "heroTitle": "Sport Fishing",
+    "heroDesc": "The thrill of fishing in the most preserved rivers of the Amazon, guided by experts.",
+    "introLabel": "Amazon Sport Fishing",
+    "introTitle": "Trophy Fishing in the Amazon",
+    "introP1": "The Amazon is one of the best sport fishing destinations in the world. At the lodge, we offer guided trips on the Mamori River to catch the legendary Tucunaré Açu — the Peacock Bass — alongside other typical regional species.",
+    "introP2": "Our owner is also an experienced guide, ensuring a safe, fun, and unforgettable experience. The Catch & Release system guarantees the preservation of species for future generations.",
+    "introFeatures": [
+      "Peacock Bass",
+      "Equipped Boats",
+      "Best: Sep – Jan",
+      "Catch & Release",
+      "Local Guides",
+      "Night Fishing"
+    ],
+    "seasonsTitle": "Season Calendar",
+    "seasonsDesc": "Select a period to see details",
+    "seasons": [
+      {
+        "period": "Jan–Mar",
+        "name": "Rising Water",
+        "tip": "Lakes and flooded forests. Good for fly fishing."
+      },
+      {
+        "period": "Mar–Jun",
+        "name": "High Water",
+        "tip": "Dispersed fish. Natural bait recommended."
+      },
+      {
+        "period": "Jun–Set",
+        "name": "Falling Water",
+        "tip": "Fish concentrating in lakes. Artificial bait."
+      },
+      {
+        "period": "Set–Jan",
+        "name": "Dry Season ★",
+        "tip": "BEST TIME — concentrated fish, clear water, huge peacock bass."
+      }
+    ],
+    "galleryTitle": "Fishing Gallery",
+    "galleryDesc": "photos · Click to expand",
+    "galleryButton": "Book Your Fishing Trip",
+    "galleryItems": [
+      {
+        "label": "Peacock Bass (Tucunaré Açu)",
+        "caption": "The legendary Peacock Bass of the Mamori River — the ultimate prize of Amazonian sport fishing."
+      },
+      {
+        "label": "Dawn Departure",
+        "caption": "We set out at dawn, when the peacock bass are most active along the riverbanks and inlets."
+      },
+      {
+        "label": "Sunset on the River",
+        "caption": "The moment fishing meets contemplation — a silence only the Amazon can offer."
+      },
+      {
+        "label": "Secret Streams",
+        "caption": "Our guides know every stream where the fish gather during the dry season."
+      },
+      {
+        "label": "Peacock Bass in Action",
+        "caption": "The dark waters of the Mamori hide schools of peacock bass ready for combat."
+      },
+      {
+        "label": "Gear & Lures",
+        "caption": "Selected artificial lures for each type of water and season. Fly, surface, and deep fishing."
+      },
+      {
+        "label": "Anglers & Trophies",
+        "caption": "Each fish caught is carefully returned to the river — the true spirit of Catch & Release."
+      }
+    ],
+    "statsTitle": "Mamori by the Numbers",
+    "stats": [
+      {
+        "value": "12kg+",
+        "label": "Largest Peacock Bass",
+        "sub": "caught in the Mamori"
+      },
+      {
+        "value": "100%",
+        "label": "Catch & Release",
+        "sub": "species preservation"
+      },
+      {
+        "value": "15+",
+        "label": "Species",
+        "sub": "in the lodge rivers"
+      },
+      {
+        "value": "4 months",
+        "label": "Peak Season",
+        "sub": "Sep to Jan"
+      }
+    ],
+    "tipsTitle": "Fishing Tips",
+    "tips": [
+      {
+        "title": "Artificial Lures",
+        "desc": "Surface poppers and jerkbaits are lethal for peacock bass during the dry season."
+      },
+      {
+        "title": "Ideal Hours",
+        "desc": "Between 6 AM–9 AM and 4 PM–6 PM the fish are most active along the banks."
+      },
+      {
+        "title": "Secret Spots",
+        "desc": "Our guides know the exact spots where schools of fish gather."
+      },
+      {
+        "title": "River Reading",
+        "desc": "Rapids, backwaters, and drop-offs are the best structures for fishing."
+      }
+    ],
+    "expeditionLabel": "Special Expedition",
+    "expeditionTitle": "Night Fishing & Alligator Spotting",
+    "expeditionP1": "For the adventurous, we offer night boat trips for alligator spotting and night fishing. An intense and safe experience, guided by professionals with vast knowledge of the region.",
+    "expeditionP2": "Under the flashlights, Amazonian nightlife reveals its secrets — alligators sliding along the banks, glowing eyes in the dark, and the unmistakable sounds of the forest at night.",
+    "expeditionButton": "Learn More / Inquire",
+    "ctaTitle": "Ready for the Greatest Fishing Trip of Your Life?",
+    "ctaDesc": "Get in touch via WhatsApp to customize your sport fishing package on the Mamori River.",
+    "ctaButton": "Book Now",
+    "ctaButtonEco": "View Ecotourism",
+    "lightboxLabel": "Fishing Gallery",
+    "liked": "Liked!",
+    "like": "Like",
+    "lightboxButton": "Book Now"
   }
 }

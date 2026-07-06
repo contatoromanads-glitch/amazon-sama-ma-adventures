@@ -4,11 +4,10 @@ import { useQuery } from "@tanstack/react-query";
 import {
   MapPin, ArrowRight,
   AirVent, Droplets, Wifi, Sparkles, BedDouble, Utensils,
-  UserCheck, Footprints, Sunrise, TreePine, Moon, Flower2,
   Ship, Compass, ShieldCheck, Leaf, ChevronDown, CalendarDays,
-  Tent, Users,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import SEOHead from "@/components/SEOHead";
 import SectionFadeIn from "@/components/SectionFadeIn";
@@ -33,12 +32,12 @@ const carouselFallback = [
 const accommodationImg = "/4567450e-33c2-4ebd-9811-397b90d43bb7.png";
 
 const amenities = [
-  { icon: BedDouble,  label: "Camas Confortáveis"  },
-  { icon: AirVent,    label: "Ar-Condicionado"      },
-  { icon: Sparkles,   label: "Limpeza Diária"       },
-  { icon: Wifi,       label: "Wi-Fi Starlink"       },
-  { icon: Droplets,   label: "Água Quente"          },
-  { icon: Utensils,   label: "Restaurante Incluso"  },
+  { icon: BedDouble,  labelKey: "accommodations.amenity.beds"  },
+  { icon: AirVent,    labelKey: "accommodations.amenity.ac"      },
+  { icon: Sparkles,   labelKey: "accommodations.amenity.cleaning"       },
+  { icon: Wifi,       labelKey: "accommodations.amenity.wifi"       },
+  { icon: Droplets,   labelKey: "accommodations.amenity.hotWater"          },
+  { icon: Utensils,   labelKey: "accommodations.amenity.restaurant"  },
 ];
 
 type ItineraryDay = { day: string; text: string; icon: string };
@@ -56,11 +55,11 @@ type Package = {
 };
 
 const packageIncludes = [
-  { icon: BedDouble,   label: "Hospedagem",  desc: "em acomodações confortáveis" },
-  { icon: Utensils,    label: "Alimentação", desc: "comida típica regional" },
-  { icon: Ship,        label: "Transporte",  desc: "fluvial durante todo o roteiro" },
-  { icon: Compass,     label: "Guia Local",  desc: "especializado" },
-  { icon: ShieldCheck, label: "Seguro",      desc: "aventura" },
+  { icon: BedDouble,   labelKey: "accommodations.includes.lodging.label",  descKey: "accommodations.includes.lodging.desc" },
+  { icon: Utensils,    labelKey: "accommodations.includes.food.label",  descKey: "accommodations.includes.food.desc" },
+  { icon: Ship,        labelKey: "accommodations.includes.transport.label",  descKey: "accommodations.includes.transport.desc" },
+  { icon: Compass,     labelKey: "accommodations.includes.guide.label",  descKey: "accommodations.includes.guide.desc" },
+  { icon: ShieldCheck, labelKey: "accommodations.includes.insurance.label",  descKey: "accommodations.includes.insurance.desc" },
 ];
 
 // ── Fallback lodges (exibido quando banco não retorna dados) ──────────────────
@@ -69,13 +68,13 @@ const fallbackLodges = [
     name: "Amazon Samaúma Lodge",
     slug: "amazon-samauma",
     img:  accommodationImg,
-    desc: "Pousada flutuante no coração da Amazônia. Quartos privativos sobre o rio com ar-condicionado, Wi-Fi Starlink e restaurante incluso.",
+    descKey: "accommodations.fallbackLodge1.desc",
   },
   {
     name: "Amazon Apuí Lodge",
     slug: "amazon-apui-lodge",
     img:  "/pousada-2/pousada-flutuante-amazonas-vista-externa-rio-por-do-sol.jpeg",
-    desc: "Nossa segunda pousada flutuante com estrutura ampla, deck panorâmico e 6 quartos confortáveis à beira do rio.",
+    descKey: "accommodations.fallbackLodge2.desc",
   },
 ];
 
@@ -89,8 +88,9 @@ type Lodge  = {
 // ── Card de pacote interativo (roteiro expansível) ────────────────────────────
 function PackageCard({ pkg, defaultOpen = false }: { pkg: Package; defaultOpen?: boolean }) {
   const [open, setOpen] = useState(defaultOpen);
+  const { t } = useTranslation();
   const hasItinerary = !!pkg.itinerary?.length;
-  const toggleLabel  = hasItinerary ? "Ver roteiro dia a dia" : "Ver detalhes da experiência";
+  const toggleLabel  = hasItinerary ? t("accommodations.viewItinerary") : t("accommodations.viewDetails");
 
   return (
     <motion.div
@@ -101,7 +101,7 @@ function PackageCard({ pkg, defaultOpen = false }: { pkg: Package; defaultOpen?:
       <div className="flex items-center justify-between gap-3 p-5 bg-primary text-primary-foreground">
         <div>
           <span className="text-xs font-body font-semibold tracking-[3px] uppercase text-gold">
-            Pacote {pkg.num}
+            {t("accommodations.package")} {pkg.num}
           </span>
           <h3 className="font-heading text-2xl leading-tight flex items-center gap-2">
             <span aria-hidden>{pkg.emoji}</span> {pkg.name}
@@ -120,14 +120,14 @@ function PackageCard({ pkg, defaultOpen = false }: { pkg: Package; defaultOpen?:
       <div className="flex items-end justify-between px-5 py-4 bg-card border-b border-border">
         <div>
           <span className="block text-[11px] text-muted-foreground uppercase tracking-widest">
-            Valor por pessoa
+            {t("accommodations.perPerson")}
           </span>
           <p className="font-heading text-3xl text-forest leading-none mt-1">
             R$ {pkg.price}<span className="text-base align-top">,00</span>
           </p>
         </div>
         <span className="text-xs text-muted-foreground text-right leading-tight">
-          à vista ou<br />em até <strong className="text-forest">{pkg.installments}</strong>
+          {t("accommodations.cashOr")}<br />{t("accommodations.upTo")} <strong className="text-forest">{pkg.installments}</strong>
         </span>
       </div>
 
@@ -172,7 +172,9 @@ function PackageCard({ pkg, defaultOpen = false }: { pkg: Package; defaultOpen?:
                       <DynamicIcon name={d.icon} size={16} className="text-forest" />
                     </div>
                     <div>
-                      <p className="font-body font-semibold text-sm text-foreground">{d.day}</p>
+                      <p className="font-body font-semibold text-sm text-foreground">
+                        {d.day.replace("Dia", t("accommodations.dayLabel"))}
+                      </p>
                       <p className="text-sm text-muted-foreground leading-snug">{d.text}</p>
                     </div>
                   </li>
@@ -205,7 +207,7 @@ function PackageCard({ pkg, defaultOpen = false }: { pkg: Package; defaultOpen?:
             whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
           >
             <WhatsappIcon size={16} className="shrink-0" />
-            Quero o Pacote {pkg.name}
+            {t("accommodations.wantThisPackage")} {pkg.name}
           </motion.button>
         </BookingModal>
       </div>
@@ -215,6 +217,7 @@ function PackageCard({ pkg, defaultOpen = false }: { pkg: Package; defaultOpen?:
 
 // ── Componente ────────────────────────────────────────────────────────────────
 function Accommodations() {
+  const { t } = useTranslation();
   // Carrossel API para autoplay
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
 
@@ -295,14 +298,14 @@ function Accommodations() {
   return (
     <div className="bg-background pt-20">
       <SEOHead
-        title="Pacotes e Acomodações | Hospedagem de Selva em Manaus"
-        description="Conheça nossas pousadas flutuantes no Paraná do Mamori e pacotes de ecoturismo e pesca esportiva na Amazônia. Quartos privativos com ar-condicionado e Wi-Fi Starlink."
+        title={t("accommodations.title")}
+        description={t("accommodations.description")}
         canonicalPath="/acomodacoes"
         schemaData={{
           "@context": "https://schema.org",
           "@type": "WebPage",
-          "name": "Pacotes e Acomodações | Hospedagem de Selva em Manaus",
-          "description": "Conheça nossas pousadas flutuantes no Paraná do Mamori e pacotes de ecoturismo e pesca esportiva na Amazônia. Quartos privativos com ar-condicionado e Wi-Fi Starlink."
+          "name": t("accommodations.title"),
+          "description": t("accommodations.description")
         }}
       />
 
@@ -310,18 +313,18 @@ function Accommodations() {
       <section className="relative h-[55vh] min-h-[400px] flex items-center justify-center overflow-hidden">
         <img
           src={accommodationImg}
-          alt="Acomodações em pousada flutuante de selva no Amazonas"
+          alt="Acomodações"
           className="absolute inset-0 w-full h-full object-cover"
           width={1200} height={800}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-primary/60 to-primary/80" />
         <div className="relative z-10 text-center px-4">
           <span className="inline-block text-gold font-body text-sm font-semibold tracking-[4px] uppercase mb-4">
-            Conforto na Amazônia
+            {t("accommodations.heroLabel")}
           </span>
-          <h1 className="heading-xl text-primary-foreground">Acomodações</h1>
+          <h1 className="heading-xl text-primary-foreground">{t("accommodations.heroTitle")}</h1>
           <p className="text-body-lg text-primary-foreground/80 mt-4 max-w-lg mx-auto">
-            Pousadas flutuantes sobre o rio, com conforto e imersão total na natureza amazônica.
+            {t("accommodations.heroDesc")}
           </p>
         </div>
       </section>
@@ -331,22 +334,17 @@ function Accommodations() {
         <div className="container-lodge grid lg:grid-cols-2 gap-12 items-center">
           <SectionFadeIn>
             <span className="text-sm font-body font-semibold tracking-widest uppercase text-gold">
-              Nossas Pousadas
+              {t("accommodations.introLabel")}
             </span>
-            <h2 className="heading-lg mt-2 mb-6">Seu Refúgio Flutuante na Amazônia</h2>
+            <h2 className="heading-lg mt-2 mb-6">{t("accommodations.introTitle")}</h2>
             <p className="text-body text-muted-foreground mb-4">
-              Nossas pousadas foram projetadas para oferecer conforto e imersão na natureza. Acorde
-              com a vista do rio, respire o ar puro da Amazônia e sinta que o tempo aqui funciona
-              diferente.
+              {t("accommodations.introP1")}
             </p>
             <p className="text-body text-muted-foreground mb-4">
-              Cada acomodação possui camas confortáveis, ar-condicionado, água quente, Wi-Fi
-              Starlink e banheiro privativo. A estrutura flutuante proporciona uma experiência única
-              de dormir sobre as águas do Paraná do Mamori.
+              {t("accommodations.introP2")}
             </p>
             <p className="text-body text-muted-foreground mb-8">
-              Ao amanhecer, a paisagem do rio e da floresta é o seu despertador natural. Ao
-              entardecer, o deck é o lugar perfeito para contemplar o pôr do sol amazônico.
+              {t("accommodations.introP3")}
             </p>
             <BookingModal defaultInterest="Relaxar/Descansar">
               <motion.button
@@ -354,7 +352,7 @@ function Accommodations() {
                 whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
               >
                 <WhatsappIcon size={18} className="shrink-0" />
-                Consultar Disponibilidade
+                {t("lodgeDetail.checkAvailability")}
               </motion.button>
             </BookingModal>
           </SectionFadeIn>
@@ -394,9 +392,9 @@ function Accommodations() {
       <section className="section-padding bg-card">
         <div className="container-lodge">
           <SectionFadeIn>
-            <h2 className="heading-lg text-center mb-4">Nossas Pousadas</h2>
+            <h2 className="heading-lg text-center mb-4">{t("accommodations.lodgesAndRooms")}</h2>
             <p className="text-body text-center text-muted-foreground max-w-xl mx-auto mb-16">
-              Escolha a pousada ideal para a sua estadia e conheça os quartos disponíveis.
+              {t("accommodations.roomsAvailable")}
             </p>
           </SectionFadeIn>
 
@@ -421,7 +419,7 @@ function Accommodations() {
                           <h3 className="font-heading text-xl">{lodge.name}</h3>
                           {(roomCounts[lodge.id] ?? 0) > 0 && (
                             <span className="text-xs font-body font-semibold uppercase tracking-widest bg-sand-light text-forest px-3 py-1 rounded-full">
-                              {roomCounts[lodge.id]} quarto{roomCounts[lodge.id] !== 1 ? "s" : ""}
+                              {roomCounts[lodge.id]} {t("accommodations.roomLabel").toLowerCase()}
                             </span>
                           )}
                         </div>
@@ -441,7 +439,7 @@ function Accommodations() {
                             className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-accent text-accent-foreground font-body font-bold text-sm tracking-widest uppercase rounded hover:bg-gold-light transition-colors duration-300 cursor-pointer"
                             whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
                           >
-                            Ver Quartos <ArrowRight size={16} className="shrink-0" />
+                            {t("accommodations.viewDetailsArrow")} <ArrowRight size={16} className="shrink-0" />
                           </motion.div>
                         </Link>
                       </div>
@@ -464,7 +462,7 @@ function Accommodations() {
                       </div>
                       <div className="p-6">
                         <h3 className="font-heading text-xl mb-3">{lodge.name}</h3>
-                        <p className="text-body text-muted-foreground mb-5">{lodge.desc}</p>
+                        <p className="text-body text-muted-foreground mb-5">{t(lodge.descKey)}</p>
                         <div className="flex items-center gap-2 text-sm text-muted-foreground mb-5">
                           <MapPin size={14} className="text-gold" />
                           <span>Paraná do Mamori, Careiro Castanho – AM</span>
@@ -474,7 +472,7 @@ function Accommodations() {
                             className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-accent text-accent-foreground font-body font-bold text-sm tracking-widest uppercase rounded hover:bg-gold-light transition-colors duration-300 cursor-pointer"
                             whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
                           >
-                            Ver Quartos <ArrowRight size={16} className="shrink-0" />
+                            {t("accommodations.viewDetailsArrow")} <ArrowRight size={16} className="shrink-0" />
                           </motion.div>
                         </Link>
                       </div>
@@ -489,17 +487,14 @@ function Accommodations() {
       <section className="section-padding">
         <div className="container-lodge">
           <SectionFadeIn>
-            <h2 className="heading-lg text-center mb-4">Comodidades Incluídas</h2>
-            <p className="text-body text-center text-muted-foreground max-w-xl mx-auto mb-12">
-              O que você encontra em todas as acomodações do Amazon Samaúma Lodge.
-            </p>
+            <h2 className="heading-lg text-center mb-4">{t("accommodations.amenitiesTitle")}</h2>
           </SectionFadeIn>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
             {amenities.map((a) => (
-              <SectionFadeIn key={a.label}>
+              <SectionFadeIn key={a.labelKey}>
                 <div className="flex flex-col items-center justify-center text-center gap-3 p-6 h-32 bg-card rounded-lg border border-border">
                   <a.icon className="text-gold shrink-0" size={32} />
-                  <span className="font-body font-medium leading-tight text-sm sm:text-base">{a.label}</span>
+                  <span className="font-body font-medium leading-tight text-sm sm:text-base">{t(a.labelKey)}</span>
                 </div>
               </SectionFadeIn>
             ))}
@@ -512,12 +507,11 @@ function Accommodations() {
         <div className="container-lodge">
           <SectionFadeIn>
             <span className="block text-center text-sm font-body font-semibold tracking-[4px] uppercase text-gold mb-3">
-              Natureza, aventura e experiências únicas
+              {t("accommodations.packagesLabel")}
             </span>
-            <h2 className="heading-lg text-center mb-4">Pacotes de Ecoturismo na Amazônia</h2>
+            <h2 className="heading-lg text-center mb-4">{t("accommodations.packagesTitle")}</h2>
             <p className="text-body text-center text-muted-foreground max-w-xl mx-auto mb-12">
-              Escolha o pacote ideal e toque para conhecer os detalhes de cada experiência.
-              Todos com guia local, hospedagem e alimentação inclusos.
+              {t("accommodations.packagesDesc")}
             </p>
           </SectionFadeIn>
 
@@ -533,19 +527,19 @@ function Accommodations() {
               <div className="bg-background rounded-xl border border-border p-6 sm:p-8">
                 <div className="flex items-center gap-2 mb-6">
                   <Leaf size={20} className="text-gold" />
-                  <h3 className="font-heading text-xl">Incluso em todos os pacotes</h3>
+                  <h3 className="font-heading text-xl">{t("accommodations.packagesIncludesTitle")}</h3>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4">
                   {[packageIncludes.slice(0, 3), packageIncludes.slice(3)].map((col, ci) => (
                     <ul key={ci} className="space-y-4">
                       {col.map((inc) => (
-                        <li key={inc.label} className="flex items-center gap-4">
+                        <li key={inc.labelKey} className="flex items-center gap-4">
                           <div className="shrink-0 w-12 h-12 rounded-full bg-sand-light flex items-center justify-center">
                             <inc.icon size={22} className="text-forest" />
                           </div>
                           <div>
-                            <span className="block font-body font-semibold text-sm text-foreground">{inc.label}</span>
-                            <span className="text-xs text-muted-foreground leading-snug">{inc.desc}</span>
+                            <span className="block font-body font-semibold text-sm text-foreground">{t(inc.labelKey)}</span>
+                            <span className="text-xs text-muted-foreground leading-snug">{t(inc.descKey)}</span>
                           </div>
                         </li>
                       ))}
@@ -557,7 +551,7 @@ function Accommodations() {
           </div>
 
           <p className="text-xs text-center text-muted-foreground mt-8">
-            Valores por pessoa. Consulte condições de pagamento e disponibilidade.
+            {t("accommodations.packagesFootnote")}
           </p>
         </div>
       </section>
@@ -567,19 +561,16 @@ function Accommodations() {
         <div className="container-lodge grid lg:grid-cols-2 gap-12 items-center">
           <SectionFadeIn>
             <span className="text-sm font-body font-semibold tracking-widest uppercase text-gold">
-              Restaurante
+              {t("accommodations.restaurantLabel")}
             </span>
             <h2 className="heading-lg mt-2 mb-6 text-primary-foreground">
-              Culinária Amazônica Autêntica
+              {t("accommodations.restaurantTitle")}
             </h2>
             <p className="text-body text-primary-foreground/80 mb-4">
-              No Amazon Samaúma Lodge, a experiência gastronômica é parte da aventura. Nosso
-              restaurante serve pratos típicos da culinária amazônica, com destaque para os peixes
-              frescos pescados nas águas do Paraná do Mamori.
+              {t("accommodations.restaurantP1")}
             </p>
             <p className="text-body text-primary-foreground/80 mb-8">
-              Refeições caseiras, saborosas e preparadas com ingredientes locais — uma viagem pelos
-              sabores autênticos da Amazônia.
+              {t("accommodations.restaurantP2")}
             </p>
             <BookingModal defaultInterest="Relaxar/Descansar">
               <motion.button
@@ -587,7 +578,7 @@ function Accommodations() {
                 whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
               >
                 <WhatsappIcon size={18} className="shrink-0" />
-                Reserve Sua Estadia
+                {t("accommodations.restaurantButton")}
               </motion.button>
             </BookingModal>
           </SectionFadeIn>
@@ -595,7 +586,7 @@ function Accommodations() {
             <div className="hover-zoom rounded-lg overflow-hidden">
               <img
                 src="/restaurante-buffet-novo.jpeg"
-                alt="Restaurante do Amazon Samaúma Lodge"
+                alt="Restaurante"
                 className="w-full h-[380px] object-cover"
                 loading="lazy" width={1200} height={800}
               />

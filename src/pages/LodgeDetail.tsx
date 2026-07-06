@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { MapPin, MessageCircle, ChevronLeft, CheckCircle2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import SEOHead from "@/components/SEOHead";
 import SectionFadeIn from "@/components/SectionFadeIn";
@@ -22,6 +23,7 @@ const fallbackHero = "/4567450e-33c2-4ebd-9811-397b90d43bb7.png";
 
 export default function LodgeDetail() {
   const { slug } = useParams<{ slug: string }>();
+  const { t } = useTranslation();
 
   const { data: lodge, isLoading: loadingLodge } = useQuery<Lodge | null>({
     queryKey: ["lodge-detail", slug],
@@ -64,8 +66,8 @@ export default function LodgeDetail() {
   if (!lodge) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center pt-20 gap-4">
-        <h1 className="text-2xl font-serif">Pousada não encontrada</h1>
-        <Link to="/acomodacoes" className="text-gold underline">← Ver todas as acomodações</Link>
+        <h1 className="text-2xl font-serif">{t("lodgeDetail.notFound")}</h1>
+        <Link to="/acomodacoes" className="text-gold underline">{t("lodgeDetail.backToAccommodations")}</Link>
       </div>
     );
   }
@@ -87,7 +89,7 @@ export default function LodgeDetail() {
         <div className="absolute inset-0 bg-gradient-to-b from-primary/60 to-primary/80" />
         <div className="relative z-10 text-center px-4">
           <Link to="/acomodacoes" className="inline-flex items-center gap-1 text-primary-foreground/70 text-sm mb-4 hover:text-primary-foreground transition-colors">
-            <ChevronLeft size={16} /> Todas as acomodações
+            <ChevronLeft size={16} /> {t("lodgeDetail.allAccommodations")}
           </Link>
           <h1 className="heading-xl text-primary-foreground">{lodge.name}</h1>
           {lodge.location && (
@@ -103,7 +105,7 @@ export default function LodgeDetail() {
       <section className="section-padding">
         <div className="container-lodge grid lg:grid-cols-2 gap-12 items-center">
           <SectionFadeIn>
-            <span className="text-sm font-body font-semibold tracking-widest uppercase text-gold">Sobre a Pousada</span>
+            <span className="text-sm font-body font-semibold tracking-widest uppercase text-gold">{t("lodgeDetail.aboutLodge")}</span>
             <h2 className="heading-lg mt-2 mb-6">{lodge.name}</h2>
             {lodge.description && (
               <p className="text-body text-muted-foreground mb-8">{lodge.description}</p>
@@ -126,7 +128,7 @@ export default function LodgeDetail() {
                 whileTap={{ scale: 0.97 }}
               >
                 <MessageCircle size={18} className="shrink-0" />
-                Consultar Disponibilidade
+                {t("lodgeDetail.checkAvailability")}
               </motion.button>
             </BookingModal>
           </SectionFadeIn>
@@ -159,11 +161,11 @@ export default function LodgeDetail() {
       <section className="section-padding bg-card">
         <div className="container-lodge">
           <SectionFadeIn>
-            <h2 className="heading-lg text-center mb-4">Tipos de Quarto</h2>
+            <h2 className="heading-lg text-center mb-4">{t("lodgeDetail.roomTypes")}</h2>
             <p className="text-body text-center text-muted-foreground max-w-xl mx-auto mb-16">
               {rooms.length > 0
-                ? "Escolha o quarto ideal para a sua estadia e entre em contato para verificar disponibilidade."
-                : "Entre em contato para verificar disponibilidade e detalhes dos quartos."}
+                ? t("lodgeDetail.roomTypesDesc")
+                : t("lodgeDetail.roomTypesDescEmpty")}
             </p>
           </SectionFadeIn>
 
@@ -202,7 +204,7 @@ export default function LodgeDetail() {
                           ))}
                           {(room.amenities ?? []).length > 4 && (
                             <span className="text-xs bg-muted text-muted-foreground px-2 py-1 rounded-full">+{(room.amenities ?? []).length - 4}</span>
-                          )}
+                          ))}
                         </div>
                       )}
                       <div className="flex items-center gap-2 text-sm text-muted-foreground mb-5">
@@ -216,7 +218,7 @@ export default function LodgeDetail() {
                           whileTap={{ scale: 0.97 }}
                         >
                           <MessageCircle size={16} className="shrink-0" />
-                          Reservar Este Quarto
+                          {t("lodgeDetail.bookThisRoom")}
                         </motion.button>
                       </BookingModal>
                     </div>
@@ -233,7 +235,7 @@ export default function LodgeDetail() {
                   whileTap={{ scale: 0.97 }}
                 >
                   <MessageCircle size={18} className="shrink-0" />
-                  Consultar Disponibilidade
+                  {t("lodgeDetail.checkAvailability")}
                 </motion.button>
               </BookingModal>
             </div>

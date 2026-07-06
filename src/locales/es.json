@@ -33,7 +33,12 @@
     "heroLocation": "Río Mamori · Careiro Castanho · AM",
     "heroTitle1": "Vive la Verdadera Amazonia — ",
     "heroTitle2": "Una experiencia ",
-    "morphWords": { "0": "salvaje", "1": "lujosa", "2": "inolvidable", "3": "auténtica" },
+    "morphWords": {
+      "0": "salvaje",
+      "1": "lujosa",
+      "2": "inolvidable",
+      "3": "auténtica"
+    },
     "heroDesc": "Posada flotante en el río Mamori, a pocos minutos de Careiro Castanho. Naturaleza, silencio y aventura — en un solo lugar.",
     "knowLodge": "Conoce el Lodge",
     "stats": {
@@ -106,5 +111,504 @@
       "title": "¿Listo para Vivir la Verdadera Amazonia?",
       "subtitle": "Ponte en contacto ahora y planifica tu estadía en el Amazon Samaúma Lodge. La Selva Amazónica te espera."
     }
+  },
+  "notFound": {
+    "title": "¡Ups! Página no encontrada",
+    "backHome": "Volver a la Página Principal"
+  },
+  "contact": {
+    "title": "Preguntas y Contacto | Amazon Samaúma Lodge",
+    "description": "Hable con el equipo de Amazon Samaúma Lodge. Aclare dudas sobre reservas, alojamientos, ecoturismo y pesca deportiva en el río Mamori, Careiro Castanho – AM.",
+    "heroLabel": "Contáctenos",
+    "heroTitle": "Preguntas y Ayuda",
+    "heroDesc": "¿Tiene alguna duda o necesita ayuda? Estamos aquí para usted.",
+    "whatsappTitle": "Hable Directo por WhatsApp",
+    "whatsappDesc": "La forma más rápida de aclarar dudas, consultar disponibilidad y hacer su reserva. Nuestro equipo responde todos los días.",
+    "buttonBook": "Hacer Reserva",
+    "buttonQuestions": "Aclarar Dudas",
+    "whatsappHours": "Atención todos los días",
+    "sectionNeedTitle": "¿Qué es lo que necesita?",
+    "sectionNeedDesc": "Haga clic en el botón correspondiente y comenzaremos la conversación en WhatsApp con el mensaje correcto.",
+    "interestFishing": "Pesca Deportiva",
+    "interestEcotourism": "Ecoturismo",
+    "interestRelax": "Alojamiento / Descanso",
+    "infoTitle": "Información de Contacto",
+    "infoLocationLabel": "Ubicación",
+    "infoPhoneLabel": "WhatsApp / Llamada",
+    "infoInstagramLabel": "Instagram",
+    "infoHoursLabel": "Atención",
+    "infoHoursDesc": "WhatsApp disponible todos los días",
+    "howToGetTitle": "Cómo Llegar",
+    "howToGetAirTitle": "Vía Aérea hasta Manaos",
+    "howToGetAirDesc": "Vuele al Aeropuerto Eduardo Gomes (Manaos – MAO). Desde allí, siga hasta Careiro Castanho en coche, transbordador o autobús.",
+    "howToGetBoatTitle": "En Barco hasta el Lodge",
+    "howToGetBoatDesc": "Desde Careiro Castanho, acceso exclusivo en barco. Al confirmar la reserva, enviamos las instrucciones completas por WhatsApp.",
+    "tipTitle": "📍 Consejo Importante",
+    "tipDesc": "Al confirmar su reserva, enviamos toda la información de acceso detallada directamente por WhatsApp, incluido el punto de embarque exacto en Careiro Castanho.",
+    "bookingQuery": "Hola, vengo de la web. ¿Cómo funciona la reserva en el Amazon Samaúma?",
+    "faqQuery": "Hola, vengo de la web. Tengo algunas dudas sobre el Amazon Samaúma."
+  },
+  "lodgeDetail": {
+    "notFound": "Lodge no encontrado",
+    "backToAccommodations": "← Ver todos los alojamientos",
+    "allAccommodations": "Todos los alojamientos",
+    "aboutLodge": "Sobre el Lodge",
+    "checkAvailability": "Consultar Disponibilidad",
+    "roomTypes": "Tipos de Habitación",
+    "roomTypesDesc": "Elija la habitación ideal para su estadia y contáctenos para verificar disponibilidad.",
+    "roomTypesDescEmpty": "Póngase en contacto para verificar disponibilidad y detalles de las habitaciones.",
+    "bookThisRoom": "Reservar esta Habitación"
+  },
+  "accommodations": {
+    "title": "Paquetes y Alojamientos | Hospedaje de Selva en Manaos",
+    "description": "Conozca nuestros lodges flotantes en el río Mamori y paquetes de ecoturismo y pesca deportiva en la Amazonia. Habitaciones privadas con aire acondicionado y Wi-Fi Starlink.",
+    "heroLabel": "Confort en la Amazonia",
+    "heroTitle": "Alojamientos",
+    "heroDesc": "Lodges flotantes sobre el río, con confort e inmersión total en la naturaleza amazónica.",
+    "introLabel": "Nuestros Lodges",
+    "introTitle": "Su Refugio Flotante en la Amazonia",
+    "introP1": "Nuestros lodges fueron diseñados para ofrecer confort e inmersión en la naturaleza. Despiértese con la vista del río, respire el aire puro de la Amazonia y sienta que el tiempo aquí funciona diferente.",
+    "introP2": "Cada alojamiento cuenta con camas cómodas, aire acondicionado, agua caliente, Wi-Fi Starlink y baño privado. La estructura flotante brinda una experiencia única de dormir sobre las aguas del río Mamori.",
+    "introP3": "Al amanecer, el paisaje del río y la selva es su despertador natural. Al atardecer, el deck es el lugar perfecto para contemplar el atardecer amazónico.",
+    "amenitiesTitle": "Lo que ofrecemos en todos los alojamientos",
+    "packagesLabel": "Naturaleza, aventura y experiencias únicas",
+    "packagesTitle": "Paquetes de Ecoturismo en la Amazonia",
+    "packagesDesc": "Elija el paquete ideal y toque para conocer los detalles de cada experiencia. Todos con guía local, hospedaje y alimentación incluidos.",
+    "packagesIncludesTitle": "Incluido en todos los paquetes",
+    "packagesFootnote": "Valores por persona. Consulte condiciones de pago y disponibilidad.",
+    "restaurantLabel": "Restaurante",
+    "restaurantTitle": "Culinaria Amazónica Auténtica",
+    "restaurantP1": "En el Amazon Samaúma Lodge, la experiencia gastronómica es parte de la aventura. Nuestro restaurante sirve platos típicos de la cocina amazónica, destacando los pescados frescos del río Mamori.",
+    "restaurantP2": "Comidas caseras, sabrosas y preparadas con ingredientes locales — un viaje por los sabores auténticos de la Amazonia.",
+    "restaurantButton": "Reserve Su Estadía",
+    "viewItinerary": "Ver itinerario día a día",
+    "viewDetails": "Ver detalles de la experiencia",
+    "roomLabel": "Habitación:",
+    "interestLabel": "Interés:",
+    "dayLabel": "Día",
+    "wantPackage": "Quiero este paquete",
+    "fromPrice": "desde",
+    "orPrice": "o",
+    "noInterest": "sin intereses",
+    "consultPrice": "Consulte tarifas vía WhatsApp",
+    "lodgesAndRooms": "Lodges y Habitaciones",
+    "roomsAvailable": "Habitaciones disponibles:",
+    "viewDetailsArrow": "Ver Detalles →",
+    "package": "Paquete",
+    "perPerson": "Valor por persona",
+    "cashOr": "en efectivo o",
+    "upTo": "en hasta",
+    "wantThisPackage": "Quiero el Paquete",
+    "fallbackLodge1": {
+      "desc": "Lodge flotante en el corazón de la Amazonia. Habitaciones privadas sobre el río con aire acondicionado, Wi-Fi Starlink y restaurante incluido."
+    },
+    "fallbackLodge2": {
+      "desc": "Nuestro segundo lodge flotante con estructura amplia, deck panorámico y 6 cómodas habitaciones al lado del río."
+    },
+    "amenity": {
+      "beds": "Camas Cómodas",
+      "ac": "Aire Acondicionado",
+      "cleaning": "Limpieza Diaria",
+      "wifi": "Wi-Fi Starlink",
+      "hotWater": "Agua Caliente",
+      "restaurant": "Restaurante Incluido"
+    },
+    "includes": {
+      "lodging": {
+        "label": "Hospedagem",
+        "desc": "en alojamientos cómodos"
+      },
+      "food": {
+        "label": "Alimentación",
+        "desc": "comida típica regional"
+      },
+      "transport": {
+        "label": "Transporte",
+        "desc": "fluvial durante todo el itinerario"
+      },
+      "guide": {
+        "label": "Guia Local",
+        "desc": "especializado"
+      },
+      "insurance": {
+        "label": "Seguro",
+        "desc": "seguro de aventura"
+      }
+    }
+  },
+  "about": {
+    "title": "Sobre Nosotros | Amazon Samaúma Lodge",
+    "description": "Conozca la historia del Amazon Samaúma Lodge: un lodge flotante en el río Mamori, Careiro Castanho – AM. Arlos, el dueño, y el equipo que hace que cada estadía sea inolvidable.",
+    "heroLabel": "Río Mamori · Careiro Castanho · AM",
+    "heroTitle": "Sobre Nosotros",
+    "heroSubtitle": "El lodge flotante nacido de la pasión por la Amazonia.",
+    "statBeds": "Alojamientos Privados",
+    "statFishing": "Captura y Libera",
+    "statSpecies": "Especies de Peces",
+    "statRating": "Opinión de Huéspedes ★",
+    "storyLabel": "Nuestra Historia",
+    "storyTitle": "Nacido de la Pasión\npor la Amazonia",
+    "storyP1": "El Amazon Samaúma Lodge es un lodge flotante ubicado en el río Mamori, Careiro Castanho, en el corazón de la Amazonia. Aquí, el acceso es exclusivamente en barco, y ese es el comienzo de la experiencia.",
+    "storyP2": "Con dos lodges flotantes y habitaciones acogedoras, un restaurante de cocina regional y guías especializados, ofrecemos el contacto más auténtico posible con la selva amazónica.",
+    "storyP3": "Nuestra filosofía es simple: conexiones reales con la naturaleza, con la cultura ribereña y con uno mismo.",
+    "storyButton": "Haga su Reserva",
+    "storyGuideLink": "Conozca al Guía →",
+    "storyLocationLabel": "Ubicación",
+    "timelineTitle": "Nuestra Trayectoria",
+    "timelineDesc": "Del sueño a la realidad: cada paso construido con amor por la Amazonia.",
+    "restaurantLabel": "Gastronomía",
+    "restaurantTitle": "La Cocina es Parte de la Aventura",
+    "restaurantP1": "En Amazon Samaúma Lodge, la experiencia gastronómica es parte integral de la aventura. Nuestro restaurante sirve platos típicos de la cocina amazónica, destacando el pescado fresco capturado en el río Mamori.",
+    "restaurantP2": "Comidas caseras, sabrosas y preparadas con ingredientes locales — un viaje por los sabores auténticos de la Amazonia.",
+    "restaurantTags": [
+      "🐟 Pescado a la parrilla",
+      "🍚 Harina de yuca regional",
+      "🍴 Guiso de pescado amazónico",
+      "🌿 Jugos de la selva"
+    ],
+    "valuesTitle": "Nuestros Valores",
+    "valuesDesc": "Los principios que guían cada experiencia que ofrecemos.",
+    "valuesClickTip": "↓ Haga clic en cada valor para saber más",
+    "valuesCardTip": "Toque para saber más",
+    "ctaTitle": "Venga a Conocernos Personalmente",
+    "ctaDesc": "La mejor manera de entender Amazon Samaúma Lodge es vivir la experiencia. Contáctenos y planifique su visita.",
+    "ctaButtonContact": "Póngase en Contacto / Consulta",
+    "ctaButtonBook": "Hacer Reserva",
+    "ownerModalLabel": "Guía y Propietario",
+    "ownerModalTitle": "Amazon Samaúma Lodge",
+    "ownerModalDesc": "Criado a orillas del río Mamori, nuestro guía conoce cada curva del río, cada ave de la selva y cada pez en las aguas oscuras del Paraná. La Amazonia vivida desde dentro, transmitida de generación en generación.",
+    "ownerModalTags": [
+      "🎣 Pesca Deportiva",
+      "🌿 Senderismo",
+      "🐊 Fauna Nocturna",
+      "🌅 Tours al Atardecer"
+    ],
+    "ownerModalButton": "Hablar con el Guía",
+    "values": {
+      "sustainability": {
+        "title": "Sostenibilidad",
+        "short": "Bajo impacto ambiental",
+        "long": "Cada decisión en Amazon Samaúma Lodge está guiada por el respeto a la selva. Utilizamos la energía de forma consciente, reducimos el plástico y trabajamos en armonía con la naturaleza que nos cobija. Preservar la Amazonia es nuestro compromiso con las generaciones futuras."
+      },
+      "hospitality": {
+        "title": "Hospitalidad",
+        "short": "Le recibimos como familia",
+        "long": "Cada huésped es recibido con una sonrisa sincera, café fresco y toda la atención de nuestro equipo. Nuestra hospitalidad nace de la cultura ribereña: cálida, espontánea y verdadera. Queremos que se sienta como en casa en el corazón de la Amazonia."
+      },
+      "safety": {
+        "title": "Seguridad",
+        "short": "Guías experimentados y equipo de primera",
+        "long": "Todos los recorridos están a cargo de guías locales con un profundo conocimiento del río y la selva. Mantenemos equipos de seguridad de calidad, chalecos salvavidas y primeros auxilios en todas las salidas. Su familia puede relajarse con total tranquilidad."
+      },
+      "community": {
+        "title": "Comunidad",
+        "short": "Valoramos a la gente ribereña",
+        "long": "Trabajamos con residentes locales, compramos a productores ribereños y contribuimos a la prosperidad de la comunidad de Paraná do Mamori. El turismo que practicamos respeta a las personas que custodian la selva desde hace siglos."
+      },
+      "fishing": {
+        "title": "Pesca Responsable",
+        "short": "Siempre Captura y Libera",
+        "long": "Practicamos el Captura y Libera en todos los viajes de pesca. Cada tucunaré capturado es devuelto cuidadosamente al río, asegurando que las especies se reproduzcan y que Mamori siga siendo uno de los mejores destinos de pesca deportiva del mundo."
+      },
+      "authenticity": {
+        "title": "Autenticidad",
+        "short": "Amazonia real, sin filtros",
+        "long": "Amazon Samaúma Lodge no es un resort. Es una inmersión real en la Amazonia, con sus sonidos, olores, sabores y ritmos únicos. El atardecer sobre el Mamori, el delfín rosado que aparece de la nada, el silencio de la selva por la noche... todo real. Esta autenticidad es nuestro mayor activo."
+      }
+    },
+    "timeline": [
+      {
+        "year": "El Origen",
+        "title": "Nace una Pasión",
+        "desc": "El lodge surge de un amor genuino por la Amazonia: el río, la selva, la pesca y la gente ribereña de Paraná do Mamori."
+      },
+      {
+        "year": "La Estructura",
+        "title": "Lodge Flotante",
+        "desc": "Lodges flotantes construidos sobre el río, integrados con la naturaleza, sin dañarla."
+      },
+      {
+        "year": "La Gente",
+        "title": "Equipo 100% Local",
+        "desc": "Guías, cocineros y personal criados en la región, poseedores del conocimiento más valioso: la Amazonia vivida desde dentro."
+      },
+      {
+        "year": "Hoy",
+        "title": "Calificación de 5 Estrellas",
+        "desc": "Cientos de huéspedes de todo Brasil y del mundo. Calificación promedio de 5.0, reflejo del cuidado en cada detalle."
+      }
+    ]
+  },
+  "ecotourism": {
+    "title": "Senderos, Aventuras y Ecoturismo en la Amazonia | Amazon Samaúma",
+    "description": "Explore la selva amazónica con senderos guiados, safaris nocturnos, observación de delfines y caimanes, paseos en canoa y pesca deportiva en Manaos (Careiro Castanho).",
+    "heroLabel": "Amazonia Auténtica · Todo el Año",
+    "heroTitle": "Ecoturismo",
+    "heroDesc": "Aventuras guiadas por el corazón de la Amazonia, para toda la familia.",
+    "introLabel": "Naturaleza Salvaje",
+    "introTitle": "La Amazonia en su Estado Más Puro",
+    "introP1": "El Amazon Samaúma Lodge está rodeado de uno de los ecosistemas más ricos y biodiversos del planeta. A pocos metros del lodge, la selva amazónica primaria ofrece experiencias de ecoturismo únicas en el mundo.",
+    "introP2": "Delfines rosados, caimanes, monos capuchinos, guacamayos azules, anacondas y cientos de especies de aves habitan la región. La probabilidad de avistamiento es alta durante todo el año.",
+    "introButton": "Hacer Reserva",
+    "toursTitle": "Paseos y Actividades",
+    "toursDesc": "Toque cualquier actividad para ver detalles, galería de fotos y realizar su reserva.",
+    "toursFootnote": "↓ Todos los paseos son guiados por expertos locales",
+    "tourCardTip": "Toque para ver detalles",
+    "modalIncludes": "Qué incluye",
+    "modalButton": "Reservar este Paseo",
+    "faunaLabel": "Fauna Amazónica",
+    "faunaTitle": "Una Biodiversidad Sin Igual",
+    "faunaDesc": "El Paraná do Mamori y sus alrededores albergan una de las mayores concentraciones de especies de América del Sur. En la región es posible avistar:",
+    "faunaList": [
+      "🐬 Delfines rosados (delfines de agua dulce)",
+      "🐊 Caimanes (varias especies)",
+      "🐒 Monos: capuchino, aullador, uakari",
+      "🦜 Guacamayos azules, loros y tucanes",
+      "🐍 Anacondas, boas y nutrias gigantes",
+      "🦉 Búhos, nictibios y fauna nocturna"
+    ],
+    "faunaButton": "Agende su Experiencia",
+    "galleryTitle": "Galería de Fauna",
+    "galleryDesc": "Algunas de las increíbles especies capturadas por las lentes de nuestros visitantes y guías.",
+    "difficulty": {
+      "easy": "Fácil",
+      "none": "Ninguna",
+      "moderate": "Leve a Moderado",
+      "medMod": "Moderado",
+      "custom": "Personalizado"
+    },
+    "duration": {
+      "safari": "3–4 horas",
+      "trails": "2–5 horas",
+      "sunset": "1,5–2 horas",
+      "night": "2–3 horas (noche)",
+      "culture": "4–6 horas",
+      "custom": "Personalizado"
+    },
+    "tag": {
+      "family": "Familia",
+      "adventure": "Aventura",
+      "mustSee": "Imperdible",
+      "exciting": "Emocionante",
+      "cultural": "Cultural",
+      "exclusive": "Exclusivo"
+    },
+    "toursList": [
+      {
+        "title": "Safari Amazónico",
+        "subtitle": "Flora y Fauna",
+        "desc": "Embárquese en una expedición guiada por los canales y bosques alrededor del lodge. Observe delfines, caimanes, monos, guacamayos y cientos de especies de aves.",
+        "longDesc": "El Safari Amazónico es la experiencia más completa que ofrece Amazon Samaúma Lodge. A bordo de una embarcación silenciosa, navegamos por los canales y lagos que rodean el lodge, sumergiéndonos en el ecosistema más rico del planeta. Nuestros guías nativos conocen cada curva del río, cada ave que canta en la copa de los árboles, cada rastro dejado por la fauna que vive a orillas del río Mamori. Es una clase viva con paredes de selva y suelo de río.",
+        "highlights": [
+          "🐬 Avistamiento de delfines rosados",
+          "🐊 Observación de caimanes en las orillas",
+          "🦜 Identificación de más de 50 especies de aves",
+          "🐒 Monos capuchinos, uakaris y aulladores",
+          "🌿 Presentación de plantas medicinales",
+          "📸 Paradas fotográficas en puntos privilegiados"
+        ]
+      },
+      {
+        "title": "Senderos en la Selva",
+        "subtitle": "Caminatas Guiadas",
+        "desc": "Explore senderos por la selva primaria con diferentes niveles de dificultad. Nuestros guías le presentarán plantas medicinales, árboles centenarios y secretos de la selva.",
+        "longDesc": "Camine por la selva primaria amazónica acompañado por guías que nacieron y crecieron en esta tierra. Los senderos atraviesan diferentes ambientes: capoeiras, bosques inundados (igapós), tierra firme y orillas de arroyos. En cada parada, aprenderá sobre árboles gigantes, lianas, plantas medicinales utilizadas por los ribereños durante siglos y los animales que se camuflan entre las hojas. Una experiencia sensorial única: el olor de la selva húmeda, el sonido de las aves, la textura del musgo.",
+        "highlights": [
+          "🌳 Árboles centenarios como la samaúma",
+          "🌿 Plantas medicinales y sus usos tradicionales",
+          "🦋 Mariposas e insectos raros",
+          "🐸 Anfibios y reptiles de la selva",
+          "🍃 Técnicas de supervivencia en la selva",
+          "📍 Múltiples niveles: fácil, medio y desafiante"
+        ]
+      },
+      {
+        "title": "Atardecer en el Río",
+        "subtitle": "Paseo en Barco",
+        "desc": "Uno de los momentos más especiales del lodge. Salga en barco al final de la tarde y contemple el atardecer sobre el río Mamori en todo su esplendor.",
+        "longDesc": "A las 17h, el río Mamori se convierte en un espejo dorado. El sol amazónico se oculta lentamente tras las copas de los árboles, tiñendo el cielo de rojo, naranja y violeta, colores que no existen en ningún otro lugar del mundo. Salimos en barco en pequeños grupos, navegamos hacia las zonas más abiertas del río y simplemente apagamos el motor. Silencio. Naturaleza. Un atardecer que quedará en su memoria para siempre.",
+        "highlights": [
+          "🌅 Vista panorámica del río Mamori",
+          "🚤 Paseo en grupos pequeños (más íntimo)",
+          "🍹 Bebidas y aperitivos a bordo (bajo petición)",
+          "📸 Oportunidad de fotografía única",
+          "🌙 Regreso al anochecer con cielo estrellado",
+          "💑 Experiencia romántica para parejas"
+        ]
+      },
+      {
+        "title": "Expedición Nocturna",
+        "subtitle": "Caimanes y Fauna Nocturna",
+        "desc": "Para aventureros: salidas nocturnas en barco para avistamiento de caimanes y pesca nocturna. Intensa, segura y guiada por especialistas de la zona.",
+        "longDesc": "La selva amazónica por la noche es un mundo completamente diferente. Equipados con linternas y guiados por profesionales que conocen cada palmo del río, salimos después de cenar a descubrir la vida nocturna del Mamori. Los ojos de los caimanes brillan rojos bajo la luz de la linterna, los nictibios emiten su canto característico, las nutrias gigantes duermen en las orillas. Para quienes se atreven a sentarse en la proa y mirar a la oscuridad: esta es la experiencia más visceral de la Amazonia.",
+        "highlights": [
+          "🐊 Observación de caimanes por la noche",
+          "🦉 Nictibios, búhos y aves nocturnas",
+          "🎣 Pesca nocturna artesanal",
+          "⭐ Cielo con la Vía Láctea visible",
+          "🦟 Kit repelente proporcionado",
+          "🔦 Equipos de seguridad completos"
+        ]
+      },
+      {
+        "title": "Cultura Ribeirinha",
+        "subtitle": "Comunidades Locales",
+        "desc": "Visite comunidades ribereñas del río Mamori y conozca de cerca la cultura, tradiciones y modo de vida de los habitantes de la Amazonia.",
+        "longDesc": "Las comunidades ribereñas del río Mamori viven como lo han hecho durante siglos: de la pesca artesanal, la extracción forestal sostenible y la cultura oral transmitida de generación en generación. Visitamos comunidades socias, donde los residentes nos reciben con harina de yuca, tucupi e historias. Aprenderá a elaborar harina de mandioca, escuchará leyendas de la selva y entenderá cómo convive el habitante amazónico con el río más grande del mundo. Un encuentro humano profundo y transformador.",
+        "highlights": [
+          "🏘️ Visitas a comunidades ribereñas socias",
+          "🍚 Gastronomía regional amazónica típica",
+          "🎭 Historias y leyendas de la selva",
+          "🎣 Técnicas de pesca artesanal",
+          "🪵 Artesanía local",
+          "🤝 Encuentro cultural genuino"
+        ]
+      },
+      {
+        "title": "Itinerario Personalizado",
+        "subtitle": "Experiencia a Medida",
+        "desc": "Organice su itinerario de aventuras según sus intereses, condición física y duración de la estancia.",
+        "longDesc": "Cada viajero es único. Pensando en ello, Amazon Samaúma Lodge ofrece la posibilidad de armar un itinerario completamente personalizado, combinando paseos en barco, senderismo, pesca, visitas culturales y momentos de contemplación, según su perfil, tiempo disponible e intereses. Ya sea para una luna de miel, un viaje en grupo, una aventura extrema o un retiro de descanso, nuestros guías crean la experiencia perfecta para usted.",
+        "highlights": [
+          "🗺️ Planificación 100% personalizada",
+          "👨‍👩‍👧 Ideal para familias, parejas y grupos",
+          "🎣 Combinación de pesca + ecoturismo",
+          "🌙 Incluye recorridos diurnos y nocturnos",
+          "💼 Paquetes especiales para lunas de miel",
+          "📞 Atención vía WhatsApp previa al viaje"
+        ]
+      }
+    ]
+  },
+  "fishing": {
+    "title": "Pesca Deportiva en la Amazonia | Amazon Samaúma Lodge",
+    "description": "Pesca deportiva en el río Mamori — Tucunaré, Tambaqui y más. Guías experimentados, barcos equipados, Captura y Libera. Temporada: Sep–Ene. Careiro Castanho – AM.",
+    "heroLabel": "Río Mamori · Temporada: Sep – Ene",
+    "heroTitle": "Pesca Deportiva",
+    "heroDesc": "La emoción de pescar en los ríos más preservados de la Amazonia, guiado por expertos.",
+    "introLabel": "Amazon Sport Fishing",
+    "introTitle": "Pesca de Trofeo en la Amazonia",
+    "introP1": "La Amazonia es uno de los mejores destinos de pesca deportiva del mundo. En el lodge, ofrecemos salidas guiadas en el río Mamori para capturar al legendario Tucunaré Açu — el Peacock Bass — además de otras especies típicas de la región.",
+    "introP2": "Nuestro propietario es también un guía experimentado, lo que garantiza una experiencia segura, divertida e inolvidable. El sistema de Captura y Libera asegura la preservación de las especies para las futuras generaciones.",
+    "introFeatures": [
+      "Tucunaré Açu",
+      "Barcos Equipados",
+      "Mejor: Sep – Ene",
+      "Captura y Libera",
+      "Guías Locales",
+      "Pesca Nocturna"
+    ],
+    "seasonsTitle": "Calendario de Temporadas",
+    "seasonsDesc": "Seleccione un período para ver detalles",
+    "seasons": [
+      {
+        "period": "Ene–Mar",
+        "name": "Creciente",
+        "tip": "Lagos y selvas inundadas. Bueno para la pesca con mosca."
+      },
+      {
+        "period": "Mar–Jun",
+        "name": "Lleno",
+        "tip": "Peces dispersos. Se recomienda cebo natural."
+      },
+      {
+        "period": "Jun–Sep",
+        "name": "Bajante",
+        "tip": "Peces concentrados en lagos. Cebo artificial."
+      },
+      {
+        "period": "Sep–Ene",
+        "name": "Sequía ★",
+        "tip": "MEJOR ÉPOCA — peces concentrados, agua clara, tucunarés enormes."
+      }
+    ],
+    "galleryTitle": "Galería de Pesca",
+    "galleryDesc": "fotos · Haga clic para ampliar",
+    "galleryButton": "Reserve su Viaje de Pesca",
+    "galleryItems": [
+      {
+        "label": "Tucunaré Açu",
+        "caption": "El legendario Peacock Bass del río Mamori — el mayor trofeo de la pesca deportiva amazónica."
+      },
+      {
+        "label": "Salida al Amanecer",
+        "caption": "Partimos al amanecer, cuando los tucunarés están más activos en las orillas y bahías del río."
+      },
+      {
+        "label": "Atardecer en el Río",
+        "caption": "El momento en que la pesca se une a la contemplación — un silencio que solo la Amazonia ofrece."
+      },
+      {
+        "label": "Canales Secretos",
+        "caption": "Nuestros guías conocen cada canal donde se concentran los peces durante la sequía."
+      },
+      {
+        "label": "Tucunaré en Acción",
+        "caption": "Las aguas oscuras del Mamori esconden cardúmenes de tucunaré listos para el combate."
+      },
+      {
+        "label": "Equipo y Señuelos",
+        "caption": "Señuelos artificiales seleccionados para cada tipo de agua y estación. Mosca, pesca de superficie y fondo."
+      },
+      {
+        "label": "Pescadores y Trofeos",
+        "caption": "Cada pez capturado se devuelve con cuidado al río — el espíritu de Captura y Libera."
+      }
+    ],
+    "statsTitle": "Cifras del Mamori",
+    "stats": [
+      {
+        "value": "12kg+",
+        "label": "Mayor Tucunaré",
+        "sub": "capturado en el Mamori"
+      },
+      {
+        "value": "100%",
+        "label": "Captura y Libera",
+        "sub": "preservación de especies"
+      },
+      {
+        "value": "15+",
+        "label": "Especies",
+        "sub": "en los ríos del lodge"
+      },
+      {
+        "value": "4 meses",
+        "label": "Temporada Alta",
+        "sub": "Sep a Ene"
+      }
+    ],
+    "tipsTitle": "Consejos de Pesca",
+    "tips": [
+      {
+        "title": "Señuelos Artificiales",
+        "desc": "Los poppers y jerkbaits de superficie son letales para el tucunaré durante la sequía."
+      },
+      {
+        "title": "Horarios Ideales",
+        "desc": "Entre las 6 AM–9 AM y 4 PM–6 PM los peces están más activos en las orillas."
+      },
+      {
+        "title": "Puntos Secretos",
+        "desc": "Nuestros guías conocen los puntos exactos donde se concentran los cardúmenes."
+      },
+      {
+        "title": "Lectura del Río",
+        "desc": "Rápidos, remansos y pozas de agua son las mejores estructuras para pescar."
+      }
+    ],
+    "expeditionLabel": "Expedición Especial",
+    "expeditionTitle": "Pesca Nocturna y Observación de Caimanes",
+    "expeditionP1": "Para los aventureros, ofrecemos salidas nocturnas en bote para avistamiento de caimanes y pesca nocturna. Una experiencia intensa y segura, guiada por profesionales con amplio conocimiento de la zona.",
+    "expeditionP2": "Bajo la luz de las linternas, la vida nocturna amazónica revela sus secretos: caimanes deslizándose por las orillas, ojos brillantes en la oscuridad y los sonidos inconfundibles de la selva por la noche.",
+    "expeditionButton": "Más Información / Consulta",
+    "ctaTitle": "¿Listo para la Mayor Pesca de su Vida?",
+    "ctaDesc": "Contáctenos vía WhatsApp para diseñar su paquete de pesca deportiva personalizado en el río Mamori.",
+    "ctaButton": "Reservar Ahora",
+    "ctaButtonEco": "Ver Ecoturismo",
+    "lightboxLabel": "Galería de Pesca",
+    "liked": "¡Le gusta!",
+    "like": "Me gusta",
+    "lightboxButton": "Reservar Ahora"
   }
 }

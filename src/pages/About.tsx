@@ -7,17 +7,14 @@ import {
   motion, AnimatePresence, useMotionValue, useSpring,
   useTransform, useInView, animate,
 } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import SectionFadeIn from "@/components/SectionFadeIn";
 import SEOHead from "@/components/SEOHead";
 import BookingModal from "@/components/BookingModal";
-import { Link } from "react-router-dom";
 import { photos } from "@/lib/photos";
 const heroImg          = "/fotos_reais_amazon/about-hero-artesanato.webp";
 const accommodationImg = "/fotos_reais_amazon/about-card-floresta.webp";
-const restaurantImg    = photos.restaurante;
 const ownerImg         = photos.proprietario;
-const fishingImg       = photos.pesca;
-const ecotourismImg    = photos.ecoturismo;
 
 // ─── Spring configs ───────────────────────────────────────────────────────────
 const sp = { type: "spring" as const, stiffness: 380, damping: 28 };
@@ -168,58 +165,67 @@ function Counter({ to, suffix = "" }: { to: number; suffix?: string }) {
 // ─── Values data ──────────────────────────────────────────────────────────────
 const values = [
   {
-    icon: Leaf, emoji: "🌿", title: "Sustentabilidade",
-    short: "Baixo impacto ambiental",
+    icon: Leaf, emoji: "🌿",
+    titleKey: "about.values.sustainability.title",
+    shortKey: "about.values.sustainability.short",
     color: "hsl(147,55%,38%)", glow: "rgba(50,160,80,0.3)",
-    long: "Cada decisão no Amazon Samaúma Lodge é guiada pelo respeito à floresta. Utilizamos energia de forma consciente, reduzimos o plástico e trabalhamos em harmonia com a natureza que nos abriga. Preservar a Amazônia é nosso compromisso com as próximas gerações.",
+    longKey: "about.values.sustainability.long",
     image: "/sustentabilidade-canoa.jpeg",
   },
   {
-    icon: Heart, emoji: "🤝", title: "Hospitalidade",
-    short: "Recebemos como família",
+    icon: Heart, emoji: "🤝",
+    titleKey: "about.values.hospitality.title",
+    shortKey: "about.values.hospitality.short",
     color: "hsl(0,70%,62%)", glow: "rgba(220,60,60,0.28)",
-    long: "Cada hóspede é recebido com um sorriso genuíno, um café fresco e toda a atenção da equipe. Nossa hospitalidade nasce da cultura ribeirinha — calorosa, espontânea e verdadeira. Queremos que você se sinta em casa no coração da Amazônia.",
+    longKey: "about.values.hospitality.long",
     image: "/hospitalidade-grupo-lodge.jpeg",
   },
   {
-    icon: Shield, emoji: "🛡️", title: "Segurança",
-    short: "Guias experientes & equipamentos top",
+    icon: Shield, emoji: "🛡️",
+    titleKey: "about.values.safety.title",
+    shortKey: "about.values.safety.short",
     color: "hsl(210,70%,58%)", glow: "rgba(50,120,220,0.28)",
-    long: "Todos os passeios são conduzidos por guias locais com vasto conhecimento do rio e da floresta. Mantemos equipamentos de segurança de qualidade, coletes salva-vidas e primeiros socorros em todas as saídas. Sua família pode relaxar com total tranquilidade.",
+    longKey: "about.values.safety.long",
     image: "/seguranca-barco-equipe.jpeg",
   },
   {
-    icon: Users, emoji: "👨‍👩‍👧", title: "Comunidade",
-    short: "Valorizamos o povo ribeirinho",
+    icon: Users, emoji: "👨‍👩‍👧",
+    titleKey: "about.values.community.title",
+    shortKey: "about.values.community.short",
     color: "hsl(280,60%,62%)", glow: "rgba(180,80,220,0.28)",
-    long: "Trabalhamos com moradores locais, compramos de produtores ribeirinhos e contribuímos para que a comunidade do Paraná do Mamori prospere. O turismo que praticamos respeita as pessoas que guardam a floresta há séculos.",
+    longKey: "about.values.community.long",
     image: "/comunidade-artesanato.jpeg",
   },
   {
-    icon: Fish, emoji: "🎣", title: "Pesca Responsável",
-    short: "Pesque & Solte sempre",
+    icon: Fish, emoji: "🎣",
+    titleKey: "about.values.fishing.title",
+    shortKey: "about.values.fishing.short",
     color: "hsl(195,70%,52%)", glow: "rgba(30,180,200,0.3)",
-    long: "Praticamos o Pesque & Solte em todas as saídas de pesca. Cada tucunaré capturado é devolvido ao rio com cuidado, garantindo que as espécies se reproduzam e que o Mamori continue sendo um dos melhores destinos de pesca esportiva do mundo.",
+    longKey: "about.values.fishing.long",
     image: "/pesca-responsavel-sunset.jpeg",
   },
   {
-    icon: Compass, emoji: "🧭", title: "Autenticidade",
-    short: "Amazônia real, sem filtros",
+    icon: Compass, emoji: "🧭",
+    titleKey: "about.values.authenticity.title",
+    shortKey: "about.values.authenticity.short",
     color: "hsl(38,80%,57%)", glow: "rgba(220,160,30,0.3)",
-    long: "O Amazon Samaúma Lodge não é um resort. É um mergulho real na Amazônia — com seus sons, cheiros, sabores e ritmos únicos. O pôr do sol sobre o Mamori, o boto que aparece do nada, o silêncio da floresta à noite — tudo real. Essa autenticidade é o nosso maior patrimônio.",
+    longKey: "about.values.authenticity.long",
     image: "/autenticidade-fogueira.jpeg",
   },
 ];
 
-const timeline = [
-  { icon: "🌱", year: "A Origem", title: "Uma Paixão Nasce", desc: "O lodge surge de um amor genuíno pela Amazônia — rio, floresta, pesca e o povo ribeirinho do Paraná do Mamori." },
-  { icon: "🏗️", year: "A Estrutura", title: "Lodge Flutuante", desc: "Pousadas flutuantes construídas sobre o rio — integradas à natureza, sem agredi-la." },
-  { icon: "👥", year: "As Pessoas", title: "Equipe 100% Local", desc: "Guias, cozinheiros e funcionários criados na região — donos do conhecimento mais precioso: a Amazônia vivida por dentro." },
-  { icon: "⭐", year: "Hoje", title: "Avaliação 5 Estrelas", desc: "Centenas de hóspedes de todo o Brasil e do mundo. Avaliação média 5.0 — reflexo do cuidado em cada detalhe." },
+type TimelineItem = { yearKey: string; titleKey: string; descKey: string; icon: string };
+
+const timeline: TimelineItem[] = [
+  { icon: "🌱", yearKey: "about.timeline.0.year", titleKey: "about.timeline.0.title", descKey: "about.timeline.0.desc" },
+  { icon: "🏗️", yearKey: "about.timeline.1.year", titleKey: "about.timeline.1.title", descKey: "about.timeline.1.desc" },
+  { icon: "👥", yearKey: "about.timeline.2.year", titleKey: "about.timeline.2.title", descKey: "about.timeline.2.desc" },
+  { icon: "⭐", yearKey: "about.timeline.3.year", titleKey: "about.timeline.3.title", descKey: "about.timeline.3.desc" },
 ];
 
 // ─── Value Pop-up Modal ───────────────────────────────────────────────────────
 function ValueModal({ value, onClose }: { value: typeof values[0]; onClose: () => void }) {
+  const { t } = useTranslation();
   useEffect(() => {
     const h = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", h);
@@ -241,7 +247,7 @@ function ValueModal({ value, onClose }: { value: typeof values[0]; onClose: () =
         onClick={e => e.stopPropagation()}>
         {/* Image header */}
         <div className="relative h-52 overflow-hidden">
-          <motion.img src={value.image} alt={value.title}
+          <motion.img src={value.image} alt={t(value.titleKey)}
             className="w-full h-full object-cover"
             initial={{ scale: 1.1 }} animate={{ scale: 1 }} transition={{ duration: 0.7 }} />
           <div className="absolute inset-0 bg-gradient-to-t from-black/75 to-transparent" />
@@ -261,16 +267,16 @@ function ValueModal({ value, onClose }: { value: typeof values[0]; onClose: () =
           <motion.div className="inline-flex items-center gap-2 px-3 py-1 rounded-full mb-4 text-xs font-body font-bold uppercase tracking-wider"
             style={{ background: value.glow, border: `1px solid ${value.color}50`, color: value.color }}
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
-            <value.icon size={12} /> {value.short}
+            <value.icon size={12} /> {t(value.shortKey)}
           </motion.div>
-          <h3 className="font-heading text-2xl text-white mb-3">{value.title}</h3>
-          <p className="text-white/80 font-body text-sm leading-relaxed">{value.long}</p>
+          <h3 className="font-heading text-2xl text-white mb-3">{t(value.titleKey)}</h3>
+          <p className="text-white/80 font-body text-sm leading-relaxed">{t(value.longKey)}</p>
           <BookingModal>
             <motion.button 
               className="mt-6 flex items-center justify-center flex-wrap gap-2 px-4 py-3.5 rounded-2xl text-sm font-bold uppercase tracking-wide font-body text-white w-full h-auto min-h-[50px] text-center leading-snug"
               style={{ background: "linear-gradient(135deg,#d4af37,#aa8529)", boxShadow: "0 4px 20px rgba(194,155,71,0.4)" }}
               whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}>
-              <MessageCircle size={16} className="shrink-0" /> Reserve sua Estadia
+              <MessageCircle size={16} className="shrink-0" /> {t("about.ownerModalButton")}
             </motion.button>
           </BookingModal>
         </div>
@@ -287,6 +293,7 @@ function ValueCard({ value, index, onClick }: { value: typeof values[0]; index: 
   const rx = useSpring(useTransform(my, [-60, 60], [8, -8]), { stiffness: 300, damping: 28 });
   const ry = useSpring(useTransform(mx, [-60, 60], [-8, 8]), { stiffness: 300, damping: 28 });
   const ref = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation();
 
   return (
     <motion.div ref={ref}
@@ -332,9 +339,9 @@ function ValueCard({ value, index, onClick }: { value: typeof values[0]; index: 
           )}
         </AnimatePresence>
 
-        <h3 className="font-heading text-lg text-white mb-1 font-semibold">{value.title}</h3>
-        <p className="text-xs font-body mb-3" style={{ color: value.color }}>{value.short}</p>
-        <p className="text-white/60 font-body text-sm leading-relaxed line-clamp-3">{value.long}</p>
+        <h3 className="font-heading text-lg text-white mb-1 font-semibold">{t(value.titleKey)}</h3>
+        <p className="text-xs font-body mb-3" style={{ color: value.color }}>{t(value.shortKey)}</p>
+        <p className="text-white/60 font-body text-sm leading-relaxed line-clamp-3">{t(value.longKey)}</p>
 
         <motion.div className="flex items-center gap-1.5 mt-4 text-xs font-body"
           animate={{ opacity: hov ? 1 : 0.3 }}>
@@ -342,7 +349,7 @@ function ValueCard({ value, index, onClick }: { value: typeof values[0]; index: 
             style={{ background: value.color }}
             animate={{ scale: hov ? [1, 1.6, 1] : 1 }}
             transition={{ repeat: Infinity, duration: 0.9 }} />
-          <span style={{ color: value.color }}>Toque para saber mais</span>
+          <span style={{ color: value.color }}>{t("about.valuesCardTip")}</span>
         </motion.div>
       </div>
 
@@ -357,12 +364,16 @@ function ValueCard({ value, index, onClick }: { value: typeof values[0]; index: 
 const About = () => {
   const [activeValue, setActiveValue] = useState<typeof values[0] | null>(null);
   const [ownerOpen, setOwnerOpen] = useState(false);
+  const { t } = useTranslation();
+
+  const restaurantTags = t("about.restaurantTags", { returnObjects: true }) as string[];
+  const ownerModalTags = t("about.ownerModalTags", { returnObjects: true }) as string[];
 
   return (
     <div className="bg-background pt-20 overflow-x-hidden">
       <SEOHead
-        title="Sobre Nós | Amazon Samaúma Lodge"
-        description="Conheça a história do Amazon Samaúma Lodge — pousada flutuante no Paraná do Mamori, Careiro Castanho – AM. Arlos, o proprietário, e a equipe que torna cada estadia inesquecível."
+        title={t("about.title")}
+        description={t("about.description")}
         canonicalPath="/sobre"
         ogImage="https://amazon-samauma-lodge.com.br/fotos_reais_amazon/about-hero-artesanato.webp"
       />
@@ -382,7 +393,7 @@ const About = () => {
         <div className="relative z-10 text-center px-4">
           <motion.div className="inline-flex items-center gap-2 mb-5 text-amber-300 font-body text-xs font-semibold tracking-[4px] uppercase"
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
-            <MapPin size={12} /> Paraná do Mamori · Careiro Castanho · AM
+            <MapPin size={12} /> {t("about.heroLabel")}
           </motion.div>
 
           {/* Animated underline title */}
@@ -390,7 +401,7 @@ const About = () => {
             <motion.h1 className="heading-xl text-primary-foreground relative z-10"
               initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.35, ...spSlow }}>
-              Sobre Nós
+              {t("about.heroTitle")}
             </motion.h1>
             <svg className="absolute -bottom-2 left-0 w-full" height="8" viewBox="0 0 300 8">
               <motion.path d="M0,4 Q75,0 150,4 Q225,8 300,4"
@@ -403,7 +414,7 @@ const About = () => {
 
           <motion.p className="text-body-lg text-primary-foreground/80 mt-6 max-w-xl mx-auto"
             initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
-            A pousada flutuante nascida da paixão pela Amazônia.
+            {t("about.heroSubtitle")}
           </motion.p>
 
           {/* Scroll cue */}
@@ -419,10 +430,10 @@ const About = () => {
       <section className="py-8 bg-primary border-b border-white/10">
         <div className="container-lodge grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           {[
-            { val: 5, suf: "", label: "Acomodações Privativas", Icon: Anchor },
-            { val: 100, suf: "%", label: "Pesque & Solte", Icon: Fish },
-            { val: 15, suf: "+", label: "Espécies de Peixe", Icon: TreePine },
-            { val: 5, suf: ".0", label: "Avaliação Hóspedes ★", Icon: Star },
+            { val: 5, suf: "", label: t("about.statBeds"), Icon: Anchor },
+            { val: 100, suf: "%", label: t("about.statFishing"), Icon: Fish },
+            { val: 15, suf: "+", label: t("about.statSpecies"), Icon: TreePine },
+            { val: 5, suf: ".0", label: t("about.statRating"), Icon: Star },
           ].map(({ val, suf, label, Icon }, i) => (
             <motion.div key={label} className="flex flex-col items-center gap-1"
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
@@ -451,23 +462,23 @@ const About = () => {
               height={96}
               loading="lazy"
             />
-            <span className="text-sm font-body font-semibold tracking-widest uppercase text-gold">Nossa História</span>
-            <h2 className="heading-lg mt-2 mb-6">Nascido da Paixão<br />pela Amazônia</h2>
+            <span className="text-sm font-body font-semibold tracking-widest uppercase text-gold">{t("about.storyLabel")}</span>
+            <h2 className="heading-lg mt-2 mb-6" style={{ whiteSpace: "pre-line" }}>{t("about.storyTitle")}</h2>
             <p className="text-body text-muted-foreground mb-4">
-              O Amazon Samaúma Lodge é uma pousada flutuante localizada no Paraná do Mamori, Careiro Castanho, no coração do Amazonas. Aqui, o acesso é feito exclusivamente de barco — e esse já é o começo da experiência.
+              {t("about.storyP1")}
             </p>
             <p className="text-body text-muted-foreground mb-4">
-              Com duas pousadas flutuantes e quartos aconchegantes, restaurante com culinária regional e guias especializados, oferecemos o contato mais autêntico possível com a floresta amazônica.
+              {t("about.storyP2")}
             </p>
             <p className="text-body text-muted-foreground mb-8">
-              Nossa filosofia é simples: conexões reais — com a natureza, com a cultura ribeirinha e consigo mesmo.
+              {t("about.storyP3")}
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <BookingModal>
                 <motion.button
                   className="inline-flex items-center justify-center flex-wrap gap-2 px-8 py-4 bg-accent text-accent-foreground font-body font-bold text-sm tracking-widest uppercase rounded hover:bg-gold-light transition-colors duration-300 h-auto min-h-[50px] text-center leading-snug"
                   whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
-                  Faça sua Reserva
+                  {t("about.storyButton")}
                 </motion.button>
               </BookingModal>
               <motion.button
@@ -475,7 +486,7 @@ const About = () => {
                 whileHover={{ x: 4 }} transition={sp}
                 onClick={() => setOwnerOpen(true)}>
                 <img src={ownerImg} alt="Guia" className="w-9 h-9 rounded-full object-cover object-top border-2 border-gold/40" />
-                <span>Conheça o Guia →</span>
+                <span>{t("about.storyGuideLink")}</span>
               </motion.button>
             </div>
           </SectionFadeIn>
@@ -494,7 +505,7 @@ const About = () => {
                 whileInView={{ opacity: 1, scale: 1, x: 0 }}
                 viewport={{ once: true }} transition={{ ...sp, delay: 0.55 }}
                 whileHover={{ y: -4 }}>
-                <div className="text-white/50 text-xs font-body mb-1">Localização</div>
+                <div className="text-white/50 text-xs font-body mb-1">{t("about.storyLocationLabel")}</div>
                 <div className="text-white font-body font-semibold text-sm">Paraná do Mamori</div>
                 <div className="text-amber-300 text-xs font-body mt-0.5">Careiro Castanho, AM</div>
                 <div className="flex items-center gap-1 mt-2">
@@ -515,16 +526,16 @@ const About = () => {
         style={{ background: "linear-gradient(160deg,hsl(147,22%,96%) 0%,hsl(38,30%,96%) 100%)" }}>
         <div className="container-lodge">
           <SectionFadeIn>
-            <h2 className="heading-lg text-center mb-3">Nossa Jornada</h2>
+            <h2 className="heading-lg text-center mb-3">{t("about.timelineTitle")}</h2>
             <p className="text-body text-center text-muted-foreground max-w-xl mx-auto mb-16">
-              Do sonho à realidade — cada passo construído com amor pela Amazônia.
+              {t("about.timelineDesc")}
             </p>
           </SectionFadeIn>
           <div className="relative">
             <TimelineSVG />
             <div className="grid md:grid-cols-2 gap-8 md:gap-x-20">
               {timeline.map((item, i) => (
-                <motion.div key={item.year}
+                <motion.div key={item.yearKey}
                   className={`flex gap-5 items-start p-6 rounded-2xl bg-white border border-border shadow-sm ${i % 2 !== 0 ? "md:mt-14" : ""}`}
                   initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -533,9 +544,9 @@ const About = () => {
                   whileHover={{ y: -5, boxShadow: "0 12px 40px rgba(0,0,0,0.08)", borderColor: "hsl(var(--gold)/0.4)" }}>
                   <div className="text-4xl shrink-0 mt-1">{item.icon}</div>
                   <div>
-                    <span className="text-xs font-body font-bold uppercase tracking-widest text-gold">{item.year}</span>
-                    <h3 className="font-heading text-lg mt-1 mb-2">{item.title}</h3>
-                    <p className="text-muted-foreground font-body text-sm leading-relaxed">{item.desc}</p>
+                    <span className="text-xs font-body font-bold uppercase tracking-widest text-gold">{t(item.yearKey)}</span>
+                    <h3 className="font-heading text-lg mt-1 mb-2">{t(item.titleKey)}</h3>
+                    <p className="text-muted-foreground font-body text-sm leading-relaxed">{t(item.descKey)}</p>
                   </div>
                 </motion.div>
               ))}
@@ -549,30 +560,30 @@ const About = () => {
         <div className="container-lodge grid lg:grid-cols-2 gap-12 items-center">
           <SectionFadeIn>
             <div className="relative rounded-2xl overflow-hidden">
-              <motion.img src="/restaurante-buffet.jpeg" alt="Buffet de gastronomia amazônica no lodge"
+              <motion.img src="/restaurante-buffet.jpeg" alt="Buffet"
                 className="w-full h-[380px] object-cover" loading="lazy"
                 whileHover={{ scale: 1.04 }} transition={{ duration: 0.6 }} />
               <motion.div className="absolute inset-0 flex items-end p-6"
                 style={{ background: "linear-gradient(to top,rgba(0,0,0,0.7),transparent 60%)" }}
                 initial={{ opacity: 0 }} whileHover={{ opacity: 1 }} transition={{ duration: 0.3 }}>
                 <div>
-                  <p className="text-xs text-amber-300 font-body uppercase tracking-widest mb-1">Gastronomia Amazônica</p>
-                  <p className="text-white font-heading text-lg">Sabores autênticos do Paraná do Mamori</p>
+                  <p className="text-xs text-amber-300 font-body uppercase tracking-widest mb-1">{t("about.restaurantLabel")}</p>
+                  <p className="text-white font-heading text-lg">{t("about.restaurantTitle")}</p>
                 </div>
               </motion.div>
             </div>
           </SectionFadeIn>
           <SectionFadeIn>
-            <span className="text-sm font-body font-semibold tracking-widest uppercase text-gold">Gastronomia</span>
-            <h2 className="heading-lg mt-2 mb-6">A Culinária é Parte da Aventura</h2>
+            <span className="text-sm font-body font-semibold tracking-widest uppercase text-gold">{t("about.restaurantLabel")}</span>
+            <h2 className="heading-lg mt-2 mb-6">{t("about.restaurantTitle")}</h2>
             <p className="text-body text-muted-foreground mb-4">
-              No Amazon Samaúma Lodge, a experiência gastronômica é parte integral da aventura. Nosso restaurante serve pratos típicos da culinária amazônica — com destaque para os peixes frescos pescados nas águas do Paraná do Mamori.
+              {t("about.restaurantP1")}
             </p>
             <p className="text-body text-muted-foreground mb-6">
-              Refeições caseiras, saborosas e com ingredientes locais — uma viagem pelos sabores autênticos da Amazônia.
+              {t("about.restaurantP2")}
             </p>
             <div className="grid grid-cols-2 gap-3">
-              {["🐟 Peixe grelhado", "🍚 Farofa regional", "🍴 Caldeirada amazônica", "🌿 Sucos da floresta"].map(item => (
+              {(restaurantTags ?? []).map(item => (
                 <motion.div key={item}
                   className="flex items-center gap-2 text-sm font-body text-muted-foreground p-3 bg-background rounded-xl border border-border"
                   whileHover={{ x: 4, borderColor: "hsl(var(--gold)/0.4)" }} transition={sp}>
@@ -591,17 +602,17 @@ const About = () => {
           style={{ backgroundImage: "radial-gradient(hsl(38,80%,55%) 1px,transparent 1px)", backgroundSize: "28px 28px" }} />
         <div className="container-lodge relative z-10">
           <SectionFadeIn>
-            <h2 className="heading-lg text-center mb-3 text-primary-foreground">Nossos Valores</h2>
+            <h2 className="heading-lg text-center mb-3 text-primary-foreground">{t("about.valuesTitle")}</h2>
             <p className="text-center font-body text-primary-foreground/50 max-w-xl mx-auto mb-4">
-              Os princípios que guiam cada experiência que oferecemos.
+              {t("about.valuesDesc")}
             </p>
             <p className="text-center text-xs text-primary-foreground/30 font-body uppercase tracking-widest mb-14">
-              ↓ Clique em cada valor para saber mais
+              {t("about.valuesClickTip")}
             </p>
           </SectionFadeIn>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {values.map((v, i) => (
-              <ValueCard key={v.title} value={v} index={i} onClick={() => setActiveValue(v)} />
+              <ValueCard key={v.titleKey} value={v} index={i} onClick={() => setActiveValue(v)} />
             ))}
           </div>
         </div>
@@ -613,23 +624,23 @@ const About = () => {
           style={{ background: "radial-gradient(ellipse 60% 50% at 50% 50%,hsl(38,70%,55%),transparent)" }} />
         <div className="container-lodge relative z-10">
           <SectionFadeIn>
-            <h2 className="heading-lg text-primary-foreground mb-6">Venha nos Conhecer Pessoalmente</h2>
+            <h2 className="heading-lg text-primary-foreground mb-6">{t("about.ctaTitle")}</h2>
             <p className="text-body-lg text-primary-foreground/80 max-w-xl mx-auto mb-10">
-              A melhor forma de entender o Amazon Samaúma Lodge é viver a experiência. Entre em contato e planeje sua visita.
+              {t("about.ctaDesc")}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <BookingModal>
                 <motion.button
                   className="inline-flex items-center justify-center flex-wrap gap-2 px-8 py-4 bg-accent text-accent-foreground font-body font-bold text-sm tracking-widest uppercase rounded hover:bg-gold-light transition-colors duration-300 h-auto min-h-[50px] text-center leading-snug"
                   whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
-                  Entre em Contato / Reservar
+                  {t("about.ctaButtonContact")}
                 </motion.button>
               </BookingModal>
               <BookingModal>
                 <motion.button
                   className="inline-flex items-center justify-center flex-wrap gap-2 px-8 py-4 rounded border-2 border-primary-foreground/30 text-primary-foreground font-body font-semibold text-sm tracking-widest uppercase hover:border-amber-300 hover:text-amber-300 transition-colors duration-300 h-auto min-h-[50px] text-center leading-snug"
                   whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
-                  <MessageCircle size={16} className="shrink-0" /> Fazer Reserva
+                  <MessageCircle size={16} className="shrink-0" /> {t("about.ctaButtonBook")}
                 </motion.button>
               </BookingModal>
             </div>
@@ -652,7 +663,7 @@ const About = () => {
               transition={{ type: "spring", stiffness: 300, damping: 26 }}
               onClick={e => e.stopPropagation()}>
               <div className="relative h-72 overflow-hidden">
-                <motion.img src={ownerImg} alt="Guia do Amazon Samaúma Lodge"
+                <motion.img src={ownerImg} alt="Guia"
                   className="w-full h-full object-cover object-top"
                   initial={{ scale: 1.1 }} animate={{ scale: 1 }} transition={{ duration: 0.7 }} />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
@@ -663,16 +674,16 @@ const About = () => {
                   <X size={15} className="text-white" />
                 </motion.button>
                 <div className="absolute bottom-4 left-5">
-                  <p className="text-xs text-amber-300 font-body uppercase tracking-widest mb-1">Guia & Proprietário</p>
-                  <h3 className="font-heading text-xl text-white">Amazon Samaúma Lodge</h3>
+                  <p className="text-xs text-amber-300 font-body uppercase tracking-widest mb-1">{t("about.ownerModalLabel")}</p>
+                  <h3 className="font-heading text-xl text-white">{t("about.ownerModalTitle")}</h3>
                 </div>
               </div>
               <div className="p-5">
                 <p className="text-white/80 font-body text-sm leading-relaxed mb-4">
-                  Criado às margens do Rio Mamori, nosso guia conhece cada curva do rio, cada pássaro da floresta e cada peixe das águas escuras do Paraná. A Amazônia vivida por dentro — passada de geração em geração.
+                  {t("about.ownerModalDesc")}
                 </p>
                 <div className="flex flex-wrap gap-2 mb-5">
-                  {["🎣 Pesca Esportiva", "🌿 Trilhas", "🐊 Fauna Noturna", "🌅 Pôr do Sol"].map(tag => (
+                  {(ownerModalTags ?? []).map(tag => (
                     <span key={tag} className="text-xs px-2.5 py-1 rounded-full font-body text-white/70"
                       style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.15)" }}>
                       {tag}
@@ -689,7 +700,7 @@ const About = () => {
                   whileTap={{ scale: 0.97 }}
                   transition={sp}
                 >
-                  <MessageCircle size={16} className="shrink-0" /> Falar com o Guia
+                  <MessageCircle size={16} className="shrink-0" /> {t("about.ownerModalButton")}
                 </motion.a>
               </div>
             </motion.div>
